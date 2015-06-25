@@ -14,7 +14,7 @@ $.behavior('NAME', function () {
 })
 ```
 
-The code above is syntactic sugar for:
+This will attach behaviors to the selector `.js-NAME`. The code above is syntactic sugar for:
 
 ```js
 // creates an 'init' event handler for document with the tag 'NAME'.
