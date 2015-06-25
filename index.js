@@ -31,8 +31,9 @@
    */
 
   function behavior (selector, options, init) {
-    // trigger all behaviors
-    if (arguments.length === 0) {
+    // trigger all behaviors on $.behavior(). Also account for cases such as
+    // $($.behavior), where it's triggered with an event object.
+    if (arguments.length === 0 || selector === $ || selector.target) {
       return $(document).trigger('behavior')
     }
     if (arguments.length === 1) {
