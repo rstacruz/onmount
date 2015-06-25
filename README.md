@@ -39,11 +39,19 @@ $.behavior('.push-button')
 
 ## API
 
-| Call | Description |
-| `$.behavior(selector, initializer())` | Creates a behavior for `selector` to run the function `initializer()` |
-| `$.behavior(selector)` | Runs all behaviors for `selector` |
-| `$.behavior()` | Runs all behaviors |
+* `$.behavior()`
 
+  > Runs all behavior initializers in the document.
+
+* `$.behavior(selector)`
+
+  > Runs all behaviors for `selector`.
+
+* `$.behavior(selector, initializer())`
+
+  > Creates a behavior for `selector` to run the function `initializer()`.
+
+  
 <br>
 
 ## Premise
