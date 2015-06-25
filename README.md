@@ -36,13 +36,15 @@ $(document).on('init.NAME', function () {
 
 This achieves a few things:
 
-* Assuming you also have `$(function() { $(document).trigger('init') })` (which you should), the behavior initializers will run on document load.
+* __Run on document load__: Assuming you also have `$(function() { $(document).trigger('init') })` (which you should), the behavior initializers will run on document load.
 
-* The `data('behavior:NAME:loaded')` guard makes your initialization idempotent, so you can call `$(document).trigger('init')` as many times as you like.
+* __Idempotency__: The `data('behavior:NAME:loaded')` guard makes your initialization idempotent, so you can call `$(document).trigger('init')` as many times as you like.
 
-* Because it's idempotent, you can call it as many times as you like, such as when dynamic content is placed (like a modal dialog).
+* __Work with dynamic content__: Because it's idempotent, you can call it as many times as you like, such as when dynamic content is placed (like a modal dialog).
 
-* You can test it by doing `$(document).trigger('init.NAME')`.
+* __Testable__: You can create unit tests for your jQuery code by doing `$(document).trigger('init.NAME')` in your tests.
+
+* __Turbolinks-compatible__: Since your initialization is now idempotent, you can use it with Turbolinks. Simply trigger `init` when the page loads.
 
 <br>
 
