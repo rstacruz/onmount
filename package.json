@@ -1,0 +1,15 @@
+{
+  "name": "jq-behavior",
+  "version": "0.0.1",
+  "description": "Safe, reliable, idempotent and testable behaviors for DOM nodes using jQuery",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5"
+  }
+}
