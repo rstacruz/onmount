@@ -9,6 +9,8 @@
   }
 }(this, function ($) {
 
+  behavior.all = all
+
   return behavior
 
   /*
@@ -58,6 +60,12 @@
         if (result !== false) $this.data(key, true)
       })
     })
+
+    return $
+  }
+
+  function all () {
+    return behavior()
   }
 
   function slugify (str) {

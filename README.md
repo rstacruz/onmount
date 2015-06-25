@@ -7,14 +7,13 @@ behaviors to DOM node using jQuery.
 
 ```js
 $.behavior('.push-button', function () {
-  console.log("initializing")
   $(this).on('click', function () {
     alert('working...')
   })
 })
 ```
 
-You can then trigger all defined behaviors:
+You can then trigger all defined behaviors for all applicable elements using `behavior()`:
 
 ```js
 $(function () {
@@ -22,11 +21,12 @@ $(function () {
 })
 ```
 
-This is idempotent, so you can call it many times:
+This is idempotent, so you can call it as many times as you like.
 
 ```js
 $(function () { $.behavior() })
 $(document).on('show.bs.modal', function () { $.behavior() })
+$(document).on('page:load', function () { $.behavior() })
 ```
 
 Or you can trigger just one:
@@ -105,13 +105,22 @@ $.behavior('.js-expandable-nav', function () {
 
 ### Idempotency
 
-You can call `$.behavior()` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new components in your DOM.
+You can call `$.behavior()` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new elements that may appear in your DOM.
 
 ```js
 // add more content
 $("#content").append(...)
 
 $.behavior()
+```
+
+### Turbolinks
+
+You'll notice that document.ready is not friendly for Turbolinks applications. This solves that.
+
+```js
+$(function () { $.behavior() })
+$(document).on('page:load', function () { $.behavior() })
 ```
 
 ### Using with Commonjs/AMD
