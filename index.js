@@ -9,8 +9,6 @@
   }
 }(this, function ($) {
 
-  behavior.all = all
-
   return behavior
 
   /*
@@ -62,10 +60,6 @@
     })
 
     return $
-  }
-
-  function all () {
-    return behavior()
   }
 
   function slugify (str) {
