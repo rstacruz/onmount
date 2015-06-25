@@ -9,22 +9,34 @@
   }
 }(this, function ($) {
 
-  /*
-   * defaults
-   */
-
-  behavior.selector = '.js-{name}'
-  behavior.eventName = 'init'
+  return behavior
 
   /*
-   * adds a behavior
+   * adds a behavior, or triggers behaviors
    *
-   *     $.behavior('select-box', function () {
+   *     // define a behavior
+   *     $.behavior('.select-box', function () {
    *       $(this).on('...')
    *     })
+   *
+   *     // retrigger a behavior
+   *     $.behavior('.select-box')
+   *
+   *     // retriggers all behaviors
+   *     $.behavior()
    */
 
-  function behavior (name, options, init) {
+  function behavior (selector, options, init) {
+    var name = slugify(selector)
+
+    // trigger all behaviors
+    if (arguments.length === 0) {
+      return $(document).trigger('behavior')
+    }
+    if (arguments.length === 1) {
+      return $(document).trigger('behavior.' + name)
+    }
+
     if (typeof options === 'function') {
       init = options
       options = {}
@@ -32,11 +44,10 @@
 
     options = $.extend({}, behavior, options || {})
 
-    var sel = options.selector.replace('{name}', name)
-    var event = '' + options.eventName + '.' + name
+    var event = 'behavior.' + name
 
     $(document).on(event, function () {
-      $(sel).each(function () {
+      $(selector).each(function () {
         var $this = $(this)
         var key = 'behavior:' + name + ':loaded'
 
@@ -49,5 +60,8 @@
     })
   }
 
-  return behavior
+  function slugify (str) {
+    return encodeURIComponent(str).replace(/[^a-z0-9]/g, '_')
+  }
+
 }))

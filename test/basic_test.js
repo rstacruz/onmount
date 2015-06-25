@@ -16,14 +16,14 @@ describe('standard', function () {
 
 describe('behavior:', function () {
   before(function () {
-    $.behavior('my-behavior', function () {
+    $.behavior('.my-behavior', function () {
       var $this = $(this)
       $this.html($this.html() + 'clicked')
     })
   })
 
   beforeEach(function () {
-    $div = $('<div class="js-my-behavior">').appendTo('body')
+    $div = $('<div class="my-behavior">').appendTo('body')
   })
 
   afterEach(function () {
@@ -31,22 +31,26 @@ describe('behavior:', function () {
   })
 
   it('works', function () {
-    $(document).trigger('init')
+    $.behavior()
+    expect($div.html()).eql('clicked')
+  })
+
+  it('can be triggered on its own', function () {
+    $.behavior('.my-behavior')
     expect($div.html()).eql('clicked')
   })
 
   it('is idempotent', function () {
-    $(document).trigger('init')
-    $(document).trigger('init')
-    $(document).trigger('init')
+    $.behavior()
+    $.behavior()
+    $.behavior()
     expect($div.html()).eql('clicked')
   })
 })
 
-describe('behavior with default selector:', function () {
+describe('behavior with role selector:', function () {
   before(function () {
-    $.behavior.selector = '[role~="your-behavior"]'
-    $.behavior('your-behavior', function () {
+    $.behavior('[role~="your-behavior"]', function () {
       var $this = $(this)
       $this.html($this.html() + 'clicked')
     })
@@ -61,29 +65,12 @@ describe('behavior with default selector:', function () {
   })
 
   it('works', function () {
-    $(document).trigger('init')
+    $.behavior()
     expect($div.html()).eql('clicked')
   })
-})
 
-describe('behavior with custom selector:', function () {
-  before(function () {
-    $.behavior('his-behavior', { selector: '[role="his-behavior"]' }, function () {
-      var $this = $(this)
-      $this.html($this.html() + 'clicked')
-    })
-  })
-
-  beforeEach(function () {
-    $div = $('<div role="his-behavior">').appendTo('body')
-  })
-
-  afterEach(function () {
-    $div.remove()
-  })
-
-  it('works', function () {
-    $(document).trigger('init')
+  it('can be called', function () {
+    $.behavior('[role~="your-behavior"]')
     expect($div.html()).eql('clicked')
   })
 })
