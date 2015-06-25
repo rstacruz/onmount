@@ -1,0 +1,16 @@
+{
+  "name": "jq-behavior",
+  "description": "Safe, reliable, idempotent and testable behaviors for DOM nodes using jQuery",
+  "main": "index.js",
+  "authors": [
+    "Rico Sta. Cruz <rico@ricostacruz.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
