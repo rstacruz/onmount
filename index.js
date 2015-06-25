@@ -11,8 +11,12 @@
 
   return behavior
 
-  /*
-   * adds a behavior, or triggers behaviors
+  /**
+   * Adds a behavior, or triggers behaviors.
+   *
+   * When no parameters are passed, it triggers all behaviors. When one
+   * parameter is passed, it triggers the given behavior. Otherwise, it adds a
+   * behavior.
    *
    *     // define a behavior
    *     $.behavior('.select-box', function () {
@@ -27,15 +31,16 @@
    */
 
   function behavior (selector, options, init) {
-    var name = slugify(selector)
-
     // trigger all behaviors
     if (arguments.length === 0) {
       return $(document).trigger('behavior')
     }
     if (arguments.length === 1) {
-      return $(document).trigger('behavior.' + name)
+      return $(document).trigger('behavior.' + slugify(selectify(selector)))
     }
+
+    selector = selectify(selector)
+    var name = slugify(selector)
 
     if (typeof options === 'function') {
       init = options
@@ -62,8 +67,28 @@
     return $
   }
 
+  /**
+   * Internal: Converts `@role` to `[role~="role"]` if needed.
+   *
+   *     selectify('@hi')   //=> '[role="hi"]'
+   *     selectify('.btn')  //=> '.btn'
+   */
+
+  function selectify (selector) {
+    if (selector[0] === '@') {
+      return '[role~=' + JSON.stringify(selector.substr(1)) + ']'
+    }
+    return selector
+  }
+
+  /**
+   * Internal: Neutralizes a string so that it can be used as an event tag.
+   *
+   *     slugify('[role="hi"]')  //=> "_5Brole_3D_22hi_22_5D"
+   */
+
   function slugify (str) {
-    return encodeURIComponent(str).replace(/[^a-z0-9]/g, '_')
+    return encodeURIComponent(str).replace(/[^a-zA-Z0-9]/g, '_')
   }
 
 }))
