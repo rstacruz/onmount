@@ -21,7 +21,7 @@ $(function () {
 })
 ```
 
-This is idempotent, so you can call it as many times as you like.
+This is idempotent, so you can call it as many times as you like. If the behavior has already been applied to an element, it will not be reapplied.
 
 ```js
 $(function () { $.behavior() })
@@ -29,11 +29,20 @@ $(document).on('show.bs.modal', function () { $.behavior() })
 $(document).on('page:load', function () { $.behavior() })
 ```
 
-Or you can trigger just one:
+Or you can trigger just one behavior, perfect for testing:
 
 ```js
 $.behavior('.push-button')
 ```
+
+<br>
+
+## API
+
+| Call | Description |
+| `$.behavior(selector, initializer())` | Creates a behavior for `selector` to run the function `initializer()` |
+| `$.behavior(selector)` | Runs all behaviors for `selector` |
+| `$.behavior()` | Runs all behaviors |
 
 <br>
 
