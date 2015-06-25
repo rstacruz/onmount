@@ -9,6 +9,9 @@
   }
 }(this, function ($) {
 
+  behavior.selectify = selectify
+  behavior.slugify = slugify
+
   return behavior
 
   /**
@@ -36,12 +39,14 @@
     if (arguments.length === 0 || selector === $ || selector.target) {
       return $(document).trigger('behavior')
     }
-    if (arguments.length === 1) {
-      return $(document).trigger('behavior.' + slugify(selectify(selector)))
-    }
 
-    selector = selectify(selector)
-    var name = slugify(selector)
+    selector = behavior.selectify(selector)
+    var name = behavior.slugify(selector)
+    var event = 'behavior.' + name
+
+    if (arguments.length === 1) {
+      return $(document).trigger(event)
+    }
 
     if (typeof options === 'function') {
       init = options
@@ -49,8 +54,6 @@
     }
 
     options = $.extend({}, behavior, options || {})
-
-    var event = 'behavior.' + name
 
     $(document).on(event, function () {
       $(selector).each(function () {
@@ -69,7 +72,8 @@
   }
 
   /**
-   * Internal: Converts `@role` to `[role~="role"]` if needed.
+   * Internal: Converts `@role` to `[role~="role"]` if needed. You can override
+   * this by reiimplementing `behavior.selectify`.
    *
    *     selectify('@hi')   //=> '[role="hi"]'
    *     selectify('.btn')  //=> '.btn'
@@ -83,7 +87,8 @@
   }
 
   /**
-   * Internal: Neutralizes a string so that it can be used as an event tag.
+   * Internal: Neutralizes a string so that it can be used as an event tag. You
+   * may override this by reiimplementing `behavior.slugify`.
    *
    *     slugify('[role="hi"]')  //=> "_5Brole_3D_22hi_22_5D"
    */
