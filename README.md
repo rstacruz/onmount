@@ -3,6 +3,8 @@
 Provides an safe, reliable, idempotent, and testable way to attach JavaScript
 behaviors to DOM node using jQuery.
 
+[![Status](https://travis-ci.org/rstacruz/jq-behavior.svg?branch=master)](https://travis-ci.org/rstacruz/jq-behavior "See test builds")
+
 ```js
 $.behavior('NAME', function () {
   /* code here */
