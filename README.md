@@ -116,7 +116,7 @@ $.behavior('expandable-nav', function () {
 
 ### Idempotency
 
-You can call `$(document).trigger('init')` as much as you like.
+You can call `$(document).trigger('init')` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new components in your DOM.
 
 ```js
 // add more content
@@ -134,7 +134,9 @@ $.behavior('expandable-nav', { selector: '.nav' }, function () {
 })
 ```
 
-If you'd like to change the template, change `defaults.selector`:
+### Default selector pattern
+
+The default pattern is `.js-{name}`. To override this, can you can use `defaults.selector`:
 
 ```js
 $.behavior.defaults.selector = '[role~="{name}"]'
@@ -186,3 +188,17 @@ it('renders an avatar', function () {
   expect($div.html()).to.include("<img src='avatars/rstacruz.png'>")
 })
 ```
+
+<br>
+
+## Thanks
+
+**jq-behavior** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
+Authored and maintained by Rico Sta. Cruz with help from contributors ([list][contributors]).
+
+> [ricostacruz.com](http://ricostacruz.com) &nbsp;&middot;&nbsp;
+> GitHub [@rstacruz](https://github.com/rstacruz) &nbsp;&middot;&nbsp;
+> Twitter [@rstacruz](https://twitter.com/rstacruz)
+
+[MIT]: http://mit-license.org/
+[contributors]: http://github.com/rstacruz/jq-behavior/contributors
