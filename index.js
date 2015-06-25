@@ -1,3 +1,4 @@
+/* global define */
 ;(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory)
@@ -12,10 +13,8 @@
    * defaults
    */
 
-  behavior.defaults = {
-    selector: '.js-{name}',
-    eventName: 'init'
-  }
+  behavior.selector = '.js-{name}'
+  behavior.eventName = 'init'
 
   /*
    * adds a behavior
@@ -27,11 +26,11 @@
 
   function behavior (name, options, init) {
     if (typeof options === 'function') {
-      fn = options
+      init = options
       options = {}
     }
 
-    options = $.extend({}, behavior.defaults, options || {})
+    options = $.extend({}, behavior, options || {})
 
     var sel = options.selector.replace('{name}', name)
     var event = '' + options.eventName + '.' + name

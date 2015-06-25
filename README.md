@@ -136,10 +136,10 @@ $.behavior('expandable-nav', { selector: '.nav' }, function () {
 
 ### Default selector pattern
 
-The default pattern is `.js-{name}`. To override this, can you can use `defaults.selector`:
+The default pattern is `.js-{name}`. To override this, can you can use `behavior.selector`:
 
 ```js
-$.behavior.defaults.selector = '[role~="{name}"]'
+$.behavior.selector = '[role~="{name}"]'
 ```
 
 ### Using with Commonjs/AMD
