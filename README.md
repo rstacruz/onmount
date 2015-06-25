@@ -1,7 +1,7 @@
 # jq-behavior
 
-Provides an safe, reliable, idempotent, and testable way to attach JavaScript
-behaviors to DOM node using jQuery.
+Provides a safe, reliable, idempotent, and testable way to attach JavaScript
+behaviors to DOM nodes using jQuery.
 
 [![Status](https://travis-ci.org/rstacruz/jq-behavior.svg?branch=master)](https://travis-ci.org/rstacruz/jq-behavior "See test builds")
 
@@ -61,8 +61,8 @@ Typically, to make this work, you'll make code like this:
 ```js
 $(function () {
   $('.js-expandable-nav button').on('click', function () {
-    $('.js-expandable-nav .more').show();
-    $('.js-expandable-nav button').hide();
+    $('.js-expandable-nav .more').show()
+    $('.js-expandable-nav button').hide()
   })
 })
 ```
@@ -90,7 +90,7 @@ $(document).on('show.bs.modal', function () { $.behavior() })
 $.behavior('.js-expandable-nav', function () {
   var $this   = $(this)
   var $button = $this.find('button')
-  var $more   = $this.find('more')
+  var $more   = $this.find('.more')
 
   $button.on('click', function () {
     $more.toggle()
@@ -123,7 +123,7 @@ $(function () { $.behavior() })
 $(document).on('page:load', function () { $.behavior() })
 ```
 
-### Using with Commonjs/AMD
+### Using with CommonJS/AMD
 
 When loading from a module loader like browserify or Require.js, `$.behavior` is not overriden. Instead, it is returned as a value.
 
