@@ -6,47 +6,34 @@ behaviors to DOM node using jQuery.
 [![Status](https://travis-ci.org/rstacruz/jq-behavior.svg?branch=master)](https://travis-ci.org/rstacruz/jq-behavior "See test builds")
 
 ```js
-$.behavior('NAME', function () {
-  /* code here */
+$.behavior('.push-button', function () {
+  console.log("initializing")
   $(this).on('click', function () {
     alert('working...')
   })
 })
 ```
 
-This will attach behaviors to the selector `.js-NAME`. The code above is syntactic sugar for:
+You can then trigger all defined behaviors:
 
 ```js
-// creates an 'init' event handler for document with the tag 'NAME'.
-// this will be ran when calling $(document).trigger('init')
-
-$(document).on('init.NAME', function () {
-  $('.js-NAME').each(function () {
-    var $this = $(this)
-
-    if ($this.data('behavior:NAME:loaded')) return
-
-    /* code here */
-    $(this).on('click', function () {
-      alert('working...')
-    })
-
-    $this.data('behavior:NAME:loaded', true)
-  })
+$(function () {
+  $.behavior()
 })
 ```
 
-This achieves a few things:
+This is idempotent, so you can call it many times:
 
-* __Run on document load__: Assuming you also have `$(function() { $(document).trigger('init') })` (which you should), the behavior initializers will run on document load.
+```js
+$(function () { $.behavior() })
+$(document).on('show.bs.modal', function () { $.behavior() })
+```
 
-* __Idempotency__: The `data('behavior:NAME:loaded')` guard makes your initialization idempotent, so you can call `$(document).trigger('init')` as many times as you like.
+Or you can trigger just one:
 
-* __Work with dynamic content__: Because it's idempotent, you can call it as many times as you like, such as when dynamic content is placed (like a modal dialog).
-
-* __Testable__: You can create unit tests for your jQuery code by doing `$(document).trigger('init.NAME')` in your tests.
-
-* __Turbolinks-compatible__: Since your initialization is now idempotent, you can use it with Turbolinks. Simply trigger `init` when the page loads.
+```js
+$.behavior('.push-button')
+```
 
 <br>
 
@@ -93,14 +80,14 @@ Behaviors solve that.
  * initializes behaviors on document.ready and on bootstrap modal show.
  */
 
-$(function () { $(document).trigger('init') })
-$(document).on('show.bs.modal', function () { $(document).trigger('init') })
+$(function () { $.behavior() })
+$(document).on('show.bs.modal', function () { $.behavior() })
 
 /*
  * attach a behavior to `.js-expandable-nav`
  */
 
-$.behavior('expandable-nav', function () {
+$.behavior('.js-expandable-nav', function () {
   var $this   = $(this)
   var $button = $this.find('button')
   var $more   = $this.find('more')
@@ -118,30 +105,13 @@ $.behavior('expandable-nav', function () {
 
 ### Idempotency
 
-You can call `$(document).trigger('init')` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new components in your DOM.
+You can call `$.behavior()` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new components in your DOM.
 
 ```js
 // add more content
 $("#content").append(...)
 
-$(document).trigger('init')
-```
-
-### Different selectors
-
-By default, the behaviors are attached to `.js-{name}`. To override this, pass the `selector` option.
-
-```js
-$.behavior('expandable-nav', { selector: '.nav' }, function () {
-})
-```
-
-### Default selector pattern
-
-The default pattern is `.js-{name}`. To override this, can you can use `behavior.selector`:
-
-```js
-$.behavior.selector = '[role~="{name}"]'
+$.behavior()
 ```
 
 ### Using with Commonjs/AMD
@@ -151,7 +121,7 @@ When loading from a module loader like browserify or Require.js, `$.behavior` is
 ```js
 var behavior = require('jq-behavior')
 
-behavior('hover-card', function () {
+behavior('.js-hover-card', function () {
   ...
 })
 ```
@@ -161,7 +131,7 @@ behavior('hover-card', function () {
 You can cancel an initialization by returning `false`. This makes it so that the initialization will run again when `init` is triggered again.
 
 ```js
-$.behavior('expandable-nav', function () {
+$.behavior('.expandable-nav', function () {
   if ($(this).is(':hidden')) return false
 
   /* ... */
@@ -170,7 +140,7 @@ $.behavior('expandable-nav', function () {
 
 ### Testing behaviors
 
-Events are attached as `init.NAME` to the `document` (where *NAME* is your behavior name). You can trigger it again in a test.
+You can trigger just one behavior via `$.behavior(SELECTOR)`. This is useful for tests.
 
 ```js
 var $div
@@ -179,7 +149,7 @@ beforeEach(function () {
   $div = $("<div class='js-user-profile' data-user='rstacruz'>")
     .appendTo('body')
 
-  $(document).trigger('init.user-profile')
+  $.behavior('.js-user-profile')
 })
 
 afterEach(function () {
