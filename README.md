@@ -110,8 +110,8 @@ Typically, to make this work, you'll make code like this:
 ```js
 $(function () {
   $('.js-expandable-nav button').on('click', function () {
-    $('.js-expandable-nav .more').show();
-    $('.js-expandable-nav button').hide();
+    $('.js-expandable-nav .more').show()
+    $('.js-expandable-nav button').hide()
   })
 })
 ```
