@@ -127,7 +127,7 @@ However, you have a few problems with this approach.
 * __It doesn't work in modal dialogs.__ Since it works in `$(function() { ... })`, it doesn't work on elements loaded later.
 * __There's no provision for cleanups.__ What happens when `.js-expandable-nav` exits the DOM (eg, the dialog box was closed)?
 
-Behaviors solve that.
+Behaviors solve that. You don't write your code any differently, but it will be accessible in a way that it's testable, isolated, and idempotent.
 
 ```js
 /*
@@ -152,6 +152,14 @@ $.behavior('.js-expandable-nav', function () {
   })
 })
 ```
+
+By simply wrapping your code in `$.behavior(...)` instead of `$(function)`, it gives you the power of a few features:
+
+* You're assured that the block will only run once for every `.js-expandable-nav` element.
+
+* You can retrigger this behavior for tests.
+
+* You can call behaviors again and again (`$.behavior()`) every time your DOM changes to make it work for any new elements.
 
 <br>
 
