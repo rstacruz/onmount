@@ -9,10 +9,7 @@
   }
 }(this, function ($) {
 
-  var B = behavior
-
   behavior.selectify = selectify
-  behavior.slugify = slugify
   behavior.handlers = []
 
   return behavior
@@ -43,7 +40,7 @@
       return trigger()
     }
 
-    selector = B.selectify(selector)
+    selector = behavior.selectify(selector)
 
     if (arguments.length === 1) {
       return trigger(selector)
@@ -56,7 +53,7 @@
 
     register(selector, function () {
       each(selector, function () {
-        var key = '__behavior:' + B.slugify(selector) + ':loaded'
+        var key = '__behavior:' + slugify(selector) + ':loaded'
         if (this[key]) return
         var result = init.call(this)
         if (result !== false) this[key] = true
@@ -69,12 +66,12 @@
   }
 
   function register (selector, fn) {
-    $(document).on('behavior.' + behavior.slugify(selector), fn)
+    $(document).on('behavior.' + slugify(selector), fn)
   }
 
   function trigger (selector) {
     if (selector) {
-      $(document).trigger('behavior.' + behavior.slugify(selector))
+      $(document).trigger('behavior.' + slugify(selector))
     } else {
       $(document).trigger('behavior')
     }

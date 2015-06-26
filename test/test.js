@@ -1,14 +1,33 @@
-/* global before, describe, it, document, beforeEach, afterEach, expect */
+/* global window, before, describe, it, document, beforeEach, afterEach */
 'use strict'
-var $, $div
+var $, $div, expect
+
+var jsdom = require('mocha-jsdom')
+var rerequire = jsdom.rerequire
 
 if (typeof process === 'object') {
-  require('mocha-jsdom')()
+  jsdom()
   before(function () {
-    $ = require('jquery')
-    $.behavior = require('../index')
+    $ = rerequire('jquery')
+    $.behavior = rerequire('../index')
+    expect = require('chai').expect
   })
+} else {
+  $ = window.jQuery
+  expect = window.chai.expect
 }
+
+afterEach(function () {
+  $div.remove()
+})
+
+describe('jquery:', function () {
+  it('is an working environment', function () {
+    $div = $('<div class="hello">').appendTo('body')
+    expect($('body')[0].innerHTML).include('hello')
+    expect(window.document.body.innerHTML).include('hello')
+  })
+})
 
 describe('behavior:', function () {
   before(function () {
@@ -20,10 +39,6 @@ describe('behavior:', function () {
 
   beforeEach(function () {
     $div = $('<div class="my-behavior">').appendTo('body')
-  })
-
-  afterEach(function () {
-    $div.remove()
   })
 
   it('works', function () {
@@ -56,10 +71,6 @@ describe('behavior with role selector:', function () {
     $div = $('<div role="your-behavior">').appendTo('body')
   })
 
-  afterEach(function () {
-    $div.remove()
-  })
-
   it('works', function () {
     $.behavior()
     expect($div.html()).eql('clicked')
@@ -83,10 +94,6 @@ describe('behavior with @role:', function () {
     $div = $('<div role="his-behavior">').appendTo('body')
   })
 
-  afterEach(function () {
-    $div.remove()
-  })
-
   it('works', function () {
     $.behavior()
     expect($div.html()).eql('clicked')
@@ -103,6 +110,8 @@ describe('behavior with @role:', function () {
   })
 })
 
-describe('standard', function () {
-  it('is conformed to', require('mocha-standard'))
-})
+if (typeof process === 'object') {
+  describe('standard', function () {
+    it('is conformed to', require('mocha-standard'))
+  })
+}
