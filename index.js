@@ -8,15 +8,16 @@
   }
 }(this, function ($) {
 
+  // Initializer registry.
+  var handlers = behavior.handlers = []
+  var selectors = behavior.selectors = {}
+
   // Allow users to override this if needed.
   behavior.selectify = selectify
 
-  // Initializer registry.
-  var handlers = []
-  var selectors = {}
-
-  // Use jQuery when available.
-  if (window.jQuery) behavior.$ = window.jQuery
+  // Use jQuery (or a jQuery-like) when available. This will allow
+  // the use of jQuery selectors.
+  behavior.$ = window.jQuery || window.Zepto || window.Ender
 
   return behavior
 
@@ -30,6 +31,13 @@
    *     // define a behavior
    *     $.behavior('.select-box', function () {
    *       $(this).on('...')
+   *     })
+   *
+   *     // define a behavior with exit
+   *     $.behavior('.select-box', function () {
+   *       $(document).on('...')
+   *     }, function () {
+   *       $(document).off('...')
    *     })
    *
    *     // retrigger a behavior
@@ -46,39 +54,44 @@
       return trigger()
     }
 
+    // account for `@role` selectors and such
     selector = behavior.selectify(selector)
 
-    if (arguments.length === 1) {
-      return trigger(selector)
-    }
+    // trigger with $.behavior(selector)
+    if (arguments.length === 1) return trigger(selector)
 
-    // keep track of dom elements loaded
+    // keep track of dom elements loaded for this behavior
     var loaded = []
+    var key = '__behavior:' + slugify(selector) + ':loaded'
 
     register(selector, function () {
-      var key = '__behavior:' + slugify(selector) + ':loaded'
-
       // clean up old ones
       for (var i = 0, len = loaded.length; i < len; i++) {
         var element = loaded[i]
         if (element && !isAttached(element) && exit) {
-          loaded[i] = undefined
-          exit.call(element)
-          delete element[key]
+          if (exit.call(element) !== false) {
+            loaded[i] = undefined
+            delete element[key]
+          }
         }
       }
 
       // initialize new ones
       each(selector, function () {
-        if (this[key]) return
-        var result = init.call(this)
-        if (result !== false) {
+        if (!this[key] && init.call(this) !== false) {
           this[key] = true
           loaded.push(this)
         }
       })
     })
+
+    // allow $.behavior().behavior() chain
+    return this
   }
+
+  /**
+   * Internal: check if an element is still attached to its document.
+   */
 
   function isAttached (el) {
     while (el) {
@@ -88,7 +101,9 @@
   }
 
   /**
-   * Internal: reimplementation of `$('...').each()`.
+   * Internal: reimplementation of `$('...').each()`. If jQuery is available,
+   * use it (I guess to preserve IE compatibility and to enable special jQuery
+   * attribute selectors).
    */
 
   function each (selector, fn) {
@@ -111,7 +126,7 @@
   }
 
   /**
-   * Internal: triggers behaviors for a selector.
+   * Internal: triggers behaviors for a selector or for all.
    *
    *     trigger()
    *     trigger('.js-button')

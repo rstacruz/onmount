@@ -73,15 +73,19 @@ $.behavior('.js-hover-card', function () {
 
 * `$.behavior()`
 
-  > Runs all behavior initializers in the document.
+  > Runs all behaviors.
 
 * `$.behavior(selector)`
 
   > Runs all behaviors for `selector`.
 
-* `$.behavior(selector, initializer())`
+* `$.behavior(selector, init())`
 
-  > Creates a behavior for `selector` to run the function `initializer()`.
+  > Creates a behavior for `selector` to run the function `init()`.
+
+* `$.behavior(selector, init(), exit())`
+
+  > Creates a behavior for `selector` to run the function `init()`. The `exit()` function will be called once the behavior is triggered again but the element is no longer attached to the DOM.
 
   
 <br>
