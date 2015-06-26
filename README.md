@@ -1,13 +1,17 @@
-# jq-behavior
+# behavior
 
 Provides an safe, reliable, idempotent, and testable way to attach JavaScript
-behaviors to DOM node using jQuery.
+behaviors to DOM node.
+
+Works well with jQuery, but does *not* require jQuery at all.
 
 > NB: this project will be renamed soon. name suggestions are welcome.
 
 [![Status](https://travis-ci.org/rstacruz/jq-behavior.svg?branch=master)](https://travis-ci.org/rstacruz/jq-behavior "See test builds")
 
 ```js
+$.behavior = require('jq-behavior')
+
 $.behavior('.push-button', function () {
   $(this).on('click', function () {
     alert('working...')
@@ -35,6 +39,35 @@ Or you can trigger just one behavior, perfect for testing:
 
 ```js
 $.behavior('.push-button')
+```
+
+<br>
+
+## Installation
+
+```
+npm install rstacruz/jq-behavior
+bower install rstacruz/jq-behavior
+```
+
+### With CommonJS/AMD
+When loading from a module loader like browserify or Require.js, `$.behavior` is not overriden. Instead, it is returned as a value.
+
+```js
+var behavior = require('jq-behavior')
+
+behavior('.js-hover-card', function () {
+  ...
+})
+```
+
+### With no module loaders
+When loading in a project without jQuery, it's registered as `window.behavior`. If jQuery was found, it'll be available as `jQuery.behavior` (aka, `$.behavior`).
+
+```js
+$.behavior('.js-hover-card', function () {
+  ...
+})
 ```
 
 <br>
@@ -140,18 +173,6 @@ You'll notice that document.ready is not friendly for Turbolinks applications. T
 ```js
 $(function () { $.behavior() })
 $(document).on('page:load', function () { $.behavior() })
-```
-
-### Using with Commonjs/AMD
-
-When loading from a module loader like browserify or Require.js, `$.behavior` is not overriden. Instead, it is returned as a value.
-
-```js
-var behavior = require('jq-behavior')
-
-behavior('.js-hover-card', function () {
-  ...
-})
 ```
 
 ### Cancelling
