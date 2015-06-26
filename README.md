@@ -218,6 +218,8 @@ Some recommend [using the role attribute][rsjs] to bind your behaviors. To aid t
 $.behavior('@hiding-menu', function () {
   /* ... */
 })
+
+/* same as $.behavior('[role~="hiding-menu"]', ...) */
 ```
 
 [rsjs]: https://github.com/rstacruz/rsjs
