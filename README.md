@@ -22,9 +22,7 @@ $.behavior('.push-button', function () {
 You can then trigger all defined behaviors for all applicable elements using `behavior()`:
 
 ```js
-$(function () {
-  $.behavior()
-})
+$(function () { $.behavior() })
 ```
 
 This is idempotent, so you can call it as many times as you like. If the behavior has already been applied to an element, it will not be reapplied.
@@ -35,7 +33,7 @@ $(document).on('show.bs.modal', function () { $.behavior() })
 $(document).on('page:load', function () { $.behavior() })
 ```
 
-Or you can trigger just one behavior, perfect for testing:
+Or you can trigger just one behavior. Perfect for testing.
 
 ```js
 $.behavior('.push-button')
