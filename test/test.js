@@ -32,8 +32,7 @@ describe('jquery:', function () {
 describe('behavior:', function () {
   before(function () {
     $.behavior('.my-behavior', function () {
-      var $this = $(this)
-      $this.html($this.html() + 'clicked')
+      this.innerHTML += '(clicked)'
     })
   })
 
@@ -43,27 +42,45 @@ describe('behavior:', function () {
 
   it('works', function () {
     $.behavior()
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 
   it('can be triggered on its own', function () {
     $.behavior('.my-behavior')
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 
   it('is idempotent', function () {
     $.behavior()
     $.behavior()
     $.behavior()
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
+  })
+})
+
+describe('exiting:', function () {
+  before(function () {
+    $.behavior('.their-behavior', function () {
+      this.innerHTML += '(loaded)'
+    }, function () {
+      this.innerHTML += '(unloaded)'
+    })
+  })
+
+  it('calls the unloader', function () {
+    $div = $('<div class="their-behavior">').appendTo('body')
+    $.behavior()
+    $div.remove()
+    $.behavior()
+
+    expect($div.html()).eql('(loaded)(unloaded)')
   })
 })
 
 describe('behavior with role selector:', function () {
   before(function () {
     $.behavior('[role~="your-behavior"]', function () {
-      var $this = $(this)
-      $this.html($this.html() + 'clicked')
+      this.innerHTML += '(clicked)'
     })
   })
 
@@ -73,20 +90,19 @@ describe('behavior with role selector:', function () {
 
   it('works', function () {
     $.behavior()
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 
   it('can be called', function () {
     $.behavior('[role~="your-behavior"]')
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 })
 
 describe('behavior with @role:', function () {
   before(function () {
     $.behavior('@his-behavior', function () {
-      var $this = $(this)
-      $this.html($this.html() + 'clicked')
+      this.innerHTML += '(clicked)'
     })
   })
 
@@ -96,17 +112,17 @@ describe('behavior with @role:', function () {
 
   it('works', function () {
     $.behavior()
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 
   it('can be called via @', function () {
     $.behavior('@his-behavior')
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 
   it('can be called', function () {
     $.behavior('[role~="his-behavior"]')
-    expect($div.html()).eql('clicked')
+    expect($div.html()).eql('(clicked)')
   })
 })
 

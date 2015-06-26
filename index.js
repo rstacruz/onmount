@@ -39,7 +39,7 @@
    *     $.behavior()
    */
 
-  function behavior (selector, options, init) {
+  function behavior (selector, init, exit) {
     // trigger all behaviors on $.behavior(). Also account for cases such as
     // $($.behavior), where it's triggered with an event object.
     if (arguments.length === 0 || selector === $ || selector.target) {
@@ -52,19 +52,39 @@
       return trigger(selector)
     }
 
-    if (typeof options === 'function') {
-      init = options
-      options = {}
-    }
+    // keep track of dom elements loaded
+    var loaded = []
 
     register(selector, function () {
+      var key = '__behavior:' + slugify(selector) + ':loaded'
+
+      // clean up old ones
+      for (var i = 0, len = loaded.length; i < len; i++) {
+        var element = loaded[i]
+        if (element && !isAttached(element) && exit) {
+          loaded[i] = undefined
+          exit.call(element)
+          delete element[key]
+        }
+      }
+
+      // initialize new ones
       each(selector, function () {
-        var key = '__behavior:' + slugify(selector) + ':loaded'
         if (this[key]) return
         var result = init.call(this)
-        if (result !== false) this[key] = true
+        if (result !== false) {
+          this[key] = true
+          loaded.push(this)
+        }
       })
     })
+  }
+
+  function isAttached (el) {
+    while (el) {
+      if (el === document.documentElement) return true
+      el = el.parentElement
+    }
   }
 
   /**
