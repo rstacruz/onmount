@@ -81,11 +81,11 @@ $.behavior('.js-hover-card', function () {
 
 * `$.behavior(selector, init())`
 
-  > Creates a behavior for `selector` to run the function `init()`.
+  > Creates a behavior for `selector` to run the callback `init()`.
 
 * `$.behavior(selector, init(), exit())`
 
-  > Creates a behavior for `selector` to run the function `init()`. The `exit()` function will be called once the behavior is triggered again but the element is no longer attached to the DOM.
+  > Creates a behavior for `selector` to run the callback `init()`. The `exit()` callback will be called once the behavior is triggered again but the element is no longer attached to the DOM.
 
   
 <br>
@@ -125,6 +125,7 @@ However, you have a few problems with this approach.
 * __It's not testable.__ You can't make unit tests from this code.
 * __Assumes just one instance.__ When there are 2 .js-expandable-nav elements in the page, this will break.
 * __It doesn't work in modal dialogs.__ Since it works in `$(function() { ... })`, it doesn't work on elements loaded later.
+* __There's no provision for cleanups.__ What happens when `.js-expandable-nav` exits the DOM (eg, the dialog box was closed)?
 
 Behaviors solve that.
 
@@ -176,9 +177,30 @@ $(function () { $.behavior() })
 $(document).on('page:load', function () { $.behavior() })
 ```
 
+### Cleanups
+
+When your behavior modifies things outside itself (eg, binds events to the `document` element), you might want to clean up when the behavior is removed. Just pass a 2nd function to `behavior()`.
+
+In this example below, behaviors are checked once dialog boxes are opened and closed (`$.behavior()`). When it's called after closing, it will see that the old `.js-sticky` element is not part of the document anymore, and its exit callback will be called.
+
+```js
+$.behavior('.js-sticky', function () {
+  $(document).on('scroll.sticky', function () {
+    // do stuff
+  })
+}, function () {
+  $(document).off('scroll.sticky')
+})
+
+$(function () { $.behavior() })
+$(document).on('show.bs.modal close.bs.modal', function () { $.behavior() })
+```
+
 ### Cancelling
 
 You can cancel an initialization by returning `false`. This makes it so that the initialization will run again when `init` is triggered again.
+
+This is also available for exit callbacks.
 
 ```js
 $.behavior('.expandable-nav', function () {
