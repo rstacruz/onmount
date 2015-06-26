@@ -2,10 +2,9 @@
 'use strict'
 var $, $div, expect
 
-var jsdom = require('mocha-jsdom')
-var rerequire = jsdom.rerequire
-
 if (typeof process === 'object') {
+  var jsdom = require('mocha-jsdom')
+  var rerequire = jsdom.rerequire
   jsdom()
   before(function () {
     $ = rerequire('jquery')
