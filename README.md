@@ -1,7 +1,6 @@
 # behavior
 
-Provides an safe, reliable, idempotent, and testable way to attach JavaScript
-behaviors to DOM node.
+A safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM node.
 
 Works well with jQuery, but does *not* require jQuery at all.
 
@@ -19,7 +18,7 @@ $.behavior('.push-button', function () {
 })
 ```
 
-You can then trigger all defined behaviors for all applicable elements using `behavior()`:
+Then trigger all defined behaviors for all applicable elements using `behavior()`. If an element `.push-button` is found in the DOM, it'll have the function applied to it.
 
 ```js
 $(function () { $.behavior() })
@@ -140,7 +139,7 @@ $(document).on('show.bs.modal', function () { $.behavior() })
 $.behavior('.js-expandable-nav', function () {
   var $this   = $(this)
   var $button = $this.find('button')
-  var $more   = $this.find('more')
+  var $more   = $this.find('.more')
 
   $button.on('click', function () {
     $more.toggle()
@@ -159,7 +158,7 @@ You can call `$.behavior()` as much as you like. This will skip any behavior ini
 
 ```js
 // add more content
-$("#content").append(...)
+$('#content').append(...)
 
 $.behavior()
 ```
