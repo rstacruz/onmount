@@ -148,7 +148,7 @@
 
   /**
    * Internal: Converts `@role` to `[role~="role"]` if needed. You can override
-   * this by reiimplementing `behavior.selectify`.
+   * this by reimplementing `behavior.selectify`.
    *
    *     selectify('@hi')   //=> '[role="hi"]'
    *     selectify('.btn')  //=> '.btn'
@@ -163,7 +163,7 @@
 
   /**
    * Internal: Neutralizes a string so that it can be used as an event tag. You
-   * may override this by reiimplementing `behavior.slugify`.
+   * may override this by reimplementing `behavior.slugify`.
    *
    *     slugify('[role="hi"]')  //=> "_5Brole_3D_22hi_22_5D"
    */

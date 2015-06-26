@@ -1,3 +1,4 @@
+/* global $ */
 /* jshint expr: true */
 
 /*
