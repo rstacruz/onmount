@@ -1,16 +1,22 @@
 /* global define */
 ;(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory)
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'))
-  } else {
-    root.jQuery.behavior = factory(root.jQuery)
+  if (typeof define === 'function' && define.amd) define(factory)
+  else if (typeof exports === 'object') module.exports = factory()
+  else {
+    if (window.jQuery) window.jQuery.behavior = factory()
+    else root.behavior = factory()
   }
 }(this, function ($) {
 
+  // Allow users to override this if needed.
   behavior.selectify = selectify
-  behavior.handlers = []
+
+  // Initializer registry.
+  var handlers = []
+  var selectors = {}
+
+  // Use jQuery when available.
+  if (window.jQuery) behavior.$ = window.jQuery
 
   return behavior
 
@@ -61,19 +67,47 @@
     })
   }
 
+  /**
+   * Internal: reimplementation of `$('...').each()`.
+   */
+
   function each (selector, fn) {
-    $(selector).each(fn)
+    if (behavior.$) return behavior.$(selector).each(fn)
+
+    var list = document.querySelectorAll(selector)
+    for (var i = 0, len = list.length; i < len; i++) {
+      fn.apply(list[i])
+    }
   }
+
+  /**
+   * Internal: registers a behavior handler for a selector.
+   */
 
   function register (selector, fn) {
-    $(document).on('behavior.' + slugify(selector), fn)
+    if (!selectors[selector]) selectors[selector] = []
+    selectors[selector].push(fn)
+    handlers.push(fn)
   }
 
+  /**
+   * Internal: triggers behaviors for a selector.
+   *
+   *     trigger()
+   *     trigger('.js-button')
+   */
+
   function trigger (selector) {
+    var list
+
     if (selector) {
-      $(document).trigger('behavior.' + slugify(selector))
+      list = selectors[selector] || []
     } else {
-      $(document).trigger('behavior')
+      list = handlers
+    }
+
+    for (var i = 0, len = list.length; i < len; i++) {
+      list[i].call(this)
     }
   }
 
