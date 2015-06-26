@@ -9,8 +9,11 @@
   }
 }(this, function ($) {
 
+  var B = behavior
+
   behavior.selectify = selectify
   behavior.slugify = slugify
+  behavior.handlers = []
 
   return behavior
 
@@ -37,15 +40,13 @@
     // trigger all behaviors on $.behavior(). Also account for cases such as
     // $($.behavior), where it's triggered with an event object.
     if (arguments.length === 0 || selector === $ || selector.target) {
-      return $(document).trigger('behavior')
+      return trigger()
     }
 
-    selector = behavior.selectify(selector)
-    var name = behavior.slugify(selector)
-    var event = 'behavior.' + name
+    selector = B.selectify(selector)
 
     if (arguments.length === 1) {
-      return $(document).trigger(event)
+      return trigger(selector)
     }
 
     if (typeof options === 'function') {
@@ -53,22 +54,30 @@
       options = {}
     }
 
-    options = $.extend({}, behavior, options || {})
-
-    $(document).on(event, function () {
-      $(selector).each(function () {
-        var $this = $(this)
-        var key = 'behavior:' + name + ':loaded'
-
-        if ($this.data(key)) return
-
+    register(selector, function () {
+      each(selector, function () {
+        var key = '__behavior:' + B.slugify(selector) + ':loaded'
+        if (this[key]) return
         var result = init.call(this)
-
-        if (result !== false) $this.data(key, true)
+        if (result !== false) this[key] = true
       })
     })
+  }
 
-    return $
+  function each (selector, fn) {
+    $(selector).each(fn)
+  }
+
+  function register (selector, fn) {
+    $(document).on('behavior.' + behavior.slugify(selector), fn)
+  }
+
+  function trigger (selector) {
+    if (selector) {
+      $(document).trigger('behavior.' + behavior.slugify(selector))
+    } else {
+      $(document).trigger('behavior')
+    }
   }
 
   /**
@@ -81,7 +90,7 @@
 
   function selectify (selector) {
     if (selector[0] === '@') {
-      return '[role~=' + JSON.stringify(selector.substr(1)) + ']'
+      return '[role~="' + selector.substr(1).replace(/"/g, '\\"') + '"]'
     }
     return selector
   }

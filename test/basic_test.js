@@ -10,10 +10,6 @@ if (typeof process === 'object') {
   })
 }
 
-describe('standard', function () {
-  it('is conformed to', require('mocha-standard'))
-})
-
 describe('behavior:', function () {
   before(function () {
     $.behavior('.my-behavior', function () {
@@ -105,4 +101,8 @@ describe('behavior with @role:', function () {
     $.behavior('[role~="his-behavior"]')
     expect($div.html()).eql('clicked')
   })
+})
+
+describe('standard', function () {
+  it('is conformed to', require('mocha-standard'))
 })
