@@ -18,6 +18,7 @@ if (typeof process === 'object') {
 
 afterEach(function () {
   $div.remove()
+  $.behavior.reset()
 })
 
 describe('jquery:', function () {
@@ -29,7 +30,7 @@ describe('jquery:', function () {
 })
 
 describe('behavior:', function () {
-  before(function () {
+  beforeEach(function () {
     $.behavior('.my-behavior', function () {
       this.innerHTML += '(clicked)'
     })
@@ -58,7 +59,7 @@ describe('behavior:', function () {
 })
 
 describe('exiting:', function () {
-  before(function () {
+  beforeEach(function () {
     $.behavior('.their-behavior', function () {
       this.innerHTML += '(loaded)'
     }, function () {
@@ -76,8 +77,34 @@ describe('exiting:', function () {
   })
 })
 
+describe('state:', function () {
+  var state
+
+  beforeEach(function () {
+    $.behavior('.our-behavior', function (b) {
+      state = b
+      b.number = 10
+    }, function (b) {
+      b.number++
+    })
+
+    $div = $('<div class="our-behavior">').appendTo('body')
+    $.behavior()
+    $div.remove()
+    $.behavior()
+  })
+
+  it('has an id', function () {
+    expect(state.id).match(/^b\d+$/)
+  })
+
+  it('works', function () {
+    expect(state.number).eql(11)
+  })
+})
+
 describe('behavior with role selector:', function () {
-  before(function () {
+  beforeEach(function () {
     $.behavior('[role~="your-behavior"]', function () {
       this.innerHTML += '(clicked)'
     })
@@ -99,7 +126,7 @@ describe('behavior with role selector:', function () {
 })
 
 describe('behavior with @role:', function () {
-  before(function () {
+  beforeEach(function () {
     $.behavior('@his-behavior', function () {
       this.innerHTML += '(clicked)'
     })

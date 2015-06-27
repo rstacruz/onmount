@@ -2,6 +2,14 @@
 /* jshint expr: true */
 
 /*
+ * This is a contrived example that features most things you'd want to happen
+ * in a typical component:
+ *
+ *  * keep a state
+ *  * keep track of sub-elements
+ *  * bind events
+ *  * clean up when done
+ *
  * <div class='js-expandable'>
  *   This is some content. It is long<span class='js-ellipsis'>...</span>
  *   <span class='js-content'>and some parts can be collapsed.</span>
@@ -10,7 +18,7 @@
  * </div>
  */
 
-$.behavior('.js-expandable', function () {
+$.behavior('.js-expandable', function (b) {
   var $this = $(this)
 
   // cached element lookups.
@@ -21,10 +29,13 @@ $.behavior('.js-expandable', function () {
   // how we store state.
   var expanded = false
 
-  // bind events.
+  // bind events via delegation.
   $this
-    .on('click', '.js-toggle', toggle)
-    .on('click', '.js-content', close)
+    .on('click', $button, toggle)
+    .on('click', $content, close)
+
+  // bind a document event - this will need to be cleaned up later.
+  $(document).on('click.js-expandable.' + b.id, close)
 
   // run on initialize.
   init()
@@ -53,4 +64,6 @@ $.behavior('.js-expandable', function () {
   function toggle () {
     return expanded ? close() : open()
   }
+}, function (b) {
+  $(document).off('click.js-expandable.' + b.id)
 })
