@@ -113,6 +113,10 @@ bower install rstacruz/jq-behavior
   >
   > An ID is also provided, `b.id`, which is guaranteed unique for every behavior-element pair.
 
+* `$.behavior.clear()`
+
+  > Clears all defined behaviors. Useful only for tests.
+
 <br>
 
 ## Read more
