@@ -11,9 +11,10 @@
   // Initializer registry.
   var handlers = behavior.handlers = []
   var selectors = behavior.selectors = {}
+  var id = 0
 
-  // Allow users to override this if needed.
   behavior.selectify = selectify
+  behavior.reset = reset
 
   // Use jQuery (or a jQuery-like) when available. This will allow
   // the use of jQuery selectors.
@@ -62,14 +63,14 @@
 
     // keep track of dom elements loaded for this behavior
     var loaded = []
-    var key = '__behavior:' + slugify(selector) + ':loaded'
+    var key = '__behavior:' + slugify(selector) + ':id'
 
     register(selector, function () {
       // clean up old ones
       for (var i = 0, len = loaded.length; i < len; i++) {
         var element = loaded[i]
         if (element && !isAttached(element) && exit) {
-          if (exit.call(element) !== false) {
+          if (exit.call(element, element[key]) !== false) {
             loaded[i] = undefined
             delete element[key]
           }
@@ -78,8 +79,10 @@
 
       // initialize new ones
       each(selector, function () {
-        if (!this[key] && init.call(this) !== false) {
-          this[key] = true
+        var options = { id: 'b' + id }
+        if (!this[key] && init.call(this, options) !== false) {
+          this[key] = options
+          id++
           loaded.push(this)
         }
       })
@@ -87,6 +90,16 @@
 
     // allow $.behavior().behavior() chain
     return this
+  }
+
+  /**
+   * Clears all behaviors. Useful for tests.
+   * This will NOT call exit handlers.
+   */
+
+  function reset () {
+    handlers = behavior.handlers = []
+    selectors = behavior.selectors = {}
   }
 
   /**
