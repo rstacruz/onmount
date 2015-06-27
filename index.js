@@ -63,7 +63,7 @@
 
     // keep track of dom elements loaded for this behavior
     var loaded = []
-    var key = '__behavior:' + slugify(selector) + ':id'
+    var key = '__behavior:' + slugify(selector)
 
     register(selector, function () {
       // clean up old ones
