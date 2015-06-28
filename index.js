@@ -12,6 +12,7 @@ void (function (root, factory) {
   var handlers = behavior.handlers = []
   var selectors = behavior.selectors = {}
   var id = 0
+  var bid = 0
 
   behavior.selectify = selectify
   behavior.reset = reset
@@ -63,7 +64,9 @@ void (function (root, factory) {
 
     // keep track of dom elements loaded for this behavior
     var loaded = []
-    var key = '__behavior:' + slugify(selector)
+
+    // leave the state object into el['__behavior:12']
+    var key = '__behavior:' + bid++
 
     register(selector, function () {
       // clean up old ones
@@ -165,17 +168,6 @@ void (function (root, factory) {
       return '[role~="' + selector.substr(1).replace(/"/g, '\\"') + '"]'
     }
     return selector
-  }
-
-  /**
-   * Internal: Neutralizes a string so that it can be used as an event tag. You
-   * may override this by reimplementing `behavior.slugify`.
-   *
-   *     slugify('[role="hi"]')  //=> "_5Brole_3D_22hi_22_5D"
-   */
-
-  function slugify (str) {
-    return encodeURIComponent(str).replace(/[^a-zA-Z0-9]/g, '_')
   }
 
 }))

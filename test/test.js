@@ -130,6 +130,19 @@ describe('state:', function () {
   })
 })
 
+describe('multiple behaviors per selector:', function () {
+  it('works', function () {
+    $.behavior('.nobodys-behavior', function () {
+      this.innerHTML += '(1)'
+    })
+    $.behavior('.nobodys-behavior', function () {
+      this.innerHTML += '(2)'
+    })
+    $div = $('<div class="nobodys-behavior">').appendTo('body')
+    $.behavior()
+    expect($div.html()).eql('(1)(2)')
+  })
+})
 describe('behavior with role selector:', function () {
   beforeEach(function () {
     $.behavior('[role~="your-behavior"]', function () {
