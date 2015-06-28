@@ -146,14 +146,7 @@ void (function (root, factory) {
    */
 
   function trigger (selector) {
-    var list
-
-    if (selector) {
-      list = selectors[selector] || []
-    } else {
-      list = handlers
-    }
-
+    var list = (selector ? selectors[selector] : handlers) || []
     for (var i = 0, len = list.length; i < len; i++) {
       list[i].call(this)
     }
