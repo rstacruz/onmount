@@ -79,7 +79,7 @@ void (function (root, factory) {
 
       // initialize new ones
       each(selector, function () {
-        var options = { id: 'b' + id }
+        var options = { id: 'b' + id, selector: selector }
         if (!this[key] && init.call(this, options) !== false) {
           this[key] = options
           id++

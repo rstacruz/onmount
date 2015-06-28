@@ -121,6 +121,10 @@ describe('state:', function () {
     expect(state.id).match(/^b\d+$/)
   })
 
+  it('passes the selector', function () {
+    expect(state.selector).to.eql('.our-behavior')
+  })
+
   it('works', function () {
     expect(state.number).eql(11)
   })
