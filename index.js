@@ -69,9 +69,9 @@
       // clean up old ones
       for (var i = 0, len = loaded.length; i < len; i++) {
         var element = loaded[i]
-        if (element && !isAttached(element) && exit) {
-          if (exit.call(element, element[key]) !== false) {
-            loaded[i] = undefined
+        if (element && !isAttached(element)) {
+          loaded[i] = undefined
+          if (exit && exit.call(element, element[key]) !== false) {
             delete element[key]
           }
         }
