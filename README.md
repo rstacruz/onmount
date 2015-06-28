@@ -21,8 +21,7 @@ $.behavior = require('jq-behavior')
 $.behavior('.push-button', function () {
 
   // on enter
-  $(this)
-    .on('click', function () { alert('working...') })
+  $(this).on('click', function () { alert('working...') })
 
 }, function () {
 
