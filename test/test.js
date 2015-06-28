@@ -32,7 +32,7 @@ describe('jquery:', function () {
 describe('behavior:', function () {
   beforeEach(function () {
     $.behavior('.my-behavior', function () {
-      this.innerHTML += '(clicked)'
+      this.innerHTML += '(on)'
     })
   })
 
@@ -42,28 +42,43 @@ describe('behavior:', function () {
 
   it('works', function () {
     $.behavior()
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 
   it('can be triggered on its own', function () {
     $.behavior('.my-behavior')
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 
   it('is idempotent', function () {
     $.behavior()
     $.behavior()
     $.behavior()
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
+  })
+
+  it('functions even without an exit handler', function () {
+    $.behavior()
+    $div.remove()
+    $.behavior()
+  })
+
+  it('doesnt get double-applied even when removed', function () {
+    $.behavior()
+    $div.remove()
+    $.behavior()
+    $div.appendTo('body')
+    $.behavior()
+    expect($div.html()).eql('(on)')
   })
 })
 
 describe('exiting:', function () {
   beforeEach(function () {
     $.behavior('.their-behavior', function () {
-      this.innerHTML += '(loaded)'
+      this.innerHTML += '(on)'
     }, function () {
-      this.innerHTML += '(unloaded)'
+      this.innerHTML += '(off)'
     })
   })
 
@@ -73,7 +88,15 @@ describe('exiting:', function () {
     $div.remove()
     $.behavior()
 
-    expect($div.html()).eql('(loaded)(unloaded)')
+    expect($div.html()).eql('(on)(off)')
+  })
+
+  it('will intentionally get double applied when removed', function () {
+    $div.remove()
+    $.behavior()
+    $div.appendTo('body')
+    $.behavior()
+    expect($div.html()).eql('(on)(off)(on)')
   })
 })
 
@@ -106,7 +129,7 @@ describe('state:', function () {
 describe('behavior with role selector:', function () {
   beforeEach(function () {
     $.behavior('[role~="your-behavior"]', function () {
-      this.innerHTML += '(clicked)'
+      this.innerHTML += '(on)'
     })
   })
 
@@ -116,19 +139,19 @@ describe('behavior with role selector:', function () {
 
   it('works', function () {
     $.behavior()
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 
   it('can be called', function () {
     $.behavior('[role~="your-behavior"]')
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 })
 
 describe('behavior with @role:', function () {
   beforeEach(function () {
     $.behavior('@his-behavior', function () {
-      this.innerHTML += '(clicked)'
+      this.innerHTML += '(on)'
     })
   })
 
@@ -138,17 +161,17 @@ describe('behavior with @role:', function () {
 
   it('works', function () {
     $.behavior()
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 
   it('can be called via @', function () {
     $.behavior('@his-behavior')
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 
   it('can be called', function () {
     $.behavior('[role~="his-behavior"]')
-    expect($div.html()).eql('(clicked)')
+    expect($div.html()).eql('(on)')
   })
 })
 
