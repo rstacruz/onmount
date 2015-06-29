@@ -19,15 +19,11 @@ This example defines a block of code to be applied to all `.push-button` instanc
 $.behavior = require('jq-behavior')
 
 $.behavior('.push-button', function () {
-
   // on enter
   $(this).on('click', function () { alert('working...') })
-
 }, function () {
-
   // on exit (optional)
   alert('button was removed')
-
 })
 ```
 
