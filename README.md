@@ -2,7 +2,9 @@
 
 Run something when a DOM element appears and when it exits.
 
-> No dependencies. 1kb .min.gz.
+> :heavy_check_mark: No dependencies &nbsp;
+> :heavy_check_mark: Legacy IE &nbsp;
+> :heavy_check_mark:  1kb .min.gz
 
 [![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
 
