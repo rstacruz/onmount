@@ -127,7 +127,33 @@ bower install rstacruz/onmount
 
   > Clears all defined behaviors. Useful for tests.
 
+* `$.onmount.observe()`
+
+  > Automatically invoke when new DOM elements appear using [MutationObserver] API. Returns `true` if it succeeds.
+
+* `$.onmount.unobserve()`
+
+  > Turns off observation previously turned on via `onmount.observe()`.
+
 <br>
+
+## Automatic observation
+
+You can turn on automatic observation via [MutationObserver] API using `onmount.observe()`. This is not supported in Opera and IE10 (and below).
+
+```js
+$.onmount.observe()
+```
+
+Considering not all browsers support this, you can set up fallbacks via:
+
+```js
+if (!$.onmount.observe()) {
+  $(document)
+    .ready($.onmount)
+    .on('show.bs hide.bs load', $.onmount)
+}
+```
 
 ## Read more
 
@@ -160,3 +186,4 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 
 [MIT]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/onmount/contributors
+[MutationObserver]: https://developer.mozilla.org/en/docs/Web/API/MutationObserver

@@ -116,6 +116,9 @@ void (function (root, factory) {
 
     onmount.observer = obs
     obs.observe(document, { subtree: true, childList: true })
+
+    // trigger everything before going
+    onmount()
     return true
   }
 
