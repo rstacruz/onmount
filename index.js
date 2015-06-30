@@ -223,7 +223,7 @@ void (function (root, factory) {
    * Internal: visits the element `el` and sees if it needs its exit handler
    * called
    */
- 
+
   Behavior.prototype.visitExit = function (el, i) {
     if (el && !isAttached(el)) {
       if (typeof i === 'undefined') i = this.loaded.indexOf(el)
