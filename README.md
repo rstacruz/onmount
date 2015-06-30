@@ -1,10 +1,6 @@
 # onmount
 
-**Run something when a DOM element appears and when it exits.**
-
-Onmount is a a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. Perfect for simple (non-SPA) websites. jQuery is optional.
-
-See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on how this is useful.
+**Run something when a DOM element appears and when it exits.** jQuery optional.
 
 [![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
 
@@ -15,21 +11,21 @@ See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on h
 
 ## Example
 
-This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
+Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. 
+
+__Detecting elements:__ This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
 
 ```js
 $.onmount = require('onmount')
 
 $.onmount('.push-button', function () {
-  // on enter
-  $(this).on('click', function () { alert('working...') })
-}, function () {
-  // on exit (optional)
-  alert('button was removed')
+  $(this).on('click', function () {
+    alert('working...')
+  })
 })
 ```
 
-Then call `$.onmount()` everytime your code changes. The behavior will be applied once ([and only once][idempotent]) per instance, even if *onmount()* is called multiple times.
+__Polling:__ Call `$.onmount()` everytime your code changes. The behavior will be applied once ([and only once][idempotent]) per instance, even if *onmount()* is called multiple times.
 
 ```js
 document.body.innerHTML =
@@ -40,12 +36,30 @@ $.onmount()
 $(".push-button").click()  //=> 'working...'
 ```
 
-Cleanups will be performed when `$.onmount()` is called again but the element is no longer attached.
+__jQuery integration:__ If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM.
 
 ```js
-document.body.innerHTML = ''
-$.onmount()  //=> 'button was removed'
+$(function () { $.onmount() })
+$(document).on('show.bs closed.bs load page:change', $.onmount)
 ```
+
+__Cleanups:__ supply a 2nd function parameter to `onmount()` to execute something when the DOM node is first detached from the DOM.
+
+```js
+$.onmount('.push-button', function () {
+  /* ... */
+}, function () {
+  alert('button was removed')
+})
+
+document.body.innerHTML = ''
+
+$.onmount()
+//=> 'button was removed'
+```
+
+See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on how this is useful.
+
 
 <br>
 
@@ -76,8 +90,7 @@ bower install rstacruz/onmount
 
   ```js
   $(function () { $.onmount() })
-  $(document).on('show.bs closed.bs load page:change',
-    function () { $.onmount() })
+  $(document).on('show.bs closed.bs load page:change', $.onmount)
   ```
 
 [Bootstrap events]: http://getbootstrap.com/javascript/

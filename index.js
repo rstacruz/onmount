@@ -16,6 +16,7 @@ void (function (root, factory) {
 
   onmount.selectify = selectify
   onmount.reset = reset
+  onmount.observe = observe
 
   // Use jQuery (or a jQuery-like) when available. This will allow
   // the use of jQuery selectors.
@@ -93,6 +94,28 @@ void (function (root, factory) {
 
     // allow $.onmount().onmount() chain
     return this
+  }
+
+  /**
+   * Observes automatically using MutationObserver events.
+   *
+   *     $.onmount.observe()
+   */
+
+  function observe () {
+    var MutationObserver =
+      window.MutationObserver ||
+      window.WebKitMutationObserver
+
+    if (!MutationObserver) return
+
+    var obs = new MutationObserver(function (mutations) {
+      onmount() // TODO optimize
+    })
+
+    onmount.observer = obs
+    obs.observe(document, { subtree: true, childList: true })
+    return true
   }
 
   /**
