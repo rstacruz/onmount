@@ -13,6 +13,7 @@ Run something to initialize an element on its first appearance.
 
 ```js
 $.onmount = require('onmount')
+
 $.onmount('.push-button', function () {
   $(this).on('click', function () {
     alert('working...')
@@ -134,7 +135,7 @@ bower install onmount
 You can turn on automatic observation via the [MutationObserver] API. Not supported in Opera and IE10 and below.
 
 ```js
-$.onmount.observe()
+onmount.observe()
 ```
 
 Considering not all browsers support this, you can set up fallbacks via:
