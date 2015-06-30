@@ -18,8 +18,8 @@ void (function (root, factory) {
    * IDs for auto-incrementing.
    */
 
-  var id = 0
-  var bid = 0
+  var bid = 0 /* behavior ID */
+  var cid = 0 /* component ID */
 
   /*
    * Use jQuery (or a jQuery-like) when available. This will allow
@@ -175,7 +175,7 @@ void (function (root, factory) {
    */
 
   function Behavior (selector, bid, init, exit) {
-    this.id = bid
+    this.id = 'b' + bid
     this.init = init
     this.exit = exit
     this.selector = onmount.selectify(selector)
@@ -211,11 +211,11 @@ void (function (root, factory) {
 
   Behavior.prototype.visitEnter = function (el) {
     if (el[this.key]) return
-    var options = { id: 'b' + id, selector: this.selector }
+    var options = { id: 'c' + cid, selector: this.selector }
     if (this.init.call(el, options) !== false) {
       el[this.key] = options
       this.loaded.push(el)
-      id++
+      cid++
     }
   }
 

@@ -157,7 +157,7 @@ describe('state:', function () {
   })
 
   it('has an id', function () {
-    expect(state.id).match(/^b\d+$/)
+    expect(state.id).match(/^c\d+$/)
   })
 
   it('passes the selector', function () {
