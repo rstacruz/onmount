@@ -67,7 +67,7 @@ void (function (root, factory) {
   function onmount (selector, init, exit) {
     // trigger all behaviors on $.onmount(). Also account for cases such as
     // $($.onmount), where it's triggered with an event object.
-    if (arguments.length === 0 || selector === $ || selector.target) {
+    if (arguments.length === 0 || isjQuery(selector) || isEvent(selector)) {
       return trigger()
     }
 
@@ -331,6 +331,18 @@ void (function (root, factory) {
     }
 
     return list
+  }
+
+  /**
+   * Internal: Check if a given object is jQuery
+   */
+
+  function isjQuery ($) {
+    return typeof $ === 'function' && $.fn && $.noConflict
+  }
+
+  function isEvent (e) {
+    return typeof e === 'object' && e.target
   }
 
   /*

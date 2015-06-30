@@ -40,8 +40,9 @@ $(".push-button").click()  //=> 'working...'
 jQuery is entirely optional. If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
 
 ```js
-$(function () { $.onmount() })
-$(document).on('show.bs closed.bs load page:change', $.onmount)
+$(document)
+  .ready($.onmount)
+  .on('show.bs closed.bs load page:change', $.onmount)
 ```
 
 <br>

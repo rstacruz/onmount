@@ -58,6 +58,35 @@ describe('onmount:', function () {
     expect($div.html()).eql('(on)')
   })
 
+  describe('in jquery', function () {
+    var old$
+
+    beforeEach(function () {
+      old$ = onmount.$
+      onmount.$ = $
+    })
+
+    afterEach(function () {
+      onmount.$ = old$
+    })
+
+    it('is callable via dom ready', function () {
+      $(onmount)
+      expect($div.html()).eql('(on)')
+    })
+
+    it('is callable via dom ready (verbose)', function () {
+      $(document).ready(onmount)
+      expect($div.html()).eql('(on)')
+    })
+
+    it('is callable via dom events', function () {
+      $(document).on('onmount', onmount)
+      $(document).trigger('onmount')
+      expect($div.html()).eql('(on)')
+    })
+  })
+
   it('functions even without an exit handler', function () {
     onmount()
     $div.remove()
