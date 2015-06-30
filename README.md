@@ -8,7 +8,8 @@
 
 ## Example
 
-### Detecting elements
+**Detecting elements:**
+This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
 
 ```js
 $.onmount = require('onmount')
@@ -19,9 +20,10 @@ $.onmount('.push-button', function () {
 })
 ```
 
-> This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
+<br>
 
-### Polling
+**Polling for changes:**
+Call `$.onmount()` everytime your code changes. The behavior will be applied once and only once per instance even if *onmount()* is called multiple times. [Automatic observation](#automatic-observation) is also supported.
 
 ```js
 document.body.innerHTML =
@@ -32,18 +34,20 @@ $.onmount()
 $(".push-button").click()  //=> 'working...'
 ```
 
-> Call `$.onmount()` everytime your code changes. The behavior will be applied once and only once per instance even if *onmount()* is called multiple times. [Automatic observation](#automatic-observation) is also supported.
+<br>
 
-### jQuery integration
+**jQuery integration:**
+jQuery is entirely optional. If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
 
 ```js
 $(function () { $.onmount() })
 $(document).on('show.bs closed.bs load page:change', $.onmount)
 ```
 
-> jQuery is entirely optional. If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
+<br>
 
-### Cleanups
+**Cleanups:**
+Supply a 2nd function parameter to `onmount()` to execute something when the DOM node is first detached from the DOM.
 
 ```js
 $.onmount('.push-button', function () {
@@ -56,8 +60,6 @@ document.body.innerHTML = ''
 
 $.onmount() //=> 'button was removed'
 ```
-
-> Supply a 2nd function parameter to `onmount()` to execute something when the DOM node is first detached from the DOM.
 
 <br>
 
