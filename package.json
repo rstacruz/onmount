@@ -1,21 +1,19 @@
 {
   "name": "onmount",
-  "version": "1.0.0",
   "description": "Run something when a DOM element appears and when it exits",
-  "main": "index.js",
-  "keywords": [
-    "dom",
-    "enter",
-    "exit",
-    "mutation",
-    "mutationobserver",
-    "observe"
-  ],
-  "scripts": {
-    "test": "mocha"
-  },
+  "version": "1.0.0",
   "author": "Rico Sta. Cruz <rico@ricostacruz.com>",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rstacruz/onmount/issues"
+  },
+  "dependencies": {
+    "chai": "^3.0.0",
+    "jquery": "^2.1.4",
+    "jsdom": "^5.4.3",
+    "mocha-jsdom": "^0.5.0",
+    "mocha-standard": "^0.0.5",
+    "standard": "^4.3.2"
+  },
   "devDependencies": {
     "chai": "^3.0.0",
     "jquery": "^2.1.4",
@@ -24,5 +22,28 @@
     "mocha-jsdom": "^0.5.0",
     "mocha-standard": "0.0.5",
     "standard": "^4.3.2"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "test"
+  },
+  "homepage": "https://github.com/rstacruz/onmount#readme",
+  "keywords": [
+    "dom",
+    "enter",
+    "exit",
+    "mutation",
+    "mutationobserver",
+    "observe"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstacruz/onmount.git"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }
