@@ -12,9 +12,7 @@ void (function (root, factory) {
    * Registry.
    */
 
-  var handlers = onmount.handlers = []
-  var behaviors = onmount.behaviors = []
-  var selectors = onmount.selectors = {}
+  var handlers, behaviors, selectors
 
   /*
    * IDs for auto-incrementing.
@@ -179,12 +177,8 @@ void (function (root, factory) {
     this.init = init
     this.exit = exit
     this.selector = onmount.selectify(selector)
-
-    // keep track of dom elements loaded for this behavior
-    this.loaded = []
-
-    // leave the state object into el['__onmount:12']
-    this.key = '__onmount:' + bid
+    this.loaded = [] // keep track of dom elements loaded for this behavior
+    this.key = '__onmount:' + bid // leave the state in el['__onmount:12']
   }
 
   /**
@@ -348,6 +342,7 @@ void (function (root, factory) {
    * Export
    */
 
+  onmount.reset()
   return onmount
 
 }))
