@@ -21,7 +21,7 @@ $.onmount('.push-button', function () {
 <br>
 
 **Polling for changes:**
-Call `$.onmount()` everytime your code changes. ^([automatic?](#automatic-observation))
+Call `$.onmount()` everytime your code changes. ([automatic?](#automatic-observation))
 
 ```js
 $('<button class="push-button">Do something</button>')
@@ -35,7 +35,7 @@ $(".push-button").click()  //=> 'working...'
 <br>
 
 **jQuery integration:**
-jQuery is optional; use it to poll on popular events. ^([1][Bootstrap events] [2][Turbolinks load])
+jQuery is optional; use it to poll on popular events. ([1][Bootstrap events] [2][Turbolinks load])
 
 ```js
 $(document)
