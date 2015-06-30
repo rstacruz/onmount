@@ -6,10 +6,8 @@
 
 <br>
 
-## Example
-
 **Detecting elements:**
-This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
+Run something to initialize an element on its first appearance.
 
 ```js
 $.onmount = require('onmount')
@@ -23,11 +21,11 @@ $.onmount('.push-button', function () {
 <br>
 
 **Polling for changes:**
-Call `$.onmount()` everytime your code changes. The behavior will be applied once and only once per instance even if *onmount()* is called multiple times. [Automatic observation](#automatic-observation) is also supported.
+Call `$.onmount()` everytime your code changes. ^([automatic?](#automatic-observation))
 
 ```js
-document.body.innerHTML =
-  '<button class="push-button">Do something</button>'
+$('<button class="push-button">Do something</button>')
+  .appendTo('body')
 
 $.onmount()
 
@@ -37,7 +35,7 @@ $(".push-button").click()  //=> 'working...'
 <br>
 
 **jQuery integration:**
-jQuery is entirely optional. If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
+jQuery is optional; use it to poll on popular events. ^([1][Bootstrap events] [2][Turbolinks load])
 
 ```js
 $(document)
@@ -48,11 +46,11 @@ $(document)
 <br>
 
 **Cleanups:**
-Supply a 2nd function parameter to `onmount()` to execute something when the DOM node is first detached from the DOM.
+Supply a 2nd function to *onmount()* to execute something when the node is first detached.
 
 ```js
 $.onmount('.push-button', function () {
-  /* ... */
+  /*...*/
 }, function () {
   alert('button was removed')
 })
@@ -66,7 +64,10 @@ $.onmount() //=> 'button was removed'
 
 ## What for?
 
-Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It's great for common websites that are not Single-Page Apps. See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on the behavior pattern.
+Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It's great for common websites that are not Single-Page Apps. Read:
+
+- [Premise](docs/docs.md#premise)
+- [rsjs][rsjs] (Reasonable System for JavaScript Structure)
 
 <br>
 
@@ -98,19 +99,19 @@ bower install rstacruz/onmount
 
 ## API
 
-* `$.onmount()`
+* `onmount()`
 
   > Runs all behaviors.
 
-* `$.onmount(selector)`
+* `onmount(selector)`
 
   > Runs all behaviors registered for `selector`.
 
-* `$.onmount(selector, init())`
+* `onmount(selector, init())`
 
   > Registers a behavior for `selector` to run the callback `init()`.
 
-* `$.onmount(selector, init(b), exit(b))`
+* `onmount(selector, init(b), exit(b))`
 
   > Registers a behavior for `selector` to run the callback `init()`. The `exit()` callback will be called once the behavior is triggered again but the element is no longer attached to the DOM.
   >
@@ -118,15 +119,15 @@ bower install rstacruz/onmount
   >
   > An ID is also provided, `b.id`, which is guaranteed unique for every behavior-element pair.
 
-* `$.onmount.reset()`
+* `onmount.reset()`
 
   > Clears all defined behaviors. Useful for tests.
 
-* `$.onmount.observe()`
+* `onmount.observe()`
 
-  > Automatically invoke when new DOM elements appear using [MutationObserver] API. Returns `true` if it succeeds.
+  > Automatically invoke when new DOM elements appear using MutationObserver API. Returns `true` if it succeeds.
 
-* `$.onmount.unobserve()`
+* `onmount.unobserve()`
 
   > Turns off observation previously turned on via `onmount.observe()`.
 
@@ -134,7 +135,7 @@ bower install rstacruz/onmount
 
 ## Automatic observation
 
-You can turn on automatic observation via [MutationObserver] API using `onmount.observe()`. This is not supported in Opera and IE10 (and below).
+You can turn on automatic observation via the [MutationObserver] API. Not supported in Opera and IE10 and below.
 
 ```js
 $.onmount.observe()
