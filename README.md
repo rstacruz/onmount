@@ -134,7 +134,7 @@ bower install onmount
 
 ## Automatic observation
 
-You can turn on automatic observation via the [MutationObserver] API. Not supported in Opera and IE10 and below.
+You can turn on automatic observation via the [MutationObserver] API. Not supported in Opera and IE10 and below. (*experimental*)
 
 ```js
 onmount.observe()
