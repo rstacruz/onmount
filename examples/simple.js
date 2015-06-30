@@ -1,6 +1,6 @@
 /* global $, alert */
 
-$.behavior('.js-clickable', function () {
+$.onmount('.js-clickable', function () {
   $(this).on('click', function () {
     alert('You clicked me!')
   })

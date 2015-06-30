@@ -3,25 +3,25 @@ void (function (root, factory) {
   if (typeof define === 'function' && define.amd) define(factory)
   else if (typeof exports === 'object') module.exports = factory()
   else {
-    if (window.jQuery) window.jQuery.behavior = factory()
-    else root.behavior = factory()
+    if (window.jQuery) window.jQuery.onmount = factory()
+    else root.onmount = factory()
   }
 }(this, function ($) {
 
   // Initializer registry.
-  var handlers = behavior.handlers = []
-  var selectors = behavior.selectors = {}
+  var handlers = onmount.handlers = []
+  var selectors = onmount.selectors = {}
   var id = 0
   var bid = 0
 
-  behavior.selectify = selectify
-  behavior.reset = reset
+  onmount.selectify = selectify
+  onmount.reset = reset
 
   // Use jQuery (or a jQuery-like) when available. This will allow
   // the use of jQuery selectors.
-  behavior.$ = window.jQuery || window.Zepto || window.Ender
+  onmount.$ = window.jQuery || window.Zepto || window.Ender
 
-  return behavior
+  return onmount
 
   /**
    * Adds a behavior, or triggers behaviors.
@@ -31,42 +31,42 @@ void (function (root, factory) {
    * behavior.
    *
    *     // define a behavior
-   *     $.behavior('.select-box', function () {
+   *     $.onmount('.select-box', function () {
    *       $(this).on('...')
    *     })
    *
    *     // define a behavior with exit
-   *     $.behavior('.select-box', function () {
+   *     $.onmount('.select-box', function () {
    *       $(document).on('...')
    *     }, function () {
    *       $(document).off('...')
    *     })
    *
-   *     // retrigger a behavior
-   *     $.behavior('.select-box')
+   *     // retrigger a onmount
+   *     $.onmount('.select-box')
    *
    *     // retriggers all behaviors
-   *     $.behavior()
+   *     $.onmount()
    */
 
-  function behavior (selector, init, exit) {
-    // trigger all behaviors on $.behavior(). Also account for cases such as
-    // $($.behavior), where it's triggered with an event object.
+  function onmount (selector, init, exit) {
+    // trigger all behaviors on $.onmount(). Also account for cases such as
+    // $($.onmount), where it's triggered with an event object.
     if (arguments.length === 0 || selector === $ || selector.target) {
       return trigger()
     }
 
     // account for `@role` selectors and such
-    selector = behavior.selectify(selector)
+    selector = onmount.selectify(selector)
 
-    // trigger with $.behavior(selector)
+    // trigger with $.onmount(selector)
     if (arguments.length === 1) return trigger(selector)
 
     // keep track of dom elements loaded for this behavior
     var loaded = []
 
-    // leave the state object into el['__behavior:12']
-    var key = '__behavior:' + bid++
+    // leave the state object into el['__onmount:12']
+    var key = '__onmount:' + bid++
 
     register(selector, function () {
       // clean up old ones
@@ -91,7 +91,7 @@ void (function (root, factory) {
       })
     })
 
-    // allow $.behavior().behavior() chain
+    // allow $.onmount().onmount() chain
     return this
   }
 
@@ -101,8 +101,8 @@ void (function (root, factory) {
    */
 
   function reset () {
-    handlers = behavior.handlers = []
-    selectors = behavior.selectors = {}
+    handlers = onmount.handlers = []
+    selectors = onmount.selectors = {}
   }
 
   /**
@@ -123,7 +123,7 @@ void (function (root, factory) {
    */
 
   function each (selector, fn) {
-    if (behavior.$) return behavior.$(selector).each(fn)
+    if (onmount.$) return onmount.$(selector).each(fn)
 
     var list = document.querySelectorAll(selector)
     for (var i = 0, len = list.length; i < len; i++) {
@@ -157,7 +157,7 @@ void (function (root, factory) {
 
   /**
    * Internal: Converts `@role` to `[role~="role"]` if needed. You can override
-   * this by reimplementing `behavior.selectify`.
+   * this by reimplementing `onmount.selectify`.
    *
    *     selectify('@hi')   //=> '[role="hi"]'
    *     selectify('.btn')  //=> '.btn'

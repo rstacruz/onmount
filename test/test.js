@@ -1,6 +1,6 @@
 /* global window, before, describe, it, document, beforeEach, afterEach */
 'use strict'
-var $, $div, expect
+var $, $div, expect, onmount
 
 if (typeof process === 'object') {
   var jsdom = require('mocha-jsdom')
@@ -8,7 +8,7 @@ if (typeof process === 'object') {
   jsdom()
   before(function () {
     $ = rerequire('jquery')
-    $.behavior = rerequire('../index')
+    onmount = rerequire('../index')
     expect = require('chai').expect
   })
 } else {
@@ -18,7 +18,7 @@ if (typeof process === 'object') {
 
 afterEach(function () {
   $div.remove()
-  $.behavior.reset()
+  onmount.reset()
 })
 
 describe('jquery:', function () {
@@ -31,7 +31,7 @@ describe('jquery:', function () {
 
 describe('behavior:', function () {
   beforeEach(function () {
-    $.behavior('.my-behavior', function () {
+    onmount('.my-behavior', function () {
       this.innerHTML += '(on)'
     })
   })
@@ -41,41 +41,41 @@ describe('behavior:', function () {
   })
 
   it('works', function () {
-    $.behavior()
+    onmount()
     expect($div.html()).eql('(on)')
   })
 
   it('can be triggered on its own', function () {
-    $.behavior('.my-behavior')
+    onmount('.my-behavior')
     expect($div.html()).eql('(on)')
   })
 
   it('is idempotent', function () {
-    $.behavior()
-    $.behavior()
-    $.behavior()
+    onmount()
+    onmount()
+    onmount()
     expect($div.html()).eql('(on)')
   })
 
   it('functions even without an exit handler', function () {
-    $.behavior()
+    onmount()
     $div.remove()
-    $.behavior()
+    onmount()
   })
 
   it('doesnt get double-applied even when removed', function () {
-    $.behavior()
+    onmount()
     $div.remove()
-    $.behavior()
+    onmount()
     $div.appendTo('body')
-    $.behavior()
+    onmount()
     expect($div.html()).eql('(on)')
   })
 })
 
 describe('exiting:', function () {
   beforeEach(function () {
-    $.behavior('.their-behavior', function () {
+    onmount('.their-behavior', function () {
       this.innerHTML += '(on)'
     }, function () {
       this.innerHTML += '(off)'
@@ -84,18 +84,18 @@ describe('exiting:', function () {
 
   it('calls the unloader', function () {
     $div = $('<div class="their-behavior">').appendTo('body')
-    $.behavior()
+    onmount()
     $div.remove()
-    $.behavior()
+    onmount()
 
     expect($div.html()).eql('(on)(off)')
   })
 
   it('will intentionally get double applied when removed', function () {
     $div.remove()
-    $.behavior()
+    onmount()
     $div.appendTo('body')
-    $.behavior()
+    onmount()
     expect($div.html()).eql('(on)(off)(on)')
   })
 })
@@ -104,7 +104,7 @@ describe('state:', function () {
   var state
 
   beforeEach(function () {
-    $.behavior('.our-behavior', function (b) {
+    onmount('.our-behavior', function (b) {
       state = b
       b.number = 10
     }, function (b) {
@@ -112,9 +112,9 @@ describe('state:', function () {
     })
 
     $div = $('<div class="our-behavior">').appendTo('body')
-    $.behavior()
+    onmount()
     $div.remove()
-    $.behavior()
+    onmount()
   })
 
   it('has an id', function () {
@@ -132,20 +132,20 @@ describe('state:', function () {
 
 describe('multiple behaviors per selector:', function () {
   it('works', function () {
-    $.behavior('.nobodys-behavior', function () {
+    onmount('.nobodys-behavior', function () {
       this.innerHTML += '(1)'
     })
-    $.behavior('.nobodys-behavior', function () {
+    onmount('.nobodys-behavior', function () {
       this.innerHTML += '(2)'
     })
     $div = $('<div class="nobodys-behavior">').appendTo('body')
-    $.behavior()
+    onmount()
     expect($div.html()).eql('(1)(2)')
   })
 })
 describe('behavior with role selector:', function () {
   beforeEach(function () {
-    $.behavior('[role~="your-behavior"]', function () {
+    onmount('[role~="your-behavior"]', function () {
       this.innerHTML += '(on)'
     })
   })
@@ -155,19 +155,19 @@ describe('behavior with role selector:', function () {
   })
 
   it('works', function () {
-    $.behavior()
+    onmount()
     expect($div.html()).eql('(on)')
   })
 
   it('can be called', function () {
-    $.behavior('[role~="your-behavior"]')
+    onmount('[role~="your-behavior"]')
     expect($div.html()).eql('(on)')
   })
 })
 
 describe('behavior with @role:', function () {
   beforeEach(function () {
-    $.behavior('@his-behavior', function () {
+    onmount('@his-behavior', function () {
       this.innerHTML += '(on)'
     })
   })
@@ -177,17 +177,17 @@ describe('behavior with @role:', function () {
   })
 
   it('works', function () {
-    $.behavior()
+    onmount()
     expect($div.html()).eql('(on)')
   })
 
   it('can be called via @', function () {
-    $.behavior('@his-behavior')
+    onmount('@his-behavior')
     expect($div.html()).eql('(on)')
   })
 
   it('can be called', function () {
-    $.behavior('[role~="his-behavior"]')
+    onmount('[role~="his-behavior"]')
     expect($div.html()).eql('(on)')
   })
 })

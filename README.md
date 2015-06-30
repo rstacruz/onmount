@@ -1,10 +1,12 @@
-# behavior
+# onmount
 
-**A safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes.**
+**Run something when a DOM element appears and when it exits.**
 
-Perfect for simple (non-SPA) websites. jQuery is optional. See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on how this is useful.
+Onmount is a a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. Perfect for simple (non-SPA) websites. jQuery is optional.
 
-[![Status](https://travis-ci.org/rstacruz/jq-behavior.svg?branch=master)](https://travis-ci.org/rstacruz/jq-behavior "See test builds")
+See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on how this is useful.
+
+[![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
 
 
 [rsjs]: https://github.com/rstacruz/rsjs
@@ -16,9 +18,9 @@ Perfect for simple (non-SPA) websites. jQuery is optional. See [rsjs][rsjs] (Rea
 This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
 
 ```js
-$.behavior = require('jq-behavior')
+$.onmount = require('onmount')
 
-$.behavior('.push-button', function () {
+$.onmount('.push-button', function () {
   // on enter
   $(this).on('click', function () { alert('working...') })
 }, function () {
@@ -27,22 +29,22 @@ $.behavior('.push-button', function () {
 })
 ```
 
-Then call `$.behavior()` everytime your code changes. The behavior will be applied once ([and only once][idempotent]) per instance, even if *behavior()* is called multiple times.
+Then call `$.onmount()` everytime your code changes. The behavior will be applied once ([and only once][idempotent]) per instance, even if *onmount()* is called multiple times.
 
 ```js
 document.body.innerHTML =
   '<button class="push-button">Do something</button>'
 
-$.behavior()
+$.onmount()
 
 $(".push-button").click()  //=> 'working...'
 ```
 
-Cleanups will be performed when `$.behavior()` is called again but the element is no longer attached.
+Cleanups will be performed when `$.onmount()` is called again but the element is no longer attached.
 
 ```js
 document.body.innerHTML = ''
-$.behavior()  //=> 'button was removed'
+$.onmount()  //=> 'button was removed'
 ```
 
 <br>
@@ -50,32 +52,32 @@ $.behavior()  //=> 'button was removed'
 ## Usage
 
 ```
-npm install rstacruz/jq-behavior
-bower install rstacruz/jq-behavior
+npm install rstacruz/onmount
+bower install rstacruz/onmount
 ```
 
 * **With CommonJS/AMD:**<br>
   Great with [Browserify].
 
   ```js
-  $.behavior = require('jq-behavior')
+  $.onmount = require('onmount')
   ```
 
 * **With no module loaders:**<br>
-  If it's loaded after jQuery, it's loaded as a jQuery plugin (`$.behavior`).
+  If it's loaded after jQuery, it's loaded as a jQuery plugin (`$.onmount`).
 
   ```js
-  window.behavior(...)   // no jQuery
-  $.behavior(...)        // with jquery
+  window.onmount(...)   // no jQuery
+  $.onmount(...)        // with jquery
   ```
 
 * **With jQuery:**<br>
-  Call `$.behavior()` every time your DOM changes. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
+  Call `$.onmount()` every time your DOM changes. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
 
   ```js
-  $(function () { $.behavior() })
+  $(function () { $.onmount() })
   $(document).on('show.bs closed.bs load page:change',
-    function () { $.behavior() })
+    function () { $.onmount() })
   ```
 
 [Bootstrap events]: http://getbootstrap.com/javascript/
@@ -88,19 +90,19 @@ bower install rstacruz/jq-behavior
 
 ## API
 
-* `$.behavior()`
+* `$.onmount()`
 
   > Runs all behaviors.
 
-* `$.behavior(selector)`
+* `$.onmount(selector)`
 
   > Runs all behaviors registered for `selector`.
 
-* `$.behavior(selector, init())`
+* `$.onmount(selector, init())`
 
   > Registers a behavior for `selector` to run the callback `init()`.
 
-* `$.behavior(selector, init(b), exit(b))`
+* `$.onmount(selector, init(b), exit(b))`
 
   > Registers a behavior for `selector` to run the callback `init()`. The `exit()` callback will be called once the behavior is triggered again but the element is no longer attached to the DOM.
   >
@@ -108,7 +110,7 @@ bower install rstacruz/jq-behavior
   >
   > An ID is also provided, `b.id`, which is guaranteed unique for every behavior-element pair.
 
-* `$.behavior.reset()`
+* `$.onmount.reset()`
 
   > Clears all defined behaviors. Useful for tests.
 
@@ -136,7 +138,7 @@ Examples:
 
 ## Thanks
 
-**jq-behavior** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
+**onmount** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
 Authored and maintained by Rico Sta. Cruz with help from contributors ([list][contributors]).
 
 > [ricostacruz.com](http://ricostacruz.com) &nbsp;&middot;&nbsp;
@@ -144,4 +146,4 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 > Twitter [@rstacruz](https://twitter.com/rstacruz)
 
 [MIT]: http://mit-license.org/
-[contributors]: http://github.com/rstacruz/jq-behavior/contributors
+[contributors]: http://github.com/rstacruz/onmount/contributors

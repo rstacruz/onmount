@@ -1,5 +1,5 @@
 {
-  "name": "jq-behavior",
+  "name": "onmount",
   "description": "Safe, reliable, idempotent and testable behaviors for DOM nodes using jQuery",
   "main": "index.js",
   "authors": [

@@ -2,8 +2,8 @@
 /* jshint expr: true */
 
 /*
- * This is a contrived example that features most things you'd want to happen
- * in a typical component:
+ * This is a kitchen-sink example that features most things you'd want to
+ * happen in a typical component:
  *
  *  * keep a state
  *  * keep track of sub-elements
@@ -18,7 +18,7 @@
  * </div>
  */
 
-$.behavior('.js-expandable', function (b) {
+$.onmount('.js-expandable', function (b) {
   var $this = $(this)
 
   // cached element lookups.

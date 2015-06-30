@@ -42,14 +42,14 @@ Behaviors solve that. You don't write your code any differently, but it will be 
  * initializes behaviors on document.ready and on bootstrap modal show.
  */
 
-$(function () { $.behavior() })
-$(document).on('show.bs.modal', function () { $.behavior() })
+$(function () { $.onmount() })
+$(document).on('show.bs.modal', function () { $.onmount() })
 
 /*
  * attach a behavior to `.js-expandable-nav`
  */
 
-$.behavior('.js-expandable-nav', function () {
+$.onmount('.js-expandable-nav', function () {
   var $this   = $(this)
   var $button = $this.find('button')
   var $more   = $this.find('.more')
@@ -61,25 +61,25 @@ $.behavior('.js-expandable-nav', function () {
 })
 ```
 
-By simply wrapping your code in `$.behavior(...)` instead of `$(function)`, it gives you the power of a few features:
+By simply wrapping your code in `$.onmount(...)` instead of `$(function)`, it gives you the power of a few features:
 
 * You're assured that the block will only run once for every `.js-expandable-nav` element.
 
 * You can retrigger this behavior for tests.
 
-* You can call behaviors again and again (`$.behavior()`) every time your DOM changes to make it work for any new elements.
+* You can call behaviors again and again (`$.onmount()`) every time your DOM changes to make it work for any new elements.
 
 <br>
 
 ## Idempotency
 
-You can call `$.behavior()` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new elements that may appear in your DOM.
+You can call `$.onmount()` as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new elements that may appear in your DOM.
 
 ```js
 // add more content
 $('#content').append(...)
 
-$.behavior()
+$.onmount()
 ```
 
 <br>
@@ -89,20 +89,20 @@ $.behavior()
 You'll notice that document.ready is not friendly for Turbolinks applications. This solves that.
 
 ```js
-$(function () { $.behavior() })
-$(document).on('page:change', function () { $.behavior() })
+$(function () { $.onmount() })
+$(document).on('page:change', function () { $.onmount() })
 ```
 
 <br>
 
 ## Performing cleanups
 
-When your behavior modifies things outside itself (eg, binds events to the `document` element), you might want to clean up when the behavior is removed. Just pass a 2nd function to `behavior()`.
+When your behavior modifies things outside itself (eg, binds events to the `document` element), you might want to clean up when the behavior is removed. Just pass a 2nd function to `onmount()`.
 
-In this example below, behaviors are checked once dialog boxes are opened and closed (`$.behavior()`). When it's called after closing, it will see that the old `.js-sticky` element is not part of the document anymore, and its exit callback will be called.
+In this example below, behaviors are checked once dialog boxes are opened and closed (`$.onmount()`). When it's called after closing, it will see that the old `.js-sticky` element is not part of the document anymore, and its exit callback will be called.
 
 ```js
-$.behavior('.js-sticky', function () {
+$.onmount('.js-sticky', function () {
   $(document).on('scroll.sticky', function () {
     // do stuff
   })
@@ -110,8 +110,8 @@ $.behavior('.js-sticky', function () {
   $(document).off('scroll.sticky')
 })
 
-$(function () { $.behavior() })
-$(document).on('show.bs.modal close.bs.modal', function () { $.behavior() })
+$(function () { $.onmount() })
+$(document).on('show.bs.modal close.bs.modal', function () { $.onmount() })
 ```
 
 <br>
@@ -123,7 +123,7 @@ You can cancel an initialization by returning `false`. This makes it so that the
 This is also available for exit callbacks.
 
 ```js
-$.behavior('.expandable-nav', function () {
+$.onmount('.expandable-nav', function () {
   if ($(this).is(':hidden')) return false
 
   /* ... */
@@ -137,11 +137,11 @@ $.behavior('.expandable-nav', function () {
 Some recommend [using the role attribute][rsjs] to bind your behaviors. To aid this, you can define behaviors as `@xxxx`, which is shorthand of `[role~="xxxx"]`. (This convention is taken from [jquery-role].)
 
 ```js
-$.behavior('@hiding-menu', function () {
+$.onmount('@hiding-menu', function () {
   /* ... */
 })
 
-/* same as $.behavior('[role~="hiding-menu"]', ...) */
+/* same as $.onmount('[role~="hiding-menu"]', ...) */
 ```
 
 [rsjs]: https://github.com/rstacruz/rsjs
@@ -151,7 +151,7 @@ $.behavior('@hiding-menu', function () {
 
 ## Testing behaviors
 
-You can trigger just one behavior via `$.behavior(SELECTOR)`. This is useful for tests.
+You can trigger just one onmount via `$.onmount(SELECTOR)`. This is useful for tests.
 
 ```js
 var $div
@@ -160,7 +160,7 @@ beforeEach(function () {
   $div = $("<div class='js-user-profile' data-user='rstacruz'>")
     .appendTo('body')
 
-  $.behavior('.js-user-profile')
+  $.onmount('.js-user-profile')
 })
 
 afterEach(function () {
@@ -183,7 +183,7 @@ The `init()` and `exit()` callbacks get passed an object with a unique ID. This 
 This makes it possible to assign event handlers with tags that are unique to that behavior-and-element so that it may be unbound later.
 
 ```js
-$.behavior('@hiding-menu', function (b) {
+$.onmount('@hiding-menu', function (b) {
   $('html, body').on('scroll.' + b.id, function () {
   })
 }, function (b) {
