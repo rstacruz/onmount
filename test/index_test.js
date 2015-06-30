@@ -29,7 +29,7 @@ describe('jquery:', function () {
   })
 })
 
-describe('behavior:', function () {
+describe('onmount:', function () {
   beforeEach(function () {
     onmount('.my-behavior', function () {
       this.innerHTML += '(on)'
@@ -143,7 +143,7 @@ describe('multiple behaviors per selector:', function () {
     expect($div.html()).eql('(1)(2)')
   })
 })
-describe('behavior with role selector:', function () {
+describe('with role selector:', function () {
   beforeEach(function () {
     onmount('[role~="your-behavior"]', function () {
       this.innerHTML += '(on)'
@@ -165,7 +165,7 @@ describe('behavior with role selector:', function () {
   })
 })
 
-describe('behavior with @role:', function () {
+describe('with @role:', function () {
   beforeEach(function () {
     onmount('@his-behavior', function () {
       this.innerHTML += '(on)'
