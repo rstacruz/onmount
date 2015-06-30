@@ -32,9 +32,10 @@ void (function (root, factory) {
    * Detect MutationObserver support for `onmount.observe()`.
    */
 
-  var MutationObserver =
+  onmount.MutationObserver =
     window.MutationObserver ||
-    window.WebKitMutationObserver
+    window.WebKitMutationObserver ||
+    window.MozMutationObserver
 
   /**
    * Adds a behavior, or triggers behaviors.
@@ -103,7 +104,8 @@ void (function (root, factory) {
    */
 
   onmount.observe = function observe () {
-    if (!MutationObserver) return
+    var MutationObserver = onmount.MutationObserver
+    if (typeof MutationObserver === 'undefined') return
 
     var obs = new MutationObserver(function (mutations) {
       each(mutations, function (mutation) {
@@ -221,7 +223,7 @@ void (function (root, factory) {
    * Internal: visits the element `el` and sees if it needs its exit handler
    * called
    */
-
+ 
   Behavior.prototype.visitExit = function (el, i) {
     if (el && !isAttached(el)) {
       if (typeof i === 'undefined') i = this.loaded.indexOf(el)
