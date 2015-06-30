@@ -8,21 +8,35 @@ void (function (root, factory) {
   }
 }(this, function ($) {
 
-  // Initializer registry.
+  /*
+   * Registry.
+   */
+
   var handlers = onmount.handlers = []
+  var behaviors = onmount.behaviors = []
   var selectors = onmount.selectors = {}
+
+  /*
+   * IDs for auto-incrementing.
+   */
+
   var id = 0
   var bid = 0
 
-  onmount.selectify = selectify
-  onmount.reset = reset
-  onmount.observe = observe
+  /*
+   * Use jQuery (or a jQuery-like) when available. This will allow
+   * the use of jQuery selectors.
+   */
 
-  // Use jQuery (or a jQuery-like) when available. This will allow
-  // the use of jQuery selectors.
   onmount.$ = window.jQuery || window.Zepto || window.Ender
 
-  return onmount
+  /*
+   * Detect MutationObserver support for `onmount.observe()`.
+   */
+
+  var MutationObserver =
+    window.MutationObserver ||
+    window.WebKitMutationObserver
 
   /**
    * Adds a behavior, or triggers behaviors.
@@ -63,34 +77,9 @@ void (function (root, factory) {
     // trigger with $.onmount(selector)
     if (arguments.length === 1) return trigger(selector)
 
-    // keep track of dom elements loaded for this behavior
-    var loaded = []
-
-    // leave the state object into el['__onmount:12']
-    var key = '__onmount:' + bid++
-
-    register(selector, function () {
-      // clean up old ones
-      for (var i = 0, len = loaded.length; i < len; i++) {
-        var element = loaded[i]
-        if (element && !isAttached(element)) {
-          loaded[i] = undefined
-          if (exit && exit.call(element, element[key]) !== false) {
-            delete element[key]
-          }
-        }
-      }
-
-      // initialize new ones
-      each(selector, function () {
-        var options = { id: 'b' + id, selector: selector }
-        if (!this[key] && init.call(this, options) !== false) {
-          this[key] = options
-          id++
-          loaded.push(this)
-        }
-      })
-    })
+    var b = new Behavior(selector, bid++, init, exit)
+    behaviors.push(b)
+    b.register()
 
     // allow $.onmount().onmount() chain
     return this
@@ -102,15 +91,27 @@ void (function (root, factory) {
    *     $.onmount.observe()
    */
 
-  function observe () {
-    var MutationObserver =
-      window.MutationObserver ||
-      window.WebKitMutationObserver
-
+  onmount.observe = function observe () {
     if (!MutationObserver) return
 
     var obs = new MutationObserver(function (mutations) {
-      onmount() // TODO optimize
+      mutations.forEach(function (mutation) {
+        each(mutation.addedNodes, function (el) {
+          behaviors.forEach(function (behavior) {
+            if (matches(el, behavior.selector)) {
+              behavior.visitEnter(el)
+            }
+          })
+        })
+
+        each(mutation.removedNodes, function (el) {
+          behaviors.forEach(function (behavior) {
+            if (matches(el, behavior.selector)) {
+              behavior.visitExit(el)
+            }
+          })
+        })
+      })
     })
 
     onmount.observer = obs
@@ -119,13 +120,107 @@ void (function (root, factory) {
   }
 
   /**
+   * Turns off observation first issued by `onmount.observe()`.
+   */
+
+  onmount.unobserve = function unobserve () {
+    if (this.observer) {
+      this.observer.disconnect()
+      delete this.observer
+    }
+  }
+
+  /**
    * Clears all behaviors. Useful for tests.
    * This will NOT call exit handlers.
    */
 
-  function reset () {
+  onmount.reset = function reset () {
     handlers = onmount.handlers = []
     selectors = onmount.selectors = {}
+    behaviors = onmount.behaviors = []
+  }
+
+  /**
+   * Internal: Converts `@role` to `[role~="role"]` if needed. You can override
+   * this by reimplementing `onmount.selectify`.
+   *
+   *     selectify('@hi')   //=> '[role="hi"]'
+   *     selectify('.btn')  //=> '.btn'
+   */
+
+  onmount.selectify = function selectify (selector) {
+    if (selector[0] === '@') {
+      return '[role~="' + selector.substr(1).replace(/"/g, '\\"') + '"]'
+    }
+    return selector
+  }
+
+  /**
+   * Internal: behavior class
+   */
+
+  function Behavior (selector, bid, init, exit) {
+    this.id = bid
+    this.init = init
+    this.exit = exit
+    this.selector = selector
+
+    // keep track of dom elements loaded for this behavior
+    this.loaded = []
+
+    // leave the state object into el['__onmount:12']
+    this.key = '__onmount:' + bid
+  }
+
+  /**
+   * Internal: Register this behavior
+   */
+
+  Behavior.prototype.register = function () {
+    var b = this
+    var loaded = this.loaded
+    var selector = this.selector
+
+    register(selector, function () {
+      // clean up old ones
+      for (var i = 0, len = loaded.length; i < len; i++) {
+        var element = loaded[i]
+        b.visitExit(element, i)
+      }
+
+      // initialize new ones
+      query(selector, function () { b.visitEnter(this) })
+    })
+  }
+
+  /**
+   * Internal: visits the element `el` and turns it on if applicable
+   */
+
+  Behavior.prototype.visitEnter = function (el) {
+    if (el[this.key]) return
+    var options = { id: 'b' + id, selector: this.selector }
+    if (this.init.call(el, options) !== false) {
+      el[this.key] = options
+      this.loaded.push(el)
+      id++
+    }
+  }
+
+  /**
+   * Internal: visits the element `el` and sees if it needs its exit handler
+   * called
+   */
+
+  Behavior.prototype.visitExit = function (el, i) {
+    if (el && !isAttached(el)) {
+      if (typeof i === 'undefined') i = this.loaded.indexOf(el)
+      this.loaded[i] = undefined
+      if (this.exit && this.exit.call(el, el[this.key]) !== false) {
+        delete el[this.key]
+      }
+    }
   }
 
   /**
@@ -145,7 +240,7 @@ void (function (root, factory) {
    * attribute selectors).
    */
 
-  function each (selector, fn) {
+  function query (selector, fn) {
     if (onmount.$) return onmount.$(selector).each(fn)
 
     var list = document.querySelectorAll(selector)
@@ -179,18 +274,66 @@ void (function (root, factory) {
   }
 
   /**
-   * Internal: Converts `@role` to `[role~="role"]` if needed. You can override
-   * this by reimplementing `onmount.selectify`.
+   * Checks if a given element `el` matches `selector`.
+   * Compare with [$.fn.is](http://api.jquery.com/is/).
    *
-   *     selectify('@hi')   //=> '[role="hi"]'
-   *     selectify('.btn')  //=> '.btn'
+   *     var matches = require('dom101/matches');
+   *
+   *     matches(button, ':focus');
    */
 
-  function selectify (selector) {
-    if (selector[0] === '@') {
-      return '[role~="' + selector.substr(1).replace(/"/g, '\\"') + '"]'
+  function matches (el, selector) {
+    var _matches = el.matches ||
+      el.matchesSelector ||
+      el.msMatchesSelector ||
+      el.mozMatchesSelector ||
+      el.webkitMatchesSelector ||
+      el.oMatchesSelector
+
+    if (onmount.$) {
+      return onmount.$(el).is(selector)
+    } else if (_matches) {
+      return _matches.call(el, selector)
+    } else if (el.parentNode) {
+      // IE8 and below
+      var nodes = el.parentNode.querySelectorAll(selector)
+      for (var i = nodes.length; i--; 0) {
+        if (nodes[i] === el) return true
+      }
+      return false
     }
-    return selector
   }
+
+  /**
+   * Iterates through `list` (an array or an object). This is useful when dealing
+   * with NodeLists like `document.querySelectorAll`.
+   *
+   *     var each = require('dom101/each');
+   *     var qa = require('dom101/query-selector-all');
+   *
+   *     each(qa('.button'), function (el) {
+   *       addClass('el', 'selected');
+   *     });
+   */
+
+  function each (list, fn) {
+    var i, len = list.length
+
+    if (len === +len) {
+      for (i = 0; i < len; i++) { fn(list[i], i) }
+    } else {
+      for (i in list) {
+        if (list.hasOwnProperty(i)) fn(list[i], i)
+      }
+    }
+
+    return list
+  }
+
+  /*
+   * Export
+   */
+
+  return onmount
 
 }))

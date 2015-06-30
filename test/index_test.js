@@ -1,4 +1,4 @@
-/* global window, before, describe, it, document, beforeEach, afterEach */
+/* global window, before, describe, it, document, beforeEach, afterEach, MutationObserver */
 'use strict'
 var $, $div, expect, onmount
 
@@ -13,6 +13,7 @@ if (typeof process === 'object') {
   })
 } else {
   $ = window.jQuery
+  onmount = $.onmount
   expect = window.chai.expect
 }
 
@@ -191,6 +192,51 @@ describe('with @role:', function () {
     expect($div.html()).eql('(on)')
   })
 })
+
+if (typeof MutationObserver !== 'undefined') {
+  describe('.observe():', function () {
+    afterEach(function () {
+      onmount.unobserve()
+    })
+
+    beforeEach(function () {
+      onmount.observe()
+    })
+
+    it('works', function (next) {
+      onmount('.his-behavior', function () {
+        this.innerHTML += '(on)'
+      })
+
+      $div = $('<div class="his-behavior">').appendTo('body')
+      setTimeout(function () {
+        expect($div.html()).eq('(on)')
+        next()
+      })
+    })
+
+    it('works for removal', function (next) {
+      onmount('.his-behavior', function () {
+        this.innerHTML += '(on)'
+      }, function () {
+        this.innerHTML += '(off)'
+      })
+
+      $div = $('<div class="his-behavior">').appendTo('body')
+      setTimeout(function () {
+        $div.remove()
+        setTimeout(function () {
+          expect($div.html()).eq('(on)(off)')
+          next()
+        })
+      })
+    })
+  })
+} else {
+  describe('.observe():', function () {
+    it('not supported in this platform')
+  })
+}
 
 if (typeof process === 'object') {
   describe('standard', function () {
