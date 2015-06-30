@@ -18,8 +18,6 @@ $.onmount('.push-button', function () {
 })
 ```
 
-<br>
-
 **Polling for changes:**
 Call `$.onmount()` everytime your code changes. ([automatic?](#automatic-observation))
 
@@ -32,8 +30,6 @@ $.onmount()
 $(".push-button").click()  //=> 'working...'
 ```
 
-<br>
-
 **jQuery integration:**
 jQuery is optional; use it to poll on popular events. ([1][Bootstrap events] [2][Turbolinks load])
 
@@ -42,8 +38,6 @@ $(document)
   .ready($.onmount)
   .on('show.bs closed.bs load page:change', $.onmount)
 ```
-
-<br>
 
 **Cleanups:**
 Supply a 2nd function to *onmount()* to execute something when the node is first detached.
