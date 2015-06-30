@@ -319,7 +319,8 @@ void (function (root, factory) {
    */
 
   function each (list, fn) {
-    var i, len = list.length
+    var i
+    var len = list.length
 
     if (len === +len) {
       for (i = 0; i < len; i++) { fn(list[i], i) }
