@@ -1,6 +1,8 @@
 # onmount
 
-> Run something when a DOM element appears and when it exits.
+Run something when a DOM element appears and when it exits.
+
+> No dependencies. 1kb .min.gz.
 
 [![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
 
