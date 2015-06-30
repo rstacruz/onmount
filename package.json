@@ -1,8 +1,16 @@
 {
   "name": "onmount",
   "version": "1.0.0",
-  "description": "Safe, reliable, idempotent and testable behaviors for DOM nodes using jQuery",
+  "description": "Run something when a DOM element appears and when it exits",
   "main": "index.js",
+  "keywords": [
+    "dom",
+    "enter",
+    "exit",
+    "mutation",
+    "mutationobserver",
+    "observe"
+  ],
   "scripts": {
     "test": "mocha"
   },
