@@ -77,6 +77,7 @@ void (function (root, factory) {
     // trigger with $.onmount(selector)
     if (arguments.length === 1) return trigger(selector)
 
+    // register a new behavior
     var b = new Behavior(selector, bid++, init, exit)
     behaviors.push(b)
     b.register()
@@ -96,16 +97,14 @@ void (function (root, factory) {
 
     var obs = new MutationObserver(function (mutations) {
       mutations.forEach(function (mutation) {
-        each(mutation.addedNodes, function (el) {
-          behaviors.forEach(function (behavior) {
+        behaviors.forEach(function (behavior) {
+          each(mutation.addedNodes, function (el) {
             if (matches(el, behavior.selector)) {
               behavior.visitEnter(el)
             }
           })
-        })
 
-        each(mutation.removedNodes, function (el) {
-          behaviors.forEach(function (behavior) {
+          each(mutation.removedNodes, function (el) {
             if (matches(el, behavior.selector)) {
               behavior.visitExit(el)
             }
@@ -114,8 +113,8 @@ void (function (root, factory) {
       })
     })
 
-    onmount.observer = obs
     obs.observe(document, { subtree: true, childList: true })
+    onmount.observer = obs
 
     // trigger everything before going
     onmount()
