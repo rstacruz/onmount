@@ -70,20 +70,29 @@ describe('onmount:', function () {
       onmount.$ = old$
     })
 
-    it('is callable via dom ready', function () {
+    it('is callable via dom ready', function (next) {
       $(onmount)
-      expect($div.html()).eql('(on)')
+      setTimeout(function () {
+        expect($div.html()).eql('(on)')
+        next()
+      })
     })
 
-    it('is callable via dom ready (verbose)', function () {
+    it('is callable via dom ready (verbose)', function (next) {
       $(document).ready(onmount)
-      expect($div.html()).eql('(on)')
+      setTimeout(function () {
+        expect($div.html()).eql('(on)')
+        next()
+      })
     })
 
-    it('is callable via dom events', function () {
+    it('is callable via dom events', function (next) {
       $(document).on('onmount', onmount)
       $(document).trigger('onmount')
-      expect($div.html()).eql('(on)')
+      setTimeout(function () {
+        expect($div.html()).eql('(on)')
+        next()
+      })
     })
   })
 

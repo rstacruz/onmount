@@ -68,22 +68,34 @@ void (function (root, factory) {
     // trigger all behaviors on $.onmount(). Also account for cases such as
     // $($.onmount), where it's triggered with an event object.
     if (arguments.length === 0 || isjQuery(selector) || isEvent(selector)) {
-      return trigger()
+      onmount.poll()
+      return this
     }
 
-    // account for `@role` selectors and such
-    selector = onmount.selectify(selector)
-
     // trigger with $.onmount(selector)
-    if (arguments.length === 1) return trigger(selector)
+    if (arguments.length === 1) {
+      onmount.poll(selector)
+      return this
+    }
 
     // register a new behavior
     var b = new Behavior(selector, bid++, init, exit)
     behaviors.push(b)
     b.register()
-
-    // allow $.onmount().onmount() chain
     return this
+  }
+
+  /**
+   * Internal: triggers behaviors for a selector or for all.
+   *
+   *     onmount.poll()
+   *     onmount.poll('.js-button')
+   */
+
+  onmount.poll = function poll (selector) {
+    if (selector) selector = onmount.selectify(selector)
+    var list = (selector ? selectors[selector] : handlers) || []
+    each(list, function (item) { item() })
   }
 
   /**
@@ -166,7 +178,7 @@ void (function (root, factory) {
     this.id = bid
     this.init = init
     this.exit = exit
-    this.selector = selector
+    this.selector = onmount.selectify(selector)
 
     // keep track of dom elements loaded for this behavior
     this.loaded = []
@@ -185,14 +197,15 @@ void (function (root, factory) {
     var selector = this.selector
 
     register(selector, function () {
-      // clean up old ones
-      for (var i = 0, len = loaded.length; i < len; i++) {
-        var element = loaded[i]
-        b.visitExit(element, i)
-      }
-
+      // clean up old ones,
       // initialize new ones
-      query(selector, function () { b.visitEnter(this) })
+      each(loaded, function (element, i) {
+        b.visitExit(element, i)
+      })
+
+      query(selector, function () {
+        b.visitEnter(this)
+      })
     })
   }
 
@@ -259,20 +272,6 @@ void (function (root, factory) {
     if (!selectors[selector]) selectors[selector] = []
     selectors[selector].push(fn)
     handlers.push(fn)
-  }
-
-  /**
-   * Internal: triggers behaviors for a selector or for all.
-   *
-   *     trigger()
-   *     trigger('.js-button')
-   */
-
-  function trigger (selector) {
-    var list = (selector ? selectors[selector] : handlers) || []
-    for (var i = 0, len = list.length; i < len; i++) {
-      list[i].call(this)
-    }
   }
 
   /**
