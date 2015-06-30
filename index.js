@@ -108,8 +108,8 @@ void (function (root, factory) {
     if (!MutationObserver) return
 
     var obs = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        behaviors.forEach(function (behavior) {
+      each(mutations, function (mutation) {
+        each(behaviors, function (behavior) {
           each(mutation.addedNodes, function (el) {
             if (matches(el, behavior.selector)) {
               behavior.visitEnter(el)
