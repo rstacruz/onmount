@@ -1,23 +1,17 @@
 # onmount
 
-**Run something when a DOM element appears and when it exits.** jQuery optional.
+> Run something when a DOM element appears and when it exits.
 
 [![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
-
-
-[rsjs]: https://github.com/rstacruz/rsjs
 
 <br>
 
 ## Example
 
-Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. 
-
-__Detecting elements:__ This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
+### Detecting elements
 
 ```js
 $.onmount = require('onmount')
-
 $.onmount('.push-button', function () {
   $(this).on('click', function () {
     alert('working...')
@@ -25,7 +19,9 @@ $.onmount('.push-button', function () {
 })
 ```
 
-__Polling:__ Call `$.onmount()` everytime your code changes. The behavior will be applied once ([and only once][idempotent]) per instance, even if *onmount()* is called multiple times.
+> This example defines a block of code to be applied to all `.push-button` instances, and another block of code when it's been removed.
+
+### Polling
 
 ```js
 document.body.innerHTML =
@@ -36,14 +32,18 @@ $.onmount()
 $(".push-button").click()  //=> 'working...'
 ```
 
-__jQuery integration:__ If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM.
+> Call `$.onmount()` everytime your code changes. The behavior will be applied once and only once per instance even if *onmount()* is called multiple times. [Automatic observation](#automatic-observation) is also supported.
+
+### jQuery integration
 
 ```js
 $(function () { $.onmount() })
 $(document).on('show.bs closed.bs load page:change', $.onmount)
 ```
 
-__Cleanups:__ supply a 2nd function parameter to `onmount()` to execute something when the DOM node is first detached from the DOM.
+> jQuery is entirely optional. If you're using jQuery, you'll want to do this by binding it to every event that may mutate the DOM. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
+
+### Cleanups
 
 ```js
 $.onmount('.push-button', function () {
@@ -54,12 +54,16 @@ $.onmount('.push-button', function () {
 
 document.body.innerHTML = ''
 
-$.onmount()
-//=> 'button was removed'
+$.onmount() //=> 'button was removed'
 ```
 
-See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on how this is useful.
+> Supply a 2nd function parameter to `onmount()` to execute something when the DOM node is first detached from the DOM.
 
+<br>
+
+## What for?
+
+Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It's great for common websites that are not Single-Page Apps. See [rsjs][rsjs] (Reasonable System for JavaScript Structure) for more info on the behavior pattern.
 
 <br>
 
@@ -70,28 +74,16 @@ npm install rstacruz/onmount
 bower install rstacruz/onmount
 ```
 
-* **With CommonJS/AMD:**<br>
-  Great with [Browserify].
-
-  ```js
-  $.onmount = require('onmount')
-  ```
-
-* **With no module loaders:**<br>
-  If it's loaded after jQuery, it's loaded as a jQuery plugin (`$.onmount`).
-
-  ```js
-  window.onmount(...)   // no jQuery
-  $.onmount(...)        // with jquery
-  ```
-
-* **With jQuery:**<br>
-  Call `$.onmount()` every time your DOM changes. In this example, it's fired on DOM ready, on [Bootstrap events], and on [Turbolinks load].
-
-  ```js
-  $(function () { $.onmount() })
-  $(document).on('show.bs closed.bs load page:change', $.onmount)
-  ```
+```js
+// With CommonJS/AMD (ie, Browserify):
+   onmount = require('onmount')
+   
+// with no module loaders:
+   window.onmount
+  
+// with jQuery:
+   $.onmount
+```
 
 [Bootstrap events]: http://getbootstrap.com/javascript/
 [Turbolinks load]: https://github.com/rails/turbolinks#events
@@ -155,6 +147,8 @@ if (!$.onmount.observe()) {
 }
 ```
 
+<br>
+
 ## Read more
 
 Documentation:
@@ -187,3 +181,4 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 [MIT]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/onmount/contributors
 [MutationObserver]: https://developer.mozilla.org/en/docs/Web/API/MutationObserver
+[rsjs]: https://github.com/rstacruz/rsjs
