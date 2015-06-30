@@ -70,8 +70,8 @@ Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript b
 ## Usage
 
 ```
-npm install rstacruz/onmount
-bower install rstacruz/onmount
+npm install onmount
+bower install onmount
 ```
 
 ```js
