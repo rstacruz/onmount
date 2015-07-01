@@ -110,18 +110,14 @@ void (function (root, factory) {
     if (typeof MutationObserver === 'undefined') return
 
     var obs = new MutationObserver(function (mutations) {
-      each(mutations, function (mutation) {
-        each(behaviors, function (behavior) {
+      each(behaviors, function (be) {
+        each(mutations, function (mutation) {
           each(mutation.addedNodes, function (el) {
-            if (matches(el, behavior.selector)) {
-              behavior.visitEnter(el)
-            }
+            if (matches(el, be.selector)) be.visitEnter(el)
           })
 
           each(mutation.removedNodes, function (el) {
-            if (matches(el, behavior.selector)) {
-              behavior.visitExit(el)
-            }
+            if (matches(el, be.selector)) be.visitExit(el)
           })
         })
       })
@@ -140,10 +136,9 @@ void (function (root, factory) {
    */
 
   onmount.unobserve = function unobserve () {
-    if (this.observer) {
-      this.observer.disconnect()
-      delete this.observer
-    }
+    if (!this.observer) return
+    this.observer.disconnect()
+    delete this.observer
   }
 
   /**
@@ -190,19 +185,18 @@ void (function (root, factory) {
    */
 
   Behavior.prototype.register = function () {
-    var b = this
+    var be = this
     var loaded = this.loaded
     var selector = this.selector
 
     register(selector, function () {
-      // clean up old ones,
-      // initialize new ones
+      // clean up old ones and initialize new ones
       each(loaded, function (element, i) {
-        b.visitExit(element, i)
+        be.visitExit(element, i)
       })
 
       query(selector, function () {
-        b.visitEnter(this)
+        be.visitEnter(this)
       })
     })
   }
