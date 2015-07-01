@@ -227,3 +227,5 @@ if (!$.onmount.observe()) {
 ```
 
 Consider this an experimental feature and subject to future optimizations.
+
+[MutationObserver]: https://developer.mozilla.org/en/docs/Web/API/MutationObserver
