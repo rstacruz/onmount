@@ -170,3 +170,5 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 [MIT]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/onmount/contributors
 [rsjs]: https://github.com/rstacruz/rsjs
+
+[![](https://img.shields.io/badge/%E2%9C%93-collaborative_etiquette-brightgreen.svg)](http://git.io/col)
