@@ -24,7 +24,7 @@ $.onmount('.push-button', function () {
 ```
 
 **Polling for changes:**
-Call `$.onmount()` everytime your code changes. ([automatic?](#automatic-observation))
+Call `$.onmount()` everytime your code changes. ([automatic?](docs/docs.md#automatic-observation))
 
 ```js
 $('<button class="push-button">Do something</button>')
@@ -132,26 +132,6 @@ bower install onmount
 
 <br>
 
-## Automatic observation
-
-You can turn on automatic observation via the [MutationObserver] API. Not supported in Opera and IE10 and below. (*experimental*)
-
-```js
-onmount.observe()
-```
-
-Considering not all browsers support this, you can set up fallbacks via:
-
-```js
-if (!$.onmount.observe()) {
-  $(document)
-    .ready($.onmount)
-    .on('show.bs hide.bs load', $.onmount)
-}
-```
-
-<br>
-
 ## Read more
 
 Documentation:
@@ -164,6 +144,7 @@ Documentation:
 - [Role attributes](docs/docs.md#role-attributes)
 - [Testing behaviors](docs/docs.md#testing-behaviors)
 - [Unique IDs](docs/docs.md#unique-ids)
+- [Automatic observation](docs/docs.md#automatic-observation)
 
 Examples:
 

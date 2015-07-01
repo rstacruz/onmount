@@ -190,3 +190,25 @@ $.onmount('@hiding-menu', function (b) {
   $('html, body').off('scroll.' + b.id)
 })
 ```
+
+<br>
+
+## Automatic observation
+
+You can turn on automatic observation via the [MutationObserver] API. Not supported in Opera and IE10 and below. (*experimental*)
+
+```js
+onmount.observe()
+```
+
+Considering not all browsers support this, you can set up fallbacks via:
+
+```js
+if (!$.onmount.observe()) {
+  $(document)
+    .ready($.onmount)
+    .on('show.bs hide.bs load', $.onmount)
+}
+```
+
+Consider this an experimental feature and subject to future optimizations.
