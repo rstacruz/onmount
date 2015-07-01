@@ -48,23 +48,20 @@ void (function (root, factory) {
    */
 
   function onmount (selector, init, exit) {
-    // trigger all behaviors on $.onmount(). Also account for cases such as
-    // $($.onmount), where it's triggered with an event object.
     if (arguments.length === 0 || isjQuery(selector) || isEvent(selector)) {
+      // onmount() - trigger all behaviors. Also account for cases such as
+      // $($.onmount), where it's triggered with a jQuery event object.
       onmount.poll()
-      return this
-    }
-
-    // trigger with $.onmount(selector)
-    if (arguments.length === 1) {
+    } else if (arguments.length === 1) {
+      // onmount(selector) - trigger for a given selector.
       onmount.poll(selector)
-      return this
+    } else {
+      // onmount(sel, fn, [fn]) - register a new behavior.
+      var be = new Behavior(selector, init, exit)
+      behaviors.push(be)
+      be.register()
     }
 
-    // register a new behavior
-    var b = new Behavior(selector, init, exit)
-    behaviors.push(b)
-    b.register()
     return this
   }
 
