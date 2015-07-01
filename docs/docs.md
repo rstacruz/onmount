@@ -82,6 +82,21 @@ $('#content').append(...)
 $.onmount()
 ```
 
+This allows you to set up polling checkpoints to trigger new behaviors on certain events.
+Great for events such as [Bootstrap events] or [Turbolinks load].
+
+Also, when used with jQuery, `onmount` can be passed as an event handler, eg,
+`$(onmount)`.
+
+```js
+$(document)
+  .ready($.onmount)
+  .on('show.bs closed.bs load page:change', $.onmount)
+```
+
+[Bootstrap events]: http://getbootstrap.com/javascript/
+[Turbolinks load]: https://github.com/rails/turbolinks#events
+
 <br>
 
 ## Turbolinks

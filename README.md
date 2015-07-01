@@ -24,7 +24,9 @@ $.onmount('.push-button', function () {
 ```
 
 **Polling for changes:**
-Call `$.onmount()` everytime your code changes. ([automatic?](docs/docs.md#automatic-observation))
+Call `$.onmount()` everytime your code changes.
+[(more...)](docs/docs.md#idempotency)
+[(automatic?)](docs/docs.md#automatic-observation)
 
 ```js
 $('<button class="push-button">Do something</button>')
@@ -36,7 +38,7 @@ $(".push-button").click()  //=> 'working...'
 ```
 
 **jQuery integration:**
-jQuery is optional; use it to poll on popular events. ([1][Bootstrap events] [2][Turbolinks load])
+jQuery is optional; use it to poll on popular events. [(more...)](docs/docs.md#idempotency)
 
 ```js
 $(document)
@@ -46,6 +48,7 @@ $(document)
 
 **Cleanups:**
 Supply a 2nd function to *onmount()* to execute something when the node is first detached.
+[(more...)](docs/docs.md#performing-cleanups)
 
 ```js
 $.onmount('.push-button', function () {
@@ -101,6 +104,8 @@ bower install onmount
 * `onmount()`
 
   > Runs all behaviors.
+  >
+  > When used with jQuery, this can be passed as an event handler, eg, `$(onmount)` or `$(document).on('load', onmount)`.
 
 * `onmount(selector)`
 
