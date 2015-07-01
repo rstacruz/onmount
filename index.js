@@ -62,7 +62,7 @@ void (function (root, factory) {
     }
 
     // register a new behavior
-    var b = new Behavior(selector, bid++, init, exit)
+    var b = new Behavior(selector, init, exit)
     behaviors.push(b)
     b.register()
     return this
@@ -176,8 +176,8 @@ void (function (root, factory) {
    * Internal: behavior class
    */
 
-  function Behavior (selector, bid, init, exit) {
-    this.id = 'b' + bid
+  function Behavior (selector, init, exit) {
+    this.id = 'b' + bid++
     this.init = init
     this.exit = exit
     this.selector = onmount.selectify(selector)
