@@ -9,36 +9,20 @@ void (function (root, factory) {
 }(this, function ($) {
 
   /*
-   * Registry.
+   * Internal: Registry.
    */
 
   var handlers, behaviors, selectors
 
   /*
-   * IDs for auto-incrementing.
+   * Internal: IDs for auto-incrementing.
    */
 
   var bid = 0 /* behavior ID */
   var cid = 0 /* component ID */
 
-  /*
-   * Use jQuery (or a jQuery-like) when available. This will allow
-   * the use of jQuery selectors.
-   */
-
-  onmount.$ = window.jQuery || window.Zepto || window.Ender
-
-  /*
-   * Detect MutationObserver support for `onmount.observe()`.
-   */
-
-  onmount.MutationObserver =
-    window.MutationObserver ||
-    window.WebKitMutationObserver ||
-    window.MozMutationObserver
-
   /**
-   * Adds a behavior, or triggers behaviors.
+   * (Module) Adds a behavior, or triggers behaviors.
    *
    * When no parameters are passed, it triggers all behaviors. When one
    * parameter is passed, it triggers the given behavior. Otherwise, it adds a
@@ -84,6 +68,24 @@ void (function (root, factory) {
     return this
   }
 
+  /*
+   * Use jQuery (or a jQuery-like) when available. This will allow
+   * the use of jQuery selectors.
+   */
+
+  onmount.$ = window.jQuery || window.Zepto || window.Ender
+
+  /*
+   * Detect MutationObserver support for `onmount.observe()`.
+   * You may even add a polyfill here via
+   * `onmount.MutationObserver = require('mutation-observer')`.
+   */
+
+  onmount.MutationObserver =
+    window.MutationObserver ||
+    window.WebKitMutationObserver ||
+    window.MozMutationObserver
+
   /**
    * Internal: triggers behaviors for a selector or for all.
    *
@@ -100,7 +102,7 @@ void (function (root, factory) {
   /**
    * Observes automatically using MutationObserver events.
    *
-   *     $.onmount.observe()
+   *     onmount.observe()
    */
 
   onmount.observe = function observe () {
