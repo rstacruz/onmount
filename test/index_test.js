@@ -100,7 +100,7 @@ describe('index', function () {
     })
 
     it('has an id', function () {
-      expect(state.id).toMatch(/^c\d+$/)
+      expect(state['id']).toMatch(/^c\d+$/)
     })
 
     it('passes the selector', function () {
