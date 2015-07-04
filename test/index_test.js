@@ -19,7 +19,7 @@ describe('index', function () {
       onmount('.my-behavior', function () {
         this.innerHTML += '(on)'
       })
-      $div = el('div', { class: 'my-behavior' })
+      $div = el('div', { 'class': 'my-behavior' })
     })
 
     it('works', function () {
@@ -65,7 +65,7 @@ describe('index', function () {
     })
 
     it('calls the unloader', function () {
-      $div = el('div', { class: 'their-behavior' })
+      $div = el('div', { 'class': 'their-behavior' })
       onmount()
       remove($div)
       onmount()
@@ -93,7 +93,7 @@ describe('index', function () {
         b.number++
       })
 
-      $div = el('div', { class: 'our-behavior' })
+      $div = el('div', { 'class': 'our-behavior' })
       onmount()
       remove($div)
       onmount()
@@ -120,7 +120,7 @@ describe('index', function () {
       onmount('.nobodys-behavior', function () {
         this.innerHTML += '(2)'
       })
-      $div = el('div', { class: 'nobodys-behavior' })
+      $div = el('div', { 'class': 'nobodys-behavior' })
       onmount()
       expect($div.innerHTML).toEqual('(1)(2)')
     })
@@ -189,7 +189,7 @@ describe('index', function () {
           this.innerHTML += '(on)'
         })
 
-        $div = el('div', { class: 'his-behavior' })
+        $div = el('div', { 'class': 'his-behavior' })
         setTimeout(function () {
           expect($div.innerHTML).toEqual('(on)')
           next()
@@ -203,7 +203,7 @@ describe('index', function () {
           this.innerHTML += '(off)'
         })
 
-        $div = el('div', { class: 'his-behavior' })
+        $div = el('div', { 'class': 'his-behavior' })
         setTimeout(function () {
           $div.remove()
           setTimeout(function () {
@@ -222,7 +222,7 @@ describe('index', function () {
   function el (name, options) {
     if (!options) options = {}
     var div = document.createElement(name)
-    if (options.class) div.className = options.class
+    if (options['class']) div.className = options['class']
     if (options.role) div.setAttribute('role', options.role)
     document.body.appendChild(div)
     return div
