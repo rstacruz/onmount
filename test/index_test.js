@@ -1,6 +1,5 @@
 /* global window, describe, it, document, beforeEach, afterEach, MutationObserver */
 /* global onmount, expect */
-/* jshint expr: true */
 
 describe('index', function () {
   'use strict'

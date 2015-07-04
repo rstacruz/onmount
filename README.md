@@ -137,6 +137,14 @@ bower install onmount
 
 <br>
 
+## Browser compatibility
+
+All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x.
+
+Try your browser: [test](https://rawgit.com/rstacruz/onmount/master/test/index.html)
+
+<br>
+
 ## Read more
 
 Documentation:
