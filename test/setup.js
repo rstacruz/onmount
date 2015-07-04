@@ -11,5 +11,8 @@ if (typeof process === 'object') {
     })
   }
 } else {
+  if (window.$) {
+    window.onmount = $.onmount
+  }
   window.require = function () { /* noop */ }
 }
