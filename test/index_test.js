@@ -5,7 +5,8 @@
 describe('index', function () {
   'use strict'
   var $div
-  require('./setup')()
+  var setup = require('./setup')
+  setup && setup()
 
   afterEach(function () {
     if ($div.remove) $div.remove()
@@ -190,7 +191,7 @@ describe('index', function () {
 
         $div = el('div', { class: 'his-behavior' })
         setTimeout(function () {
-          expect($div.innerHTML).eq('(on)')
+          expect($div.innerHTML).toEqual('(on)')
           next()
         })
       })
@@ -206,7 +207,7 @@ describe('index', function () {
         setTimeout(function () {
           $div.remove()
           setTimeout(function () {
-            expect($div.innerHTML).eq('(on)(off)')
+            expect($div.innerHTML).toEqual('(on)(off)')
             next()
           })
         })

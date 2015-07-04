@@ -2,18 +2,19 @@
 <html>
 <head>
   <title>Mocha</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link href='https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css' rel='stylesheet' />
 </head>
 <body>
-  <div id="mocha"></div>
-  <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-  <script src="https://cdn.rawgit.com/chaijs/chai/2.3.0/chai.js"></script>
-  <!-- <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script> -->
+  <div id='mocha'></div>
+  <script src='https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js'></script>
+  <script src='https://cdn.rawgit.com/mjackson/expect/v1.6.0/dist/expect.min.js'></script>
+  <script>window.onerror=function(msg,url,line){document.getElementById('mocha').innerHTML+='<h1>'+msg+'</'+'h1>'+'<h2>'+url+':'+line+'</'+'h2>';return false}</script>
   <script>mocha.setup('bdd')</script>
-  <script src="../index.js"></script>
-  <script src="index_test.js"></script>
+  <script src='../index.js'></script>
+  <script src='setup.js'></script>
+  <script src='index_test.js'></script>
   <script>mocha.run()</script>
 </body>
 </html>

@@ -8,7 +8,6 @@
   },
   "devDependencies": {
     "expect": "^1.6.0",
-    "expect-html-equal": "^1.0.1",
     "jquery": "^2.1.4",
     "jsdom": "^5.4.3",
     "mocha": "^2.2.5",

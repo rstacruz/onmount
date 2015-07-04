@@ -13,5 +13,5 @@ if (typeof process === 'object') {
     })
   }
 } else {
+  window.require = function () { /* noop */ }
 }
-
