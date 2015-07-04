@@ -6,16 +6,9 @@
   "bugs": {
     "url": "https://github.com/rstacruz/onmount/issues"
   },
-  "dependencies": {
-    "chai": "^3.0.0",
-    "jquery": "^2.1.4",
-    "jsdom": "^5.4.3",
-    "mocha-jsdom": "^0.5.0",
-    "mocha-standard": "^0.0.5",
-    "standard": "^4.3.2"
-  },
   "devDependencies": {
-    "chai": "^3.0.0",
+    "expect": "^1.6.0",
+    "expect-html-equal": "^1.0.1",
     "jquery": "^2.1.4",
     "jsdom": "^5.4.3",
     "mocha": "^2.2.5",

@@ -9,12 +9,11 @@ describe('jquery', function () {
     before(function () {
       $ = rerequire('jquery')
       onmount = rerequire('../../index')
-      expect = require('chai').expect
+      expect = require('expect')
     })
   } else {
     $ = window.jQuery
     onmount = $.onmount
-    expect = window.chai.expect
   }
 
   afterEach(function () {
@@ -25,8 +24,8 @@ describe('jquery', function () {
   describe('jquery:', function () {
     it('is an working environment', function () {
       $div = $('<div>hello</div>').appendTo('body')
-      expect($('body')[0].innerHTML).include('hello')
-      expect(window.document.body.innerHTML).include('hello')
+      expect($('body')[0].innerHTML).toInclude('hello')
+      expect(window.document.body.innerHTML).toInclude('hello')
     })
   })
   describe('in jquery', function () {
@@ -51,7 +50,7 @@ describe('jquery', function () {
     it('is callable via dom ready', function (next) {
       $(onmount)
       setTimeout(function () {
-        expect($div.html()).eql('(on)')
+        expect($div.html()).toEqual('(on)')
         next()
       })
     })
@@ -59,7 +58,7 @@ describe('jquery', function () {
     it('is callable via dom ready (verbose)', function (next) {
       $(document).ready(onmount)
       setTimeout(function () {
-        expect($div.html()).eql('(on)')
+        expect($div.html()).toEqual('(on)')
         next()
       })
     })
@@ -68,7 +67,7 @@ describe('jquery', function () {
       $(document).on('onmount', onmount)
       $(document).trigger('onmount')
       setTimeout(function () {
-        expect($div.html()).eql('(on)')
+        expect($div.html()).toEqual('(on)')
         next()
       })
     })

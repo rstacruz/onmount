@@ -1,21 +1,11 @@
-/* global window, before, describe, it, document, beforeEach, afterEach, MutationObserver */
+/* global window, describe, it, document, beforeEach, afterEach, MutationObserver */
+/* global onmount, expect */
 /* jshint expr: true */
+
 describe('index', function () {
   'use strict'
-  var $div, expect, onmount
-
-  if (typeof process === 'object') {
-    var jsdom = require('mocha-jsdom')
-    var rerequire = jsdom.rerequire
-    jsdom()
-    before(function () {
-      onmount = rerequire('../index')
-      expect = require('chai').expect
-    })
-  } else {
-    onmount = window.onmount
-    expect = window.chai.expect
-  }
+  var $div
+  require('./setup')()
 
   afterEach(function () {
     if ($div.remove) $div.remove()
@@ -33,19 +23,19 @@ describe('index', function () {
 
     it('works', function () {
       onmount()
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
 
     it('can be triggered on its own', function () {
       onmount('.my-behavior')
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
 
     it('is idempotent', function () {
       onmount()
       onmount()
       onmount()
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
 
     it('functions even without an exit handler', function () {
@@ -60,7 +50,7 @@ describe('index', function () {
       onmount()
       document.body.appendChild($div)
       onmount()
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
   })
 
@@ -79,7 +69,7 @@ describe('index', function () {
       remove($div)
       onmount()
 
-      expect($div.innerHTML).eql('(on)(off)')
+      expect($div.innerHTML).toEqual('(on)(off)')
     })
 
     it('will intentionally get double applied when removed', function () {
@@ -87,7 +77,7 @@ describe('index', function () {
       onmount()
       document.body.appendChild($div)
       onmount()
-      expect($div.innerHTML).eql('(on)(off)(on)')
+      expect($div.innerHTML).toEqual('(on)(off)(on)')
     })
   })
 
@@ -109,15 +99,15 @@ describe('index', function () {
     })
 
     it('has an id', function () {
-      expect(state.id).match(/^c\d+$/)
+      expect(state.id).toMatch(/^c\d+$/)
     })
 
     it('passes the selector', function () {
-      expect(state.selector).to.eql('.our-behavior')
+      expect(state.selector).toEqual('.our-behavior')
     })
 
     it('works', function () {
-      expect(state.number).eql(11)
+      expect(state.number).toEqual(11)
     })
   })
 
@@ -131,7 +121,7 @@ describe('index', function () {
       })
       $div = el('div', { class: 'nobodys-behavior' })
       onmount()
-      expect($div.innerHTML).eql('(1)(2)')
+      expect($div.innerHTML).toEqual('(1)(2)')
     })
   })
   describe('with role selector:', function () {
@@ -147,12 +137,12 @@ describe('index', function () {
 
     it('works', function () {
       onmount()
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
 
     it('can be called', function () {
       onmount('[role~="your-behavior"]')
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
   })
 
@@ -169,17 +159,17 @@ describe('index', function () {
 
     it('works', function () {
       onmount()
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
 
     it('can be called via @', function () {
       onmount('@his-behavior')
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
 
     it('can be called', function () {
       onmount('[role~="his-behavior"]')
-      expect($div.innerHTML).eql('(on)')
+      expect($div.innerHTML).toEqual('(on)')
     })
   })
 
