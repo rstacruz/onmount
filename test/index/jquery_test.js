@@ -1,6 +1,6 @@
-/* global window, before, describe, it, document, afterEach, beforeEach, expect */
+/* global window, before, describe, it, document, afterEach, beforeEach */
 describe('jquery', function () {
-  var $, $div, onmount
+  var $, $div, onmount, expect
 
   if (typeof process === 'object') {
     var jsdom = require('mocha-jsdom')
