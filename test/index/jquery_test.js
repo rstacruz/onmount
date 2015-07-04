@@ -13,6 +13,7 @@ describe('jquery', function () {
     })
   } else {
     $ = window.jQuery
+    expect = window.expect
     onmount = $.onmount
   }
 
