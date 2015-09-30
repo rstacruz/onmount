@@ -12,7 +12,7 @@ void (function (root, factory) {
    * Internal: Registry.
    */
 
-  var handlers, behaviors, selectors
+  var handlers, behaviors, selectors, log
 
   /*
    * Internal: IDs for auto-incrementing.
@@ -212,7 +212,7 @@ void (function (root, factory) {
     if (el[this.key]) return
     var options = { id: 'c' + cid, selector: this.selector }
     if (this.init.call(el, options) !== false) {
-      if (onmount.debug) onmount.log('enter', this.selector, el)
+      if (onmount.debug) log('enter', this.selector, el)
       el[this.key] = options
       this.loaded.push(el)
       cid++
@@ -229,7 +229,7 @@ void (function (root, factory) {
       if (typeof i === 'undefined') i = this.loaded.indexOf(el)
       this.loaded[i] = undefined
       if (this.exit && this.exit.call(el, el[this.key]) !== false) {
-        if (onmount.debug) onmount.log('exit', this.selector, el)
+        if (onmount.debug) log('exit', this.selector, el)
         delete el[this.key]
       }
     }
@@ -351,11 +351,11 @@ void (function (root, factory) {
   }
 
   if (~navigator.userAgent.indexOf('Mozilla')) {
-    onmount.log = function (type, selector, el) {
+    log = function (type, selector, el) {
       console.log('%c %s ', styles[type], selector, el)
     }
   } else {
-    onmount.log = function (type, selector, el) {
+    log = function (type, selector, el) {
       console.log('(onmount)', type, selector)
     }
   }
