@@ -135,6 +135,10 @@ bower install onmount
 
   > Turns off observation previously turned on via `onmount.observe()`.
 
+* `onmount.debug`
+
+  > Set this to `true` to see debug messages.
+
 <br>
 
 ## Browser compatibility
