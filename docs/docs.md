@@ -39,11 +39,11 @@ Behaviors solve that. You don't write your code any differently, but it will be 
 
 ```js
 /*
- * initializes behaviors on document.ready and on bootstrap modal show.
+ * initializes behaviors on jQuery document.ready, Turbolinks page:change, and
+ * on bootstrap modal show.
  */
 
-$(function () { $.onmount() })
-$(document).on('show.bs.modal', function () { $.onmount() })
+$(document).on('ready page:change show.bs.modal', function () { $.onmount() })
 
 /*
  * attach a behavior to `.js-expandable-nav`
@@ -90,8 +90,7 @@ Also, when used with jQuery, `onmount` can be passed as an event handler, eg,
 
 ```js
 $(document)
-  .ready($.onmount)
-  .on('show.bs closed.bs load page:change', $.onmount)
+  .on('ready show.bs closed.bs load page:change', $.onmount)
 ```
 
 [Bootstrap events]: http://getbootstrap.com/javascript/
@@ -104,8 +103,7 @@ $(document)
 You'll notice that document.ready is not friendly for Turbolinks applications. This solves that.
 
 ```js
-$(function () { $.onmount() })
-$(document).on('page:change', function () { $.onmount() })
+$(document).on('ready page:change', function () { $.onmount() })
 ```
 
 <br>
