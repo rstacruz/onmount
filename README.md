@@ -42,8 +42,9 @@ jQuery is optional; use it to poll on popular events. [(more...)](docs/docs.md#i
 
 ```js
 $(document)
-  .ready($.onmount)
-  .on('show.bs closed.bs load page:change', $.onmount)
+  .on('ready show.bs closed.bs load page:change', function () {
+    $.onmount()
+  })
 ```
 
 **Cleanups:**
