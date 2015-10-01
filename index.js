@@ -7,7 +7,6 @@ void (function (root, factory) {
     else root.onmount = factory()
   }
 }(this, function ($) {
-
   /*
    * Internal: Registry.
    */
