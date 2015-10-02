@@ -1,5 +1,12 @@
 # Premise
 
+Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes.
+
+* It's great for common websites that are not Single-Page Apps.
+* It goes hand-in-hand with Turbolinks.
+
+## Example
+
 Given this HTML snippet:
 
 ```html
@@ -28,12 +35,16 @@ $(function () {
 })
 ```
 
+## Problems
+
 However, you have a few problems with this approach.
 
 * __It's not testable.__ You can't make unit tests from this code.
 * __Assumes just one instance.__ When there are 2 .js-expandable-nav elements in the page, this will break.
 * __It doesn't work in modal dialogs.__ Since it works in `$(function() { ... })`, it doesn't work on elements loaded later.
 * __There's no provision for cleanups.__ What happens when `.js-expandable-nav` exits the DOM (eg, the dialog box was closed)?
+
+## Solution
 
 Behaviors solve that. You don't write your code any differently, but it will be accessible in a way that it's testable, isolated, and idempotent.
 
@@ -60,6 +71,8 @@ $.onmount('.js-expandable-nav', function () {
   })
 })
 ```
+
+## Benefits
 
 By simply wrapping your code in `$.onmount(...)` instead of `$(function)`, it gives you the power of a few features:
 

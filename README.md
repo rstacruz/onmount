@@ -1,10 +1,7 @@
 # onmount
 
-Run something when a DOM element appears and when it exits.
-
-> :zap: No dependencies &nbsp;
-> :zap: Legacy IE &nbsp;
-> :zap: 1kb .min.gz
+**Run something when a DOM element appears and when it exits.**<br>
+No dependencies. Legacy IE compatible. 1kb .min.gz.
 
 [![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
 
@@ -151,12 +148,8 @@ Try the [test suite](https://rawgit.com/rstacruz/onmount/master/test/index.html)
 
 ## Read more
 
-[Read documentation.](/docs)
-
-Examples:
-
-- [Simple example](examples/simple.js)
-- [Expandable block example](examples/expandable.js)
+* [Read documentation →](http://ricostacruz.com/onmount/)
+* [See examples →](https://github.com/rstacruz/onmount/examples)
 
 <br>
 
