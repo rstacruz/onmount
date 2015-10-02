@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Getting started](/README.md)
+* [onmount](/README.md)
 * [Premise](/docs/premise.md)
 * Features
   * [Role attributes](/docs/role.md)
