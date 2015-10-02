@@ -14,9 +14,9 @@ Run something when a DOM element appears and when it exits.
 Run something to initialize an element on its first appearance.
 
 ```js
-$.onmount = require('onmount')
+onmount = require('onmount')
 
-$.onmount('.push-button', function () {
+onmount('.push-button', function () {
   $(this).on('click', function () {
     alert('working...')
   })
