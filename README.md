@@ -25,8 +25,8 @@ $.onmount('.push-button', function () {
 
 **Polling for changes:**
 Call `$.onmount()` everytime your code changes.
-[(more...)](docs/docs.md#idempotency)
-[(automatic?)](docs/docs.md#automatic-observation)
+[(more...)](/docs/idempotency.md)
+[(automatic?)](/docs/automatic-observation.md)
 
 ```js
 $('<button class="push-button">Do something</button>')
@@ -38,7 +38,7 @@ $(".push-button").click()  //=> 'working...'
 ```
 
 **jQuery integration:**
-jQuery is optional; use it to poll on popular events. [(more...)](docs/docs.md#idempotency)
+jQuery is optional; use it to poll on popular events. [(more...)](/docs/idempotency.md)
 
 ```js
 $(document).on('ready show.bs closed.bs load page:change', function () {
@@ -48,7 +48,7 @@ $(document).on('ready show.bs closed.bs load page:change', function () {
 
 **Cleanups:**
 Supply a 2nd function to *onmount()* to execute something when the node is first detached.
-[(more...)](docs/docs.md#performing-cleanups)
+[(more...)](/docs/cleanup.md)
 
 ```js
 $.onmount('.push-button', function () {
@@ -68,7 +68,7 @@ $.onmount() //=> 'button was removed'
 
 Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It's great for common websites that are not Single-Page Apps. Read:
 
-- [Premise](docs/docs.md#premise)
+- [Premise](/docs/premise.md)
 - [rsjs][rsjs] (Reasonable System for JavaScript Structure)
 
 <br>
@@ -151,17 +151,7 @@ Try the [test suite](https://rawgit.com/rstacruz/onmount/master/test/index.html)
 
 ## Read more
 
-Documentation:
-
-- [Premise](docs/docs.md#premise)
-- [Idempotency](docs/docs.md#idempotency)
-- [Turbolinks](docs/docs.md#turbolinks)
-- [Performing cleanups](docs/docs.md#performing-cleanups)
-- [Cancelling](docs/docs.md#cancelling)
-- [Role attributes](docs/docs.md#role-attributes)
-- [Testing behaviors](docs/docs.md#testing-behaviors)
-- [Unique IDs](docs/docs.md#unique-ids)
-- [Automatic observation](docs/docs.md#automatic-observation)
+[Read documentation.](/docs)
 
 Examples:
 
