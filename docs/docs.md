@@ -1,3 +1,5 @@
+# Documentation
+
 ## Premise
 
 Given this HTML snippet:
