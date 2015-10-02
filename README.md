@@ -41,10 +41,9 @@ $(".push-button").click()  //=> 'working...'
 jQuery is optional; use it to poll on popular events. [(more...)](docs/docs.md#idempotency)
 
 ```js
-$(document)
-  .on('ready show.bs closed.bs load page:change', function () {
-    $.onmount()
-  })
+$(document).on('ready show.bs closed.bs load page:change', function () {
+  $.onmount()
+})
 ```
 
 **Cleanups:**

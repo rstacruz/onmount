@@ -18,8 +18,12 @@ In your `application.js`, load it using `//= require`. If you're using jQuery, l
 You can then use onmount.
 
 ```js
+$(document).on('ready show.bs closed.bs load page:change', function () {
+  $.onmount()
+})
+
 $.onmount('.js-tooltip', function () {
-  $(this).tooltip();
+  $(this).tooltip()
 })
 ```
 
