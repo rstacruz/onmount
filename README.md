@@ -7,6 +7,8 @@ No dependencies. Legacy IE compatible. 1kb .min.gz.
 
 <br>
 
+## Overview
+
 **Detecting elements:**
 Run something to initialize an element on its first appearance.
 
