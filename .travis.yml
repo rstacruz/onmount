@@ -1,3 +1,10 @@
 language: node_js
 node_js:
   - iojs
+script:
+  - npm test
+  - bash ./support/deploy-to-gh-pages.sh
+env:
+  global:
+    - GITHUB_REPO: rstacruz/onmount
+    - secure: "njhtNG53tDr1N1HmqvJ5qMhBvzgpvy7jwm44PFQ3QNbYNUtIVWdEa4KmuNiVMiW4bju3edVKvAXS9NBaOSmXF1hPHD1LNxbUKOHyYL+qwhrIC6x06x0pF9bFmG1LSb3wPY3JbGBkuZYW/z2TN8ExnC5ykElY5tDw/O3oVZfLLqNOJUwi68S85tnJORb0b5n0BHzHIPnC3J6o5g3abodfUJHAydMoC7vyQHwvuq3AmfkUL6JrKelQKlKrfDFqeBJqyzumNSt58kdfbHcbF8NgEVdQw668thkM/duAjHks2xhFYF/KK2x9sJFYE90nLMn8MhTUeVB/tUXvKoNAdDLaBQhlUjG6wN2g48u6trHz1afbQSpufCn+cByUZEmc1men07mKP9R68cgJB6KnbGoObrR1b1QtEn8SfGFxqwFuv+VVlNYaocMX9EiK5+9vnKmwnzVafZPjvlBG6K1sgYRgsHfyhy+IEp/WVF2MZoctaNZZjcH9QeeHxKTEs/YCStBUFzdIMSeAfAKnLacL/Svme+TKEHZpRgFmTQyMVDMVIlz8Tmg6BFys6IfhhppeLCtjb89QNlh+Dyw+QigyBAZZO7srPizwQur81fFxt7JqxArqEmPWR48M9R0KaHTE+DUazQJrNbrbQE2/HjUg5Wm8pQq3m8BT4sv3/d0177oKLqs="
