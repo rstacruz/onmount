@@ -1,0 +1,50 @@
+/* customizations for docpress */
+
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:200,400,700);
+
+.toc-menu {
+  font-size: 13px;
+  font-family: work sans, sans-serif;
+  background: white;
+}
+
+.markdown-body {
+  max-width: 640px;
+  font-size: 16px;
+  /* font-family: avenir next, sans-serif; */
+  line-height: 1.7;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.5em;
+}
+
+.markdown-body code {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.markdown-body pre {
+  padding: 30px;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body pre,
+.markdown-body ol,
+.markdown-body ul {
+  margin-bottom: 1.7em;
+}
+
+.markdown-body h2 {
+  margin-top: 1.7em;
+}
+
+.markdown-body h1 {
+  font-family: work sans, sans-serif;
+  font-weight: 200;
+  font-size: 2.5em;
+  border-bottom: 0;
+}
