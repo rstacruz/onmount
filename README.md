@@ -5,8 +5,6 @@ No dependencies. Legacy IE compatible. 1kb .min.gz.
 
 [![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
 
-<br>
-
 ## Overview
 
 **Detecting elements:**
@@ -61,16 +59,12 @@ document.body.innerHTML = ''
 $.onmount() //=> 'button was removed'
 ```
 
-<br>
-
 ## What for?
 
 Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It's great for common websites that are not Single-Page Apps. Read:
 
 - [Premise](/docs/premise.md)
 - [rsjs][rsjs] (Reasonable System for JavaScript Structure)
-
-<br>
 
 ## Usage
 
@@ -94,9 +88,6 @@ bower install onmount
 [Turbolinks load]: https://github.com/rails/turbolinks#events
 [idempotent]: https://en.wiktionary.org/wiki/idempotent
 [Browserify]: http://browserify.org/
-
-
-<br>
 
 ## API
 
@@ -138,22 +129,16 @@ bower install onmount
 
   > Set this to `true` to see debug messages.
 
-<br>
-
 ## Browser compatibility
 
 All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x.
 
 Try the [test suite](https://rawgit.com/rstacruz/onmount/master/test/index.html) in your browser. Try it [with jQuery 1.x](https://rawgit.com/rstacruz/onmount/master/test/jquery.html) for legacy browsers.
 
-<br>
-
 ## Read more
 
 * [Read documentation →](http://ricostacruz.com/onmount/)
 * [See examples →](https://github.com/rstacruz/onmount/examples)
-
-<br>
 
 ## Thanks
 
