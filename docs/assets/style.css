@@ -15,19 +15,12 @@
   line-height: 1.7;
 }
 
-.markdown-body code:before,
-.markdown-body code:after {
-  letter-spacing: -0.5em;
-}
-
 .markdown-body code {
-  background: transparent;
-  padding: 0;
-  margin: 0;
+  background: #fafafa;
 }
 
 .markdown-body pre {
-  padding: 30px;
+  padding: 24px;
 }
 
 .markdown-body p,

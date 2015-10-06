@@ -8,13 +8,14 @@
   },
   "devDependencies": {
     "expect": "1.11.1",
-    "gitbook": "2.4.3",
     "jquery": "2.1.4",
     "jsdom": "5.6.1",
     "mocha": "2.3.3",
     "mocha-jsdom": "1.0.0",
     "mocha-standard": "1.0.0",
-    "standard": "5.3.1"
+    "standard": "5.3.1",
+    "docpress": "git://github.com/rstacruz/docpress.git#master",
+    "git-update-ghpages": "git://github.com/rstacruz/git-update-ghpages.git#master"
   },
   "directories": {
     "doc": "docs",

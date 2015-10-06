@@ -3,7 +3,8 @@ node_js:
 - 4.1.1
 script:
 - npm test
-- bash ./support/deploy-to-gh-pages.sh
+- ./node_modules/.bin/docpress
+- ./node_modules/.bin/git-update-ghpages rstacruz/onmount _docpress
 env:
   global:
   - GITHUB_REPO: rstacruz/onmount
