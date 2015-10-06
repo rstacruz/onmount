@@ -61,3 +61,13 @@
   border-bottom: 0;
   margin-top: 2em;
 }
+
+/* Big heading */
+
+@media (min-width: 769px) {
+  .page-index .markdown-body h1 {
+    padding-top: 27vh;
+    padding-bottom: 20vh;
+    font-size: 5em;
+  }
+}
