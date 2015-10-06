@@ -1,0 +1,50 @@
+{
+  "index.html": {
+    "source": "README.md",
+    "title": "onmount"
+  },
+  "premise.html": {
+    "source": "docs/premise.md",
+    "title": "Premise"
+  },
+  "role.html": {
+    "source": "docs/role.md",
+    "title": "Role attributes"
+  },
+  "cancelling.html": {
+    "source": "docs/cancelling.md",
+    "title": "Cancelling"
+  },
+  "cleanup.html": {
+    "source": "docs/cleanup.md",
+    "title": "Preforming cleanups"
+  },
+  "unique-ids.html": {
+    "source": "docs/unique-ids.md",
+    "title": "Unique IDs"
+  },
+  "idempotency.html": {
+    "source": "docs/idempotency.md",
+    "title": "Idempotency"
+  },
+  "automatic-observation.html": {
+    "source": "docs/automatic-observation.md",
+    "title": "Automatic observation"
+  },
+  "testing.html": {
+    "source": "docs/testing.md",
+    "title": "Testing"
+  },
+  "debugging.html": {
+    "source": "docs/debugging.md",
+    "title": "Debugging"
+  },
+  "turbolinks.html": {
+    "source": "docs/turbolinks.md",
+    "title": "With Turbolinks"
+  },
+  "rails.html": {
+    "source": "docs/rails.md",
+    "title": "With Rails"
+  }
+}

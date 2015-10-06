@@ -1,0 +1,127 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/style.css?t=1444111612742"><title>onmount</title></head><body class="-menu-visible"><div class="doc-layout"><div class="toggle menu-toggle js-menu-toggle"></div><div class="body"><div class="markdown-body"><h1 id="onmount">onmount</h1>
+<p><strong>Run something when a DOM element appears and when it exits.</strong><br>
+No dependencies. Legacy IE compatible. 1kb .min.gz.</p>
+<p><a href="https://travis-ci.org/rstacruz/onmount" title="See test builds"><img src="https://travis-ci.org/rstacruz/onmount.svg?branch=master" alt="Status"></a></p>
+<h2 id="overview">Overview</h2>
+<p><strong>Detecting elements:</strong>
+Run something to initialize an element on its first appearance.</p>
+<pre><code class="lang-js">onmount = require(&#39;onmount&#39;)
+
+onmount(&#39;.push-button&#39;, function () {
+  $(this).on(&#39;click&#39;, function () {
+    alert(&#39;working...&#39;)
+  })
+})
+</code></pre>
+<p><strong>Polling for changes:</strong>
+Call <code>$.onmount()</code> everytime your code changes.
+<a href="/docs/idempotency.md">(more...)</a>
+<a href="/docs/automatic-observation.md">(automatic?)</a></p>
+<pre><code class="lang-js">$(&#39;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&#39;)
+  .appendTo(&#39;body&#39;)
+
+$.onmount()
+
+$(&quot;.push-button&quot;).click()  //=&gt; &#39;working...&#39;
+</code></pre>
+<p><strong>jQuery integration:</strong>
+jQuery is optional; use it to poll on popular events. <a href="/docs/idempotency.md">(more...)</a></p>
+<pre><code class="lang-js">$(document).on(&#39;ready show.bs closed.bs load page:change&#39;, function () {
+  $.onmount()
+})
+</code></pre>
+<p><strong>Cleanups:</strong>
+Supply a 2nd function to <em>onmount()</em> to execute something when the node is first detached.
+<a href="/docs/cleanup.md">(more...)</a></p>
+<pre><code class="lang-js">$.onmount(&#39;.push-button&#39;, function () {
+  /*...*/
+}, function () {
+  alert(&#39;button was removed&#39;)
+})
+
+document.body.innerHTML = &#39;&#39;
+
+$.onmount() //=&gt; &#39;button was removed&#39;
+</code></pre>
+<h2 id="what-for-">What for?</h2>
+<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&#39;s great for common websites that are not Single-Page Apps. Read:</p>
+<ul>
+<li><a href="/docs/premise.md">Premise</a></li>
+<li><a href="https://github.com/rstacruz/rsjs">rsjs</a> (Reasonable System for JavaScript Structure)</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<pre><code>npm install onmount
+bower install onmount
+</code></pre><pre><code class="lang-js">// With CommonJS/AMD (ie, Browserify):
+   onmount = require(&#39;onmount&#39;)
+
+// with no module loaders:
+   window.onmount
+
+// with jQuery:
+   $.onmount
+</code></pre>
+<h2 id="api">API</h2>
+<ul>
+<li><p><code>onmount()</code></p>
+<blockquote>
+<p>Runs all behaviors.</p>
+<p>When used with jQuery, this can be passed as an event handler, eg, <code>$(onmount)</code> or <code>$(document).on(&#39;load&#39;, onmount)</code>.</p>
+</blockquote>
+</li>
+<li><p><code>onmount(selector)</code></p>
+<blockquote>
+<p>Runs all behaviors registered for <code>selector</code>.</p>
+</blockquote>
+</li>
+<li><p><code>onmount(selector, init())</code></p>
+<blockquote>
+<p>Registers a behavior for <code>selector</code> to run the callback <code>init()</code>.</p>
+</blockquote>
+</li>
+<li><p><code>onmount(selector, init(b), exit(b))</code></p>
+<blockquote>
+<p>Registers a behavior for <code>selector</code> to run the callback <code>init()</code>. The <code>exit()</code> callback will be called once the behavior is triggered again but the element is no longer attached to the DOM.</p>
+<p>The callbacks are passed an object <code>b</code>, and  the same object is passed for both <code>init</code> and <code>exit</code>. This allows them to communicate and keep aware of state.</p>
+<p>An ID is also provided, <code>b.id</code>, which is guaranteed unique for every behavior-element pair.</p>
+</blockquote>
+</li>
+<li><p><code>onmount.reset()</code></p>
+<blockquote>
+<p>Clears all defined behaviors. Useful for tests.</p>
+</blockquote>
+</li>
+<li><p><code>onmount.observe()</code></p>
+<blockquote>
+<p>Automatically invoke when new DOM elements appear using MutationObserver API. Returns <code>true</code> if it succeeds.</p>
+</blockquote>
+</li>
+<li><p><code>onmount.unobserve()</code></p>
+<blockquote>
+<p>Turns off observation previously turned on via <code>onmount.observe()</code>.</p>
+</blockquote>
+</li>
+<li><p><code>onmount.debug</code></p>
+<blockquote>
+<p>Set this to <code>true</code> to see debug messages.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="browser-compatibility">Browser compatibility</h2>
+<p>All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x.</p>
+<p>Try the <a href="https://rawgit.com/rstacruz/onmount/master/test/index.html">test suite</a> in your browser. Try it <a href="https://rawgit.com/rstacruz/onmount/master/test/jquery.html">with jQuery 1.x</a> for legacy browsers.</p>
+<h2 id="read-more">Read more</h2>
+<ul>
+<li><a href="http://ricostacruz.com/onmount/">Read documentation →</a></li>
+<li><a href="https://github.com/rstacruz/onmount/examples">See examples →</a></li>
+</ul>
+<h2 id="thanks">Thanks</h2>
+<p><strong>onmount</strong> © 2015+, Rico Sta. Cruz. Released under the <a href="http://mit-license.org/">MIT</a> License.<br>
+Authored and maintained by Rico Sta. Cruz with help from contributors (<a href="http://github.com/rstacruz/onmount/contributors">list</a>).</p>
+<blockquote>
+<p><a href="http://ricostacruz.com">ricostacruz.com</a> &nbsp;&middot;&nbsp;
+GitHub <a href="https://github.com/rstacruz">@rstacruz</a> &nbsp;&middot;&nbsp;
+Twitter <a href="https://twitter.com/rstacruz">@rstacruz</a></p>
+</blockquote>
+<p><a href="http://git.io/col"><img src="https://img.shields.io/badge/%E2%9C%93-collaborative_etiquette-brightgreen.svg" alt=""></a></p>
+</div></div><div class="menu toc-menu"><li class="menu-item -level-0 -parent"><ul class="submenu"><li class="menu-item -level-1"><a href="index.html" class="link title -active">onmount</a></li><li class="menu-item -level-1"><a href="premise.html" class="link title">Premise</a></li><li class="menu-item -level-1 -parent"><span class="title">Features</span><ul class="submenu"><li class="menu-item -level-2"><a href="role.html" class="link title">Role attributes</a></li><li class="menu-item -level-2"><a href="cancelling.html" class="link title">Cancelling</a></li><li class="menu-item -level-2"><a href="cleanup.html" class="link title">Preforming cleanups</a></li><li class="menu-item -level-2"><a href="unique-ids.html" class="link title">Unique IDs</a></li><li class="menu-item -level-2"><a href="idempotency.html" class="link title">Idempotency</a></li><li class="menu-item -level-2"><a href="automatic-observation.html" class="link title">Automatic observation</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Testing</span><ul class="submenu"><li class="menu-item -level-2"><a href="testing.html" class="link title">Testing</a></li><li class="menu-item -level-2"><a href="debugging.html" class="link title">Debugging</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Integrations</span><ul class="submenu"><li class="menu-item -level-2"><a href="turbolinks.html" class="link title">With Turbolinks</a></li><li class="menu-item -level-2"><a href="rails.html" class="link title">With Rails</a></li></ul></li></ul></li></div></div><script src="assets/script.js?t=1444111612742"></script></body></html>

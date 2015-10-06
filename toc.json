@@ -1,0 +1,79 @@
+{
+  "sections": [
+    {
+      "title": "onmount",
+      "source": "README.md",
+      "url": "index.html"
+    },
+    {
+      "title": "Premise",
+      "source": "docs/premise.md",
+      "url": "premise.html"
+    },
+    {
+      "title": "Features",
+      "sections": [
+        {
+          "title": "Role attributes",
+          "source": "docs/role.md",
+          "url": "role.html"
+        },
+        {
+          "title": "Cancelling",
+          "source": "docs/cancelling.md",
+          "url": "cancelling.html"
+        },
+        {
+          "title": "Preforming cleanups",
+          "source": "docs/cleanup.md",
+          "url": "cleanup.html"
+        },
+        {
+          "title": "Unique IDs",
+          "source": "docs/unique-ids.md",
+          "url": "unique-ids.html"
+        },
+        {
+          "title": "Idempotency",
+          "source": "docs/idempotency.md",
+          "url": "idempotency.html"
+        },
+        {
+          "title": "Automatic observation",
+          "source": "docs/automatic-observation.md",
+          "url": "automatic-observation.html"
+        }
+      ]
+    },
+    {
+      "title": "Testing",
+      "sections": [
+        {
+          "title": "Testing",
+          "source": "docs/testing.md",
+          "url": "testing.html"
+        },
+        {
+          "title": "Debugging",
+          "source": "docs/debugging.md",
+          "url": "debugging.html"
+        }
+      ]
+    },
+    {
+      "title": "Integrations",
+      "sections": [
+        {
+          "title": "With Turbolinks",
+          "source": "docs/turbolinks.md",
+          "url": "turbolinks.html"
+        },
+        {
+          "title": "With Rails",
+          "source": "docs/rails.md",
+          "url": "rails.html"
+        }
+      ]
+    }
+  ]
+}
