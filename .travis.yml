@@ -3,9 +3,10 @@ node_js:
 - 4.1.1
 script:
 - npm test
-- ./node_modules/.bin/docpress
+- git config --global user.email "nobody@nobody.org"
+- git config --global user.name "Travis CI"
+- ./node_modules/.bin/docpress build
 - ./node_modules/.bin/git-update-ghpages rstacruz/onmount _docpress
 env:
   global:
-  - GITHUB_REPO: rstacruz/onmount
   - secure: OSNyEQt/WQHXDijPaW/dKnSyRcLs+G8ev4zzKejYJ0tAMl9FxZdV88JqqdvlYwEyhVQrffw3FNQBnwcxof1dgK9k2Hxk+442zT5uIXUsXdnVLF7NNkE8dpDLG4XZyT0lAr1yLG9cRxi+bYwwT5D2h/ln9zDnAL/QLfVWEJZ1otITl/Y2nZ+rl7WIzrf/lC7bu5wSx8rGzxiv4Zo57/67w35Z9WH9HIIH3J7KjbSUo6JVL5KMByfbbVjMNipsRmrAuIJeQOb2OdZHdAkcYsfRDD6LUttQzJh7LS5TT2xOtFM2pjexFilvfnN900jDlgF7SM9C26GCTzjpk48NFg7N3knxw5F6nWR0FnfxBpdPSx9EHvFo+UT2cR7SEgaCHXrQ2vqw9gcbtCXsdk/sk1sUnz8nDjt0ezh9i8F6MLIMhR1J0+pFrM9ZnmWZ679QSJnxPrgiqriOsXtx9RxRpC69UaNxJQfLtaJZjgg4WVzhcmJKeiKbsHJf1+pm59oougC6nuGPNaATpeVMNxsjLt9yIHXYS4BfMF7briR6rGrXIX9JcgQgsfgK6a9DvNPSDDIPx2ifEk7TEitn6uqaf+DfR3Mcr0em4XEmPiMU1cnDUbC1iUjrzTafK3eGD0JloumZr/H4aHeBb5kMKzj/M0ePFK6wLkuRyAZjQJKtYfAk824=
