@@ -1,0 +1,102 @@
+/* customizations for docpress */
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700');
+
+$accent2: #25a;
+$accent3: #1abc9c;
+// $accent3: #9b59b6;
+
+/* Antialias */
+* {
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Update menu */
+.toc-menu {
+  font-family: source sans pro, sans-serif;
+}
+
+/* no background for `code` */
+.markdown-body {
+  code {
+    // background: transparent;
+    $c: rgba(desaturate($accent, 20%), 0.03);
+    background: linear-gradient(to bottom, transparent 15%, $c 15%, $c 85%, transparent 85%);
+    letter-spacing: -.05em;
+    margin: 0 .05em;
+  }
+
+  code:before,
+  code:after {
+    letter-spacing: -.35em;
+  }
+
+  pre {
+    padding: 24px;
+    box-shadow: inset 1px 1px rgba(black, 0.04);
+    background: #fafbfb;
+  }
+}
+
+/* Links and fonts */
+.markdown-body {
+  font-family: source sans pro, sans-serif;
+  max-width: 740px;
+
+  a {
+    font-weight: bold;
+    color: $accent3;
+  }
+}
+
+/* Update spacing */
+.markdown-body {
+  line-height: 1.7;
+
+  p, blockquote, pre, ol, ul {
+    margin-bottom: 1.7em;
+  }
+
+  h2 {
+    margin-top: 2em;
+  }
+
+  h3 + p,
+  h4 + p {
+    margin-top: -.7em;
+  }
+}
+
+/* Update h2 heading style */
+.markdown-body h2 {
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  font-size: 2em;
+  color: $accent2;
+}
+
+/* Better headings */
+.markdown-body h1 {
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  color: $accent2;
+}
+
+/* Big heading */
+@media (min-width: 769px) {
+  .page-index .markdown-body h1 {
+    padding-top: 29vh;
+    padding-bottom: 29vh;
+    font-size: 5em;
+    font-family: source sans pro, sans-serif;
+    font-weight: 200;
+    color: $accent2;
+  }
+}
+
+/* Hide travis */
+a[href^='https://travis-ci.org'] {
+  display: none;
+}

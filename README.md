@@ -7,7 +7,8 @@ No dependencies. Legacy IE compatible. 1kb .min.gz.
 
 ## Overview
 
-**Detecting elements:**
+#### Detecting elements
+
 Run something to initialize an element on its first appearance.
 
 ```js
@@ -20,7 +21,8 @@ onmount('.push-button', function () {
 })
 ```
 
-**Polling for changes:**
+#### Polling for changes
+
 Call `$.onmount()` everytime your code changes.
 [(more...)](/docs/idempotency.md)
 [(automatic?)](/docs/automatic-observation.md)
@@ -34,7 +36,8 @@ $.onmount()
 $(".push-button").click()  //=> 'working...'
 ```
 
-**jQuery integration:**
+#### jQuery integration
+
 jQuery is optional; use it to poll on popular events. [(more...)](/docs/idempotency.md)
 
 ```js
@@ -43,7 +46,8 @@ $(document).on('ready show.bs closed.bs load page:change', function () {
 })
 ```
 
-**Cleanups:**
+#### Cleanups
+
 Supply a 2nd function to *onmount()* to execute something when the node is first detached.
 [(more...)](/docs/cleanup.md)
 
