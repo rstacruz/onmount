@@ -2,19 +2,25 @@
 
 /* customizations for docpress */
 
-@import url(https://fonts.googleapis.com/css?family=Work+Sans:200,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700);
 
 .toc-menu {
   font-size: 13px;
-  font-family: work sans, sans-serif;
+  font-family: source sans pro, sans-serif;
   background: white;
+}
+
+.toc-menu .-level-1:first-child > .title {
+  color: #111;
 }
 
 .markdown-body {
   max-width: 640px;
   font-size: 16px;
-  /* font-family: avenir next, sans-serif; */
+  font-family: source sans pro, sans-serif;
   line-height: 1.7;
+  padding-top: 30px;
+  overflow: visible;
 }
 
 .markdown-body code {
@@ -22,7 +28,12 @@
 }
 
 .markdown-body pre {
-  padding: 24px;
+  padding: 8px 24px;
+  font-size: 0.8em;
+  color: #678;
+  width: calc(100% + 24px * 2);
+  background: #fff;
+  border-left: solid 3px #eee;
 }
 
 .markdown-body p,
@@ -38,8 +49,17 @@
 }
 
 .markdown-body h1 {
-  font-family: work sans, sans-serif;
-  font-weight: 200;
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
   font-size: 2.5em;
+  color: #25a;
   border-bottom: 0;
+}
+
+.markdown-body h2 {
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  color: #25a;
+  border-bottom: 0;
+  margin-top: 2em;
 }
