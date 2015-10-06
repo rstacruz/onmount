@@ -1,50 +1,62 @@
 {
   "index.html": {
     "source": "README.md",
-    "title": "onmount"
+    "title": "onmount",
+    "slug": "index"
   },
   "premise.html": {
     "source": "docs/premise.md",
-    "title": "Premise"
+    "title": "Premise",
+    "slug": "premise"
   },
   "role.html": {
     "source": "docs/role.md",
-    "title": "Role attributes"
+    "title": "Role attributes",
+    "slug": "role"
   },
   "cancelling.html": {
     "source": "docs/cancelling.md",
-    "title": "Cancelling"
+    "title": "Cancelling",
+    "slug": "cancelling"
   },
   "cleanup.html": {
     "source": "docs/cleanup.md",
-    "title": "Preforming cleanups"
+    "title": "Preforming cleanups",
+    "slug": "cleanup"
   },
   "unique-ids.html": {
     "source": "docs/unique-ids.md",
-    "title": "Unique IDs"
+    "title": "Unique IDs",
+    "slug": "unique-ids"
   },
   "idempotency.html": {
     "source": "docs/idempotency.md",
-    "title": "Idempotency"
+    "title": "Idempotency",
+    "slug": "idempotency"
   },
   "automatic-observation.html": {
     "source": "docs/automatic-observation.md",
-    "title": "Automatic observation"
+    "title": "Automatic observation",
+    "slug": "automatic-observation"
   },
   "testing.html": {
     "source": "docs/testing.md",
-    "title": "Testing"
+    "title": "Testing",
+    "slug": "testing"
   },
   "debugging.html": {
     "source": "docs/debugging.md",
-    "title": "Debugging"
+    "title": "Debugging",
+    "slug": "debugging"
   },
   "turbolinks.html": {
     "source": "docs/turbolinks.md",
-    "title": "With Turbolinks"
+    "title": "With Turbolinks",
+    "slug": "turbolinks"
   },
   "rails.html": {
     "source": "docs/rails.md",
-    "title": "With Rails"
+    "title": "With Rails",
+    "slug": "rails"
   }
 }

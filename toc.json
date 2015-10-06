@@ -3,12 +3,14 @@
     {
       "title": "onmount",
       "source": "README.md",
-      "url": "index.html"
+      "url": "index.html",
+      "slug": "index"
     },
     {
       "title": "Premise",
       "source": "docs/premise.md",
-      "url": "premise.html"
+      "url": "premise.html",
+      "slug": "premise"
     },
     {
       "title": "Features",
@@ -16,32 +18,38 @@
         {
           "title": "Role attributes",
           "source": "docs/role.md",
-          "url": "role.html"
+          "url": "role.html",
+          "slug": "role"
         },
         {
           "title": "Cancelling",
           "source": "docs/cancelling.md",
-          "url": "cancelling.html"
+          "url": "cancelling.html",
+          "slug": "cancelling"
         },
         {
           "title": "Preforming cleanups",
           "source": "docs/cleanup.md",
-          "url": "cleanup.html"
+          "url": "cleanup.html",
+          "slug": "cleanup"
         },
         {
           "title": "Unique IDs",
           "source": "docs/unique-ids.md",
-          "url": "unique-ids.html"
+          "url": "unique-ids.html",
+          "slug": "unique-ids"
         },
         {
           "title": "Idempotency",
           "source": "docs/idempotency.md",
-          "url": "idempotency.html"
+          "url": "idempotency.html",
+          "slug": "idempotency"
         },
         {
           "title": "Automatic observation",
           "source": "docs/automatic-observation.md",
-          "url": "automatic-observation.html"
+          "url": "automatic-observation.html",
+          "slug": "automatic-observation"
         }
       ]
     },
@@ -51,12 +59,14 @@
         {
           "title": "Testing",
           "source": "docs/testing.md",
-          "url": "testing.html"
+          "url": "testing.html",
+          "slug": "testing"
         },
         {
           "title": "Debugging",
           "source": "docs/debugging.md",
-          "url": "debugging.html"
+          "url": "debugging.html",
+          "slug": "debugging"
         }
       ]
     },
@@ -66,12 +76,14 @@
         {
           "title": "With Turbolinks",
           "source": "docs/turbolinks.md",
-          "url": "turbolinks.html"
+          "url": "turbolinks.html",
+          "slug": "turbolinks"
         },
         {
           "title": "With Rails",
           "source": "docs/rails.md",
-          "url": "rails.html"
+          "url": "rails.html",
+          "slug": "rails"
         }
       ]
     }

@@ -14,7 +14,7 @@ var ready = require('dom101').ready
 
 void (function () {
   new Pjax({
-    selectors: ['.markdown-body', '.toc-menu', 'title']
+    selectors: ['.body', '.toc-menu', 'title']
   })
 
   document.addEventListener('pjax:send', function () {
