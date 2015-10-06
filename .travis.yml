@@ -3,9 +3,9 @@ node_js:
 - 4.1.1
 script:
 - npm test
+- ./node_modules/.bin/docpress build
 - git config --global user.email "nobody@nobody.org"
 - git config --global user.name "Travis CI"
-- if [[ "$TRAVIS_BRANCH" == "master" ]]; then ./node_modules/.bin/docpress build; fi
 - if [[ "$TRAVIS_BRANCH" == "master" ]]; then ./node_modules/.bin/git-update-ghpages rstacruz/onmount _docpress; fi
 env:
   global:
