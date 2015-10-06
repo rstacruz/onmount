@@ -34,7 +34,7 @@ void (function () {
  * pre (highlight.js)
  */
 
-onmount('pre > code', function () {
+onmount('pre > code[class]', function () {
   // Mappings of hljs -> GitHub syntax highlighting classes
   var dict = {
     'hljs-string': 'pl-s',

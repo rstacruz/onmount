@@ -2,12 +2,71 @@
   "index.html": {
     "source": "README.md",
     "title": "onmount",
-    "slug": "index"
+    "slug": "index",
+    "headings": [
+      {
+        "title": "Overview",
+        "depth": 2,
+        "id": "overview"
+      },
+      {
+        "title": "What for?",
+        "depth": 2,
+        "id": "what-for"
+      },
+      {
+        "title": "Usage",
+        "depth": 2,
+        "id": "usage"
+      },
+      {
+        "title": "API",
+        "depth": 2,
+        "id": "api"
+      },
+      {
+        "title": "Browser compatibility",
+        "depth": 2,
+        "id": "browser-compatibility"
+      },
+      {
+        "title": "Read more",
+        "depth": 2,
+        "id": "read-more"
+      },
+      {
+        "title": "Thanks",
+        "depth": 2,
+        "id": "thanks"
+      }
+    ]
   },
   "premise.html": {
     "source": "docs/premise.md",
     "title": "Premise",
-    "slug": "premise"
+    "slug": "premise",
+    "headings": [
+      {
+        "title": "Example",
+        "depth": 2,
+        "id": "example"
+      },
+      {
+        "title": "Problems",
+        "depth": 2,
+        "id": "problems"
+      },
+      {
+        "title": "Solution",
+        "depth": 2,
+        "id": "solution"
+      },
+      {
+        "title": "Benefits",
+        "depth": 2,
+        "id": "benefits"
+      }
+    ]
   },
   "role.html": {
     "source": "docs/role.md",
