@@ -1,7 +1,15 @@
 /* customizations for docpress */
 
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700');
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+
+$accent2: #25a;
+
+* {
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .toc-menu {
   font-size: 13px;
@@ -12,6 +20,7 @@
 .markdown-body code {
   background: transparent;
   font-family: 'Fira Mono', consolas, menlo, monospace;
+  letter-spacing: -0.05em;
   color: #666;
 }
 
@@ -24,24 +33,45 @@
   color: #333;
 }
 
-/* .markdown-body pre { */
-/*   padding: 8px 24px; */
-/*   font-size: 0.8em; */
-/*   background: #fff; */
-/*   border-left: solid 3px #eee; */
-/* } */
+.body {
+  overflow-x: hidden;
+}
+
+.markdown-body pre {
+  padding: 24px;
+}
 
 /* Update spacing */
-/* .markdown-body p, */
-/* .markdown-body blockquote, */
-/* .markdown-body pre, */
-/* .markdown-body ol, */
-/* .markdown-body ul { */
-/*   margin-bottom: 1.7em; */
-/* } */
+.markdown-body {
+  line-height: 1.7;
 
+  p, blockquote, pre, ol, ul {
+    margin-bottom: 1.7em;
+  }
+}
+
+/* Update h2 heading style */
 .markdown-body h2 {
   margin-top: 2em;
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  color: $accent2;
+  border-bottom: 0;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    margin-top: .2em;
+    background: linear-gradient(to right, #eee, rgba(#eee, 0));
+  }
+}
+
+.markdown-body h1 {
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  color: $accent2;
 }
 
 /* Big heading */
@@ -52,7 +82,7 @@
     font-size: 5em;
     font-family: source sans pro, sans-serif;
     font-weight: 200;
-    color: #25a;
+    color: $accent2;
   }
 }
 
