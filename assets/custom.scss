@@ -3,8 +3,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700');
 
 $accent2: #25a;
-$accent3: #1abc9c;
-// $accent3: #9b59b6;
 
 /* Antialias */
 * {
@@ -47,7 +45,7 @@ $accent3: #1abc9c;
 
   a {
     font-weight: bold;
-    color: $accent3;
+    color: $accent;
   }
 }
 

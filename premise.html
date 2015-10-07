@@ -1,11 +1,13 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/style.css?t=1444184960653"><title>Premise</title></head><body class="-menu-visible"><div class="doc-layout"><div class="toggle menu-toggle js-menu-toggle"></div><div class="body page-premise"><div class="markdown-body"><h1 id="premise">Premise</h1>
-<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes.</p>
-<ul>
-<li>It&#39;s great for common websites that are not Single-Page Apps.</li>
-<li>It goes hand-in-hand with Turbolinks.</li>
-</ul>
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/style.css?t=1444187255711"><title>Premise</title></head><body class="-menu-visible"><div class="doc-layout"><div class="toggle menu-toggle js-menu-toggle"></div><div class="body page-premise"><div class="markdown-body"><h1 id="premise">Premise</h1>
+<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&#39;s great for common websites that are not Single-Page Apps, and it goes hand-in-hand with Turbolinks.</p>
+<h4 id="once-and-only-once">Once and only once</h4>
+<p>It solves many problems that crop up on sites where the DOM changes often, such as when using with Turbolinks or Pjax. Onmount assures you that each behavior is only applied <em>once</em> to an element and never again so you don&#39;t get duplicate event handlers and such. This is a concept called <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a>.</p>
+<h4 id="testability">Testability</h4>
+<p>Onmount allows you to re-run certain behaviors. This is great for making isolated unit tests of your code.</p>
+<h4 id="reusable">Reusable</h4>
+<p>Code written in <code>onmount</code> blocks operate in the context of a single DOM element. It can be applied again other DOM elements later on and will be running in isolation from other instances.</p>
 <h2 id="example">Example</h2>
-<p>Given this HTML snippet:</p>
+<p>Let&#39;s build a navigation with some elements hidden under a <em>more...</em> button. Given this HTML snippet:</p>
 <pre><code class="lang-html">&lt;div class=&#39;js-expandable-nav&#39;&gt;
   &lt;a href=&#39;&#39;&gt;Home&lt;/a&gt;
   &lt;a href=&#39;&#39;&gt;Inbox&lt;/a&gt;
@@ -19,7 +21,7 @@
   &lt;button&gt;more...&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
-<p>Typically, to make this work, you&#39;ll make code like this:</p>
+<p>To make this work, you&#39;ll typically write JavaScript code like this:</p>
 <pre><code class="lang-js">$(function () {
   $(&#39;.js-expandable-nav button&#39;).on(&#39;click&#39;, function () {
     $(&#39;.js-expandable-nav .more&#39;).show()
@@ -30,21 +32,14 @@
 <h2 id="problems">Problems</h2>
 <p>However, you have a few problems with this approach.</p>
 <ul>
-<li><strong>It&#39;s not testable.</strong> You can&#39;t make unit tests from this code.</li>
-<li><strong>Assumes just one instance.</strong> When there are 2 .js-expandable-nav elements in the page, this will break.</li>
-<li><strong>It doesn&#39;t work in modal dialogs.</strong> Since it works in <code>$(function() { ... })</code>, it doesn&#39;t work on elements loaded later.</li>
-<li><strong>There&#39;s no provision for cleanups.</strong> What happens when <code>.js-expandable-nav</code> exits the DOM (eg, the dialog box was closed)?</li>
+<li><strong>Not testable</strong> — You can&#39;t make unit tests from this code. To test this, you will need to load the entire page, simulate a click, and see if it worked. There&#39;s no easy way to test it in isolation.</li>
+<li><strong>Not reusable</strong> — When there are 2 <code>.js-expandable-nav</code> elements in the page, this will break. This isn&#39;t a concern at first, but it certainly hampers code reusability.</li>
+<li><strong>Not for dialog boxes</strong> — Since it triggers on a <code>document.ready</code> event, it doesn&#39;t work on elements loaded later. There&#39;s no easy way to retrigger this code, either, which you would want to do for when content is loaded remotely (like in a dialog box).</li>
+<li><strong>No cleanups</strong> — What happens when <code>.js-expandable-nav</code> exits the DOM (eg, the dialog box was closed)? In a more complex scenario, you will want to do cleanup such as unbinding event handlers.</li>
 </ul>
 <h2 id="solution">Solution</h2>
-<p>Behaviors solve that. You don&#39;t write your code any differently, but it will be accessible in a way that it&#39;s testable, isolated, and idempotent.</p>
+<p>By writing your code in an <code>onmount</code> block, this will solve the issues above. You don&#39;t write your code any differently, but it will be accessible in a way that it&#39;s testable, isolated, and idempotent.</p>
 <pre><code class="lang-js">/*
- * initializes behaviors on jQuery document.ready, Turbolinks page:change, and
- * on bootstrap modal show.
- */
-
-$(document).on(&#39;ready page:change show.bs.modal&#39;, function () { $.onmount() })
-
-/*
  * attach a behavior to `.js-expandable-nav`
  */
 
@@ -59,14 +54,19 @@ $.onmount(&#39;.js-expandable-nav&#39;, function () {
   })
 })
 </code></pre>
+<p>This block is called a <em>behavior</em>—that is, a piece of JavaScript that defines what dynamic behavior happens (eg, menu expands on button click) for a given selector (eg, <code>.js-expandable-nav</code>). This is a concept first seen in legacy IE as <a href="https://msdn.microsoft.com/en-us/library/ms531079%28v=vs.85%29.aspx">DHTML behaviors</a>.</p>
+<pre><code class="lang-js">/*
+ * initializes behaviors on jQuery document.ready, Turbolinks page:change, and
+ * on bootstrap modal show.
+ */
+
+$(document).on(&#39;ready page:change show.bs.modal&#39;, function () { $.onmount() })
+</code></pre>
 <h2 id="benefits">Benefits</h2>
-<p>By simply wrapping your code in <code>$.onmount(...)</code> instead of <code>$(function)</code>, it gives you the power of a few features:</p>
+<p>By simply wrapping your code in <code>$.onmount(...)</code> instead of <code>$(function)</code> (aka <code>document.ready</code>), it gives you the power of a few features:</p>
 <ul>
-<li><p>You&#39;re assured that the block will only run once for every <code>.js-expandable-nav</code> element.</p>
-</li>
-<li><p>You can retrigger this behavior for tests.</p>
-</li>
-<li><p>You can call behaviors again and again (<code>$.onmount()</code>) every time your DOM changes to make it work for any new elements.</p>
-</li>
+<li><strong>Idempotent</strong> — You&#39;re assured that the block will only run once for every <code>.js-expandable-nav</code> element. If it has been applied before, it will not apply again.</li>
+<li><strong>Reusable</strong> — You can retrigger this behavior for tests. This allows you to create an isolated test for the behavior.</li>
+<li><strong>Reusable</strong> — You can call behaviors again and again (<code>$.onmount()</code>) every time your DOM changes to make it work for any new elements. This is useful for in-page transitions with Turbolinks or Pjax, or for dynamically-loaded content such as modal boxes.</li>
 </ul>
-</div></div><div class="menu toc-menu"><li class="menu-item -level-0 -parent"><ul class="submenu"><li class="menu-item -level-1"><a href="index.html" class="link title  link-index">onmount</a></li><li class="menu-item -level-1"><a href="premise.html" class="link title -active link-premise">Premise</a><ul class="headings heading-list"><li class="heading-item"><a href="#example" class="hlink -depth-2">Example</a></li><li class="heading-item"><a href="#problems" class="hlink -depth-2">Problems</a></li><li class="heading-item"><a href="#solution" class="hlink -depth-2">Solution</a></li><li class="heading-item"><a href="#benefits" class="hlink -depth-2">Benefits</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Features</span><ul class="submenu"><li class="menu-item -level-2"><a href="role.html" class="link title  link-role">Role attributes</a></li><li class="menu-item -level-2"><a href="cancelling.html" class="link title  link-cancelling">Cancelling</a></li><li class="menu-item -level-2"><a href="cleanup.html" class="link title  link-cleanup">Preforming cleanups</a></li><li class="menu-item -level-2"><a href="unique-ids.html" class="link title  link-unique-ids">Unique IDs</a></li><li class="menu-item -level-2"><a href="idempotency.html" class="link title  link-idempotency">Idempotency</a></li><li class="menu-item -level-2"><a href="automatic-observation.html" class="link title  link-automatic-observation">Automatic observation</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Testing</span><ul class="submenu"><li class="menu-item -level-2"><a href="testing.html" class="link title  link-testing">Testing</a></li><li class="menu-item -level-2"><a href="debugging.html" class="link title  link-debugging">Debugging</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Integrations</span><ul class="submenu"><li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a></li><li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a></li></ul></li></ul></li></div></div><script src="assets/script.js?t=1444184960655"></script></body></html>
+</div></div><div class="menu toc-menu"><li class="menu-item -level-0 -parent"><ul class="submenu"><li class="menu-item -level-1"><a href="index.html" class="link title  link-index">onmount</a></li><li class="menu-item -level-1"><a href="premise.html" class="link title -active link-premise">Premise</a><ul class="headings heading-list"><li class="heading-item"><a href="#example" class="hlink -depth-2">Example</a></li><li class="heading-item"><a href="#problems" class="hlink -depth-2">Problems</a></li><li class="heading-item"><a href="#solution" class="hlink -depth-2">Solution</a></li><li class="heading-item"><a href="#benefits" class="hlink -depth-2">Benefits</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Features</span><ul class="submenu"><li class="menu-item -level-2"><a href="role.html" class="link title  link-role">Role attributes</a></li><li class="menu-item -level-2"><a href="cancelling.html" class="link title  link-cancelling">Cancelling</a></li><li class="menu-item -level-2"><a href="cleanup.html" class="link title  link-cleanup">Preforming cleanups</a></li><li class="menu-item -level-2"><a href="unique-ids.html" class="link title  link-unique-ids">Unique IDs</a></li><li class="menu-item -level-2"><a href="idempotency.html" class="link title  link-idempotency">Idempotency</a></li><li class="menu-item -level-2"><a href="automatic-observation.html" class="link title  link-automatic-observation">Automatic observation</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Testing</span><ul class="submenu"><li class="menu-item -level-2"><a href="testing.html" class="link title  link-testing">Testing</a></li><li class="menu-item -level-2"><a href="debugging.html" class="link title  link-debugging">Debugging</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Integrations</span><ul class="submenu"><li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a></li><li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a></li></ul></li></ul></li></div></div><script src="assets/script.js?t=1444187255714"></script></body></html>
