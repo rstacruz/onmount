@@ -63,23 +63,28 @@ $accent2: #25a;
 
   h3 + p,
   h4 + p {
-    margin-top: -.7em;
+    margin-top: -.9em;
   }
 }
 
 /* Update h2 heading style */
-.markdown-body h2 {
-  font-family: source sans pro, sans-serif;
-  font-weight: 300;
-  font-size: 2em;
-  color: $accent2;
-}
+.markdown-body {
+  h2 {
+    font-family: source sans pro, sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    color: $accent2;
+  }
 
-/* Better headings */
-.markdown-body h1 {
-  font-family: source sans pro, sans-serif;
-  font-weight: 300;
-  color: $accent2;
+   h1 {
+    font-family: source sans pro, sans-serif;
+    font-weight: 300;
+    color: $accent2;
+  }
+
+  h4 {
+    font-size: 1.15em;
+  }
 }
 
 /* Big heading */
@@ -98,3 +103,18 @@ $accent2: #25a;
 a[href^='https://travis-ci.org'] {
   display: none;
 }
+
+/* Mad hero shot */
+// $image: 'https://images.unsplash.com/photo-1441448770220-76743f9e6af6?q=80&fm=jpg&w=1080&fit=max&s=306e663b576aa39089a16b52354749f8';
+// $str: .7;
+
+// .page-index {
+//   background:
+//     linear-gradient(195deg, rgba(white, $str), rgba(white, $str + (1 - $str) * 0.9), white 600px),
+//     url($image) top left / 100% auto;
+// }
+
+// .toc-menu {
+//   box-shadow: inset -1px 0 rgba(black, .05);
+//   background: rgba(white, 0.5);
+// }
