@@ -1,0 +1,62 @@
+/* customizations for docpress */
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+
+.toc-menu {
+  font-size: 13px;
+  font-family: source sans pro, sans-serif;
+}
+
+/* no background for `code` */
+.markdown-body code {
+  background: transparent;
+  font-family: 'Fira Mono', consolas, menlo, monospace;
+  color: #666;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  display: none;
+}
+
+.markdown-body pre code {
+  color: #333;
+}
+
+/* .markdown-body pre { */
+/*   padding: 8px 24px; */
+/*   font-size: 0.8em; */
+/*   background: #fff; */
+/*   border-left: solid 3px #eee; */
+/* } */
+
+/* Update spacing */
+/* .markdown-body p, */
+/* .markdown-body blockquote, */
+/* .markdown-body pre, */
+/* .markdown-body ol, */
+/* .markdown-body ul { */
+/*   margin-bottom: 1.7em; */
+/* } */
+
+.markdown-body h2 {
+  margin-top: 2em;
+}
+
+/* Big heading */
+@media (min-width: 769px) {
+  .page-index .markdown-body h1 {
+    padding-top: 29vh;
+    padding-bottom: 29vh;
+    font-size: 5em;
+    font-family: source sans pro, sans-serif;
+    font-weight: 200;
+    color: #25a;
+  }
+}
+
+/* Hide travis */
+a[href^='https://travis-ci.org'] {
+  display: none;
+}

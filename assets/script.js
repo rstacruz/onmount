@@ -240,7 +240,7 @@ Scrolltrack.prototype.scrollTop = function () {
   if (this.metrics) {
     var percent = y /
       (this.metrics.documentHeight - this.metrics.windowHeight)
-    offset = Math.pow(percent, 3) * this.metrics.windowHeight
+    offset = Math.pow(percent, 6) * this.metrics.windowHeight
   }
 
   return y + offset
