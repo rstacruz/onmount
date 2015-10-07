@@ -92,10 +92,8 @@ void (function () {
       var menu = document.querySelector('.toc-menu')
       var link = menu.querySelector('.link.-active, .link.-notactive')
 
-      if (link) {
-        toggleClass(link, '-active', !active)
-        toggleClass(link, '-notactive', active)
-      }
+      toggleClass(link, '-active', !active)
+      toggleClass(link, '-notactive', active)
     }
   })
 
@@ -129,7 +127,7 @@ function Scrolltrack (options) {
   if (!(this instanceof Scrolltrack)) return new Scrolltrack(options)
   if (!options) options = {}
 
-  this.selectors = options.selectors || 'h1, h2, h3, h4, h5, h6'
+  this.selector = options.selector || 'h1, h2, h3, h4, h5, h6'
   this.parent = options.parent || document
   this.onupdate = options.onupdate || function () {}
   this.menu = options.menu || document
@@ -170,7 +168,7 @@ Scrolltrack.prototype.destroy = function () {
  */
 
 Scrolltrack.prototype.reindex = function () {
-  var headings = this.parent.querySelectorAll(this.selectors)
+  var headings = this.parent.querySelectorAll(this.selector)
   var index = this.index = []
   var ids = {}
 
@@ -262,15 +260,15 @@ Scrolltrack.prototype.scrollTop = function () {
  */
 
 Scrolltrack.prototype.follow = function (heading, last) {
-  if (!heading || !heading.link) return
-
   if (this.lastlink) {
     toggleClass(this.lastlink, '-active', false)
     this.lastlink = null
   }
 
-  toggleClass(heading.link, '-active', true)
-  this.lastlink = heading.link
+  if (heading && heading.link) {
+    toggleClass(heading.link, '-active', true)
+    this.lastlink = heading.link
+  }
 }
 
 function q (el) {
