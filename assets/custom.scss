@@ -17,6 +17,10 @@ $accent2: #25a;
   font-family: source sans pro, sans-serif;
 }
 
+.header-nav .iconlink .title {
+  display: none;
+}
+
 /* no background for `code` */
 .markdown-body {
   code {
