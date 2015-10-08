@@ -12,8 +12,13 @@ $accent2: #25a;
 }
 
 /* Update menu */
+.header-nav,
 .toc-menu {
   font-family: source sans pro, sans-serif;
+}
+
+.header-nav .iconlink .title {
+  display: none;
 }
 
 /* no background for `code` */
