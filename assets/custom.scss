@@ -1,30 +1,46 @@
-/* customizations for docpress */
+/*
+ * Customizations for docpress
+ */
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700');
 
 $accent2: #25a;
 
-/* Antialias */
+/*
+ * Antialias
+ */
+
 * {
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Update menu */
+/*
+ * Update fonts
+ */
+
 .header-nav,
+.footer-nav,
+.markdown-body,
 .toc-menu {
   font-family: source sans pro, sans-serif;
 }
+
+/*
+ * Hide link to github
+ */
 
 .header-nav .iconlink .title {
   display: none;
 }
 
-/* no background for `code` */
+/*
+ * Update look of 'code' elements
+ */
+
 .markdown-body {
   code {
-    // background: transparent;
     $c: rgba(desaturate($accent, 20%), 0.03);
     background: linear-gradient(to bottom, transparent 15%, $c 15%, $c 85%, transparent 85%);
     letter-spacing: -.05em;
@@ -43,56 +59,71 @@ $accent2: #25a;
   }
 }
 
-/* Links and fonts */
-.markdown-body {
-  font-family: source sans pro, sans-serif;
-  max-width: 740px;
+/*
+ * Links and fonts
+ */
 
-  a {
-    font-weight: bold;
-    color: $accent;
-  }
+.markdown-body {
+  max-width: 740px;
 }
 
-/* Update spacing */
+.markdown-body a {
+  font-weight: bold;
+  color: $accent;
+}
+
+/*
+ * Update spacing to 1.7
+ */
+
 .markdown-body {
   line-height: 1.7;
-
-  p, blockquote, pre, ol, ul {
-    margin-bottom: 1.7em;
-  }
-
-  h2 {
-    margin-top: 2em;
-  }
-
-  h3 + p,
-  h4 + p {
-    margin-top: -.9em;
-  }
 }
 
-/* Update h2 heading style */
-.markdown-body {
-  h2 {
-    font-family: source sans pro, sans-serif;
-    font-weight: 300;
-    font-size: 2em;
-    color: $accent2;
-  }
-
-   h1 {
-    font-family: source sans pro, sans-serif;
-    font-weight: 300;
-    color: $accent2;
-  }
-
-  h4 {
-    font-size: 1.15em;
-  }
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body pre,
+.markdown-body ol,
+.markdown-body ul {
+  margin-bottom: 1.7em;
 }
 
-/* Big heading */
+ 
+.markdown-body h2 {
+  margin-top: 2em;
+}
+
+ 
+.markdown-body h3 + p,
+.markdown-body h4 + p {
+  margin-top: -.9em;
+}
+
+/*
+ * Update heading styles
+ */
+
+.markdown-body h2 {
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  font-size: 2em;
+  color: $accent2;
+}
+
+.markdown-body h1 {
+  font-family: source sans pro, sans-serif;
+  font-weight: 300;
+  color: $accent2;
+}
+
+.markdown-body h4 {
+  font-size: 1.15em;
+}
+
+/*
+ * Big heading
+ */
+
 @media (min-width: 769px) {
   .page-index .markdown-body h1 {
     padding-top: 29vh;
@@ -104,22 +135,27 @@ $accent2: #25a;
   }
 }
 
-/* Hide travis */
+/*
+ * Hide travis badge
+ */
+
 a[href^='https://travis-ci.org'] {
   display: none;
 }
 
 /* Mad hero shot */
-// $image: 'https://images.unsplash.com/photo-1441448770220-76743f9e6af6?q=80&fm=jpg&w=1080&fit=max&s=306e663b576aa39089a16b52354749f8';
-// $str: .7;
+/*
+  $image: 'https://images.unsplash.com/photo-1441448770220-76743f9e6af6?q=80&fm=jpg&w=1080&fit=max&s=306e663b576aa39089a16b52354749f8';
+  $str: .7;
 
-// .page-index {
-//   background:
-//     linear-gradient(195deg, rgba(white, $str), rgba(white, $str + (1 - $str) * 0.9), white 600px),
-//     url($image) top left / 100% auto;
-// }
+  .page-index {
+    background:
+      linear-gradient(195deg, rgba(white, $str), rgba(white, $str + (1 - $str) * 0.9), white 600px),
+      url($image) top left / 100% auto;
+  }
 
-// .toc-menu {
-//   box-shadow: inset -1px 0 rgba(black, .05);
-//   background: rgba(white, 0.5);
-// }
+  .toc-menu {
+    box-shadow: inset -1px 0 rgba(black, .05);
+    background: rgba(white, 0.5);
+  }
+*/
