@@ -1,65 +1,65 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/style.css?t=57068fba"><title>onmount</title></head><body class="-menu-visible"><div class="doc-layout"><div class="toggle menu-toggle js-menu-toggle"></div><div class="body page-index"><div class="header-nav"><div class="right"><a href="https://github.com/rstacruz/onmount" data-title="rstacruz/onmount" class="iconlink"><!-- span.title Open in GitHub--><span class="icon -github"></span></a></div></div><div class="markdown-body"><h1 id="onmount">onmount</h1>
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/style.css?t=644398e2"><title>onmount</title></head><body class="-menu-visible"><div class="doc-layout"><div class="toggle menu-toggle js-menu-toggle"></div><div class="body page-index"><div class="header-nav"><div class="right"><a href="https://github.com/rstacruz/onmount" data-title="rstacruz/onmount" class="iconlink"><!-- span.title Open in GitHub--><span class="icon -github"></span></a></div></div><div class="markdown-body"><h1 id="onmount">onmount</h1>
 <p>Run something when a DOM element appears and when it exits.<br>
 No dependencies. Legacy IE compatible. 1kb .min.gz.</p>
 <p><a href="https://travis-ci.org/rstacruz/onmount" title="See test builds"><img src="https://travis-ci.org/rstacruz/onmount.svg?branch=master" alt="Status"></a></p>
 <h2 id="overview">Overview</h2>
 <h4 id="detecting-elements">Detecting elements</h4>
 <p>Run something to initialize an element on its first appearance.</p>
-<pre><code class="lang-js">onmount = require(&#39;onmount&#39;)
+<pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>)
 
-onmount(&#39;.push-button&#39;, function () {
-  $(this).on(&#39;click&#39;, function () {
-    alert(&#39;working...&#39;)
+onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+  $(<span class="pl-k">this</span>).on(<span class="pl-s">&apos;click&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+    alert(<span class="pl-s">&apos;working...&apos;</span>)
   })
 })
 </code></pre>
 <h4 id="polling-for-changes">Polling for changes</h4>
 <p>Call <code>$.onmount()</code> everytime your code changes.
-<a href="/docs/idempotency.md">→</a></p>
-<pre><code class="lang-js">$(&#39;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&#39;)
-  .appendTo(&#39;body&#39;)
+<a href="/docs/idempotency.md">&#x2192;</a></p>
+<pre><code class="lang-js">$(<span class="pl-s">&apos;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&apos;</span>)
+  .appendTo(<span class="pl-s">&apos;body&apos;</span>)
 
 $.onmount()
 
-$(&quot;.push-button&quot;).click()  //=&gt; &#39;working...&#39;
+$(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c">//=&gt; &apos;working...&apos;</span>
 </code></pre>
 <h4 id="jquery-integration">jQuery integration</h4>
 <p>jQuery is optional; use it to poll on popular events.
-<a href="/docs/idempotency.md">→</a></p>
-<pre><code class="lang-js">$(document).on(&#39;ready show.bs closed.bs load page:change&#39;, function () {
+<a href="/docs/idempotency.md">&#x2192;</a></p>
+<pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready show.bs closed.bs load page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   $.onmount()
 })
 </code></pre>
 <h4 id="cleanups">Cleanups</h4>
 <p>Supply a 2nd function to <em>onmount()</em> to execute something when the node is first detached.
-<a href="/docs/cleanup.md">→</a></p>
-<pre><code class="lang-js">$.onmount(&#39;.push-button&#39;, function () {
-  /*...*/
-}, function () {
-  alert(&#39;button was removed&#39;)
+<a href="/docs/cleanup.md">&#x2192;</a></p>
+<pre><code class="lang-js">$.onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="pl-c">/*...*/</span>
+}, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+  alert(<span class="pl-s">&apos;button was removed&apos;</span>)
 })
 
-document.body.innerHTML = &#39;&#39;
+<span class="pl-c1">document</span>.body.innerHTML = <span class="pl-s">&apos;&apos;</span>
 
-$.onmount() //=&gt; &#39;button was removed&#39;
+$.onmount() <span class="pl-c">//=&gt; &apos;button was removed&apos;</span>
 </code></pre>
 <h2 id="what-for-">What for?</h2>
-<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&#39;s great for common websites that are not Single-Page Apps. Read more on its <a href="docs/premise.md">premise and motivation</a>.</p>
+<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&apos;s great for common websites that are not Single-Page Apps. Read more on its <a href="docs/premise.md">premise and motivation</a>.</p>
 <p><a href="https://github.com/rstacruz/rsjs">rsjs</a> (Reasonable System for JavaScript Structure) is a great standard that onmount fits perfectly into.</p>
 <h2 id="usage">Usage</h2>
 <p>Onmount is available via <a href="https://www.npmjs.com/package/onmount">npm</a> and Bower.</p>
 <pre><code>npm install onmount
 bower install onmount
-</code></pre><p>It can be used as a CommonJS module or on its own. It doesn&#39;t require jQuery, but if jQuery is found, it&#39;ll attach itself to it as <code>$.onmount</code>.</p>
-<pre><code class="lang-js">onmount = require(&#39;onmount&#39;)    // With CommonJS (ie, Browserify)
-window.onmount                  // with no module loaders:
-$.onmount                       // with jQuery
+</code></pre><p>It can be used as a CommonJS module or on its own. It doesn&apos;t require jQuery, but if jQuery is found, it&apos;ll attach itself to it as <code>$.onmount</code>.</p>
+<pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>)    <span class="pl-c">// With CommonJS (ie, Browserify)</span>
+<span class="pl-c1">window</span>.onmount                  <span class="pl-c">// with no module loaders:</span>
+$.onmount                       <span class="pl-c">// with jQuery</span>
 </code></pre>
 <h2 id="api">API</h2>
 <h4 id="onmount-">onmount()</h4>
 <p>Runs all behaviors.</p>
 <blockquote>
-<p>When used with jQuery, this can be passed as an event handler, eg, <code>$(onmount)</code> or <code>$(document).on(&#39;load&#39;, onmount)</code>.</p>
+<p>When used with jQuery, this can be passed as an event handler, eg, <code>$(onmount)</code> or <code>$(document).on(&apos;load&apos;, onmount)</code>.</p>
 </blockquote>
 <h4 id="onmount-selector-">onmount(<code>selector</code>)</h4>
 <p>Runs all behaviors registered for <code>selector</code>.</p>
@@ -81,14 +81,14 @@ $.onmount                       // with jQuery
 <h2 id="browser-compatibility">Browser compatibility</h2>
 <p>All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x. Try the <a href="https://rawgit.com/rstacruz/onmount/master/test/index.html">test suite</a> in your browser. Try it <a href="https://rawgit.com/rstacruz/onmount/master/test/jquery.html">with jQuery 1.x</a> for legacy browsers.</p>
 <h2 id="examples">Examples</h2>
-<p>Examples are available in the source repo. <a href="https://github.com/rstacruz/onmount/examples">See examples →</a></p>
+<p>Examples are available in the source repo. <a href="https://github.com/rstacruz/onmount/examples">See examples &#x2192;</a></p>
 <h2 id="thanks">Thanks</h2>
-<p><strong>onmount</strong> © 2015+, Rico Sta. Cruz. Released under the <a href="http://mit-license.org/">MIT</a> License.<br>
+<p><strong>onmount</strong> &#xA9; 2015+, Rico Sta. Cruz. Released under the <a href="http://mit-license.org/">MIT</a> License.<br>
 Authored and maintained by Rico Sta. Cruz with help from contributors (<a href="http://github.com/rstacruz/onmount/contributors">list</a>).</p>
 <blockquote>
-<p><a href="http://ricostacruz.com">ricostacruz.com</a> &nbsp;&middot;&nbsp;
-GitHub <a href="https://github.com/rstacruz">@rstacruz</a> &nbsp;&middot;&nbsp;
+<p><a href="http://ricostacruz.com">ricostacruz.com</a> &#xA0;&#xB7;&#xA0;
+GitHub <a href="https://github.com/rstacruz">@rstacruz</a> &#xA0;&#xB7;&#xA0;
 Twitter <a href="https://twitter.com/rstacruz">@rstacruz</a></p>
 </blockquote>
 <p><a href="http://git.io/col"><img src="https://img.shields.io/badge/%E2%9C%93-collaborative_etiquette-brightgreen.svg" alt=""></a></p>
-</div><div class="footer-nav"><div class="right"><a href="premise.html"><span class="label">Next: </span><span class="title">Premise</span></a></div></div></div><div class="menu toc-menu"><li class="menu-item -level-0 -parent"><ul class="submenu"><li class="menu-item -level-1"><a href="index.html" class="link title -active link-index">onmount</a><ul class="headings heading-list"><li class="heading-item -depth-2"><a href="#overview" class="hlink link-overview">Overview</a></li><li class="heading-item -depth-2"><a href="#what-for" class="hlink link-what-for">What for?</a></li><li class="heading-item -depth-2"><a href="#usage" class="hlink link-usage">Usage</a></li><li class="heading-item -depth-2"><a href="#api" class="hlink link-api">API</a></li><li class="heading-item -depth-2"><a href="#browser-compatibility" class="hlink link-browser-compatibility">Browser compatibility</a></li><li class="heading-item -depth-2"><a href="#examples" class="hlink link-examples">Examples</a></li><li class="heading-item -depth-2"><a href="#thanks" class="hlink link-thanks">Thanks</a></li></ul></li><li class="menu-item -level-1"><a href="premise.html" class="link title  link-premise">Premise</a></li><li class="menu-item -level-1 -parent"><span class="title">Features</span><ul class="submenu"><li class="menu-item -level-2"><a href="role.html" class="link title  link-role">Role attributes</a></li><li class="menu-item -level-2"><a href="cancelling.html" class="link title  link-cancelling">Cancelling</a></li><li class="menu-item -level-2"><a href="cleanup.html" class="link title  link-cleanup">Preforming cleanups</a></li><li class="menu-item -level-2"><a href="unique-ids.html" class="link title  link-unique-ids">Unique IDs</a></li><li class="menu-item -level-2"><a href="idempotency.html" class="link title  link-idempotency">Idempotency</a></li><li class="menu-item -level-2"><a href="automatic-observation.html" class="link title  link-automatic-observation">Automatic observation</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Testing</span><ul class="submenu"><li class="menu-item -level-2"><a href="testing.html" class="link title  link-testing">Testing</a></li><li class="menu-item -level-2"><a href="debugging.html" class="link title  link-debugging">Debugging</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Integrations</span><ul class="submenu"><li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a></li><li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a></li></ul></li></ul></li></div></div><script src="assets/script.js?t=a1af2334"></script></body></html>
+</div><div class="footer-nav"><div class="right"><a href="premise.html"><span class="label">Next: </span><span class="title">Premise</span></a></div></div></div><div class="menu toc-menu"><li class="menu-item -level-0 -parent"><ul class="submenu"><li class="menu-item -level-1"><a href="index.html" class="link title -active link-index">onmount</a><ul class="headings heading-list"><li class="heading-item -depth-2"><a href="#overview" class="hlink link-overview">Overview</a></li><li class="heading-item -depth-2"><a href="#what-for" class="hlink link-what-for">What for?</a></li><li class="heading-item -depth-2"><a href="#usage" class="hlink link-usage">Usage</a></li><li class="heading-item -depth-2"><a href="#api" class="hlink link-api">API</a></li><li class="heading-item -depth-2"><a href="#browser-compatibility" class="hlink link-browser-compatibility">Browser compatibility</a></li><li class="heading-item -depth-2"><a href="#examples" class="hlink link-examples">Examples</a></li><li class="heading-item -depth-2"><a href="#thanks" class="hlink link-thanks">Thanks</a></li></ul></li><li class="menu-item -level-1"><a href="premise.html" class="link title  link-premise">Premise</a></li><li class="menu-item -level-1 -parent"><span class="title">Features</span><ul class="submenu"><li class="menu-item -level-2"><a href="role.html" class="link title  link-role">Role attributes</a></li><li class="menu-item -level-2"><a href="cancelling.html" class="link title  link-cancelling">Cancelling</a></li><li class="menu-item -level-2"><a href="cleanup.html" class="link title  link-cleanup">Preforming cleanups</a></li><li class="menu-item -level-2"><a href="unique-ids.html" class="link title  link-unique-ids">Unique IDs</a></li><li class="menu-item -level-2"><a href="idempotency.html" class="link title  link-idempotency">Idempotency</a></li><li class="menu-item -level-2"><a href="automatic-observation.html" class="link title  link-automatic-observation">Automatic observation</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Testing</span><ul class="submenu"><li class="menu-item -level-2"><a href="testing.html" class="link title  link-testing">Testing</a></li><li class="menu-item -level-2"><a href="debugging.html" class="link title  link-debugging">Debugging</a></li></ul></li><li class="menu-item -level-1 -parent"><span class="title">Integrations</span><ul class="submenu"><li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a></li><li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a></li></ul></li></ul></li></div></div><script src="assets/script.js?t=3c14cb64"></script></body></html>
