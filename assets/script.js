@@ -172,7 +172,6 @@ Scrollclass.prototype.update = function () {
   this.documentHeight = documentHeight()
   this.winHeight = window.innerHeight
   this.maxScroll = this.documentHeight - this.winHeight
-  console.log('maxscroll', this.maxScroll, 'w:', this.winHeight, 'd:', documentHeight())
   this.onresize()
 }
 
