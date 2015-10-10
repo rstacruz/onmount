@@ -1,8 +1,6 @@
 # Cancelling
 
-You can cancel an initialization by returning `false`. This makes it so that the initialization will run again when `init` is triggered again.
-
-This is also available for exit callbacks.
+You can cancel an initialization by returning `false`. This makes it so that the initialization will run again when `init` is triggered again. This is also available for exit callbacks.
 
 ```js
 $.onmount('.expandable-nav', function () {
@@ -11,5 +9,3 @@ $.onmount('.expandable-nav', function () {
   /* ... */
 })
 ```
-
-<br>
