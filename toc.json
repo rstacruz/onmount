@@ -1,201 +1,150 @@
 {
   "sections": [
     {
-      "expand": true,
-      "title": "rscss",
+      "title": "onmount",
       "source": "README.md",
       "headings": [
         {
-          "title": "Introduction",
+          "title": "Overview",
           "depth": 2,
-          "id": "introduction"
+          "id": "overview"
         },
         {
-          "title": "Components",
+          "title": "What for?",
           "depth": 2,
-          "id": "components",
-          "headings": [
-            {
-              "title": "Naming components",
-              "depth": 3,
-              "id": "naming-components"
-            }
-          ]
+          "id": "what-for"
         },
         {
-          "title": "Elements",
+          "title": "Usage",
           "depth": 2,
-          "id": "elements",
-          "headings": [
-            {
-              "title": "Naming elements",
-              "depth": 3,
-              "id": "naming-elements"
-            },
-            {
-              "title": "Element selectors",
-              "depth": 3,
-              "id": "element-selectors"
-            },
-            {
-              "title": "On multiple words",
-              "depth": 3,
-              "id": "on-multiple-words"
-            },
-            {
-              "title": "Avoid tag selectors",
-              "depth": 3,
-              "id": "avoid-tag-selectors"
-            }
-          ]
+          "id": "usage"
         },
         {
-          "title": "Variants",
+          "title": "API",
           "depth": 2,
-          "id": "variants",
-          "headings": [
-            {
-              "title": "Naming variants",
-              "depth": 3,
-              "id": "naming-variants"
-            },
-            {
-              "title": "Element variants",
-              "depth": 3,
-              "id": "element-variants"
-            },
-            {
-              "title": "Dash prefixes",
-              "depth": 3,
-              "id": "dash-prefixes"
-            }
-          ]
+          "id": "api"
         },
         {
-          "title": "Nested components",
+          "title": "Browser compatibility",
           "depth": 2,
-          "id": "nested-components",
-          "headings": [
-            {
-              "title": "Variants of nested components",
-              "depth": 3,
-              "id": "variants-of-nested-components"
-            },
-            {
-              "title": "Simplifying nested components",
-              "depth": 3,
-              "id": "simplifying-nested-components"
-            }
-          ]
+          "id": "browser-compatibility"
         },
         {
-          "title": "Layout",
+          "title": "Examples",
           "depth": 2,
-          "id": "layout",
-          "headings": [
-            {
-              "title": "Avoid positioning properties",
-              "depth": 3,
-              "id": "avoid-positioning-properties"
-            },
-            {
-              "title": "Fixed dimensions",
-              "depth": 3,
-              "id": "fixed-dimensions"
-            },
-            {
-              "title": "Define positioning in parents",
-              "depth": 3,
-              "id": "define-positioning-in-parents"
-            }
-          ]
+          "id": "examples"
         },
         {
-          "title": "Helpers",
+          "title": "Thanks",
           "depth": 2,
-          "id": "helpers",
-          "headings": [
-            {
-              "title": "Naming helpers",
-              "depth": 3,
-              "id": "naming-helpers"
-            },
-            {
-              "title": "Organizing helpers",
-              "depth": 3,
-              "id": "organizing-helpers"
-            }
-          ]
-        },
-        {
-          "title": "CSS structure",
-          "depth": 2,
-          "id": "css-structure",
-          "headings": [
-            {
-              "title": "One component per file",
-              "depth": 3,
-              "id": "one-component-per-file"
-            },
-            {
-              "title": "Use glob matching",
-              "depth": 3,
-              "id": "use-glob-matching"
-            },
-            {
-              "title": "Avoid over-nesting",
-              "depth": 3,
-              "id": "avoid-over-nesting"
-            }
-          ]
-        },
-        {
-          "title": "Pitfalls",
-          "depth": 2,
-          "id": "pitfalls",
-          "headings": [
-            {
-              "title": "Bleeding through nested components",
-              "depth": 3,
-              "id": "bleeding-through-nested-components"
-            }
-          ]
-        },
-        {
-          "title": "Apprehensions",
-          "depth": 2,
-          "id": "apprehensions"
-        },
-        {
-          "title": "Other resources",
-          "depth": 2,
-          "id": "other-resources"
-        },
-        {
-          "title": "Other solutions",
-          "depth": 2,
-          "id": "other-solutions",
-          "headings": [
-            {
-              "title": "BEM",
-              "depth": 3,
-              "id": "bem"
-            },
-            {
-              "title": "Terminologies",
-              "depth": 3,
-              "id": "terminologies"
-            }
-          ]
-        },
-        {
-          "title": "Summary",
-          "depth": 2,
-          "id": "summary"
+          "id": "thanks"
         }
       ],
       "url": "index.html",
       "slug": "index"
+    },
+    {
+      "title": "Premise",
+      "source": "docs/premise.md",
+      "headings": [
+        {
+          "title": "Example",
+          "depth": 2,
+          "id": "example"
+        },
+        {
+          "title": "Problems",
+          "depth": 2,
+          "id": "problems"
+        },
+        {
+          "title": "Solution",
+          "depth": 2,
+          "id": "solution"
+        },
+        {
+          "title": "Benefits",
+          "depth": 2,
+          "id": "benefits"
+        }
+      ],
+      "url": "premise.html",
+      "slug": "premise"
+    },
+    {
+      "title": "Features",
+      "sections": [
+        {
+          "title": "Role attributes",
+          "source": "docs/role.md",
+          "url": "role.html",
+          "slug": "role"
+        },
+        {
+          "title": "Cancelling",
+          "source": "docs/cancelling.md",
+          "url": "cancelling.html",
+          "slug": "cancelling"
+        },
+        {
+          "title": "Preforming cleanups",
+          "source": "docs/cleanup.md",
+          "url": "cleanup.html",
+          "slug": "cleanup"
+        },
+        {
+          "title": "Unique IDs",
+          "source": "docs/unique-ids.md",
+          "url": "unique-ids.html",
+          "slug": "unique-ids"
+        },
+        {
+          "title": "Idempotency",
+          "source": "docs/idempotency.md",
+          "url": "idempotency.html",
+          "slug": "idempotency"
+        },
+        {
+          "title": "Automatic observation",
+          "source": "docs/automatic-observation.md",
+          "url": "automatic-observation.html",
+          "slug": "automatic-observation"
+        }
+      ]
+    },
+    {
+      "title": "Testing",
+      "sections": [
+        {
+          "title": "Testing",
+          "source": "docs/testing.md",
+          "url": "testing.html",
+          "slug": "testing"
+        },
+        {
+          "title": "Debugging",
+          "source": "docs/debugging.md",
+          "url": "debugging.html",
+          "slug": "debugging"
+        }
+      ]
+    },
+    {
+      "title": "Integrations",
+      "sections": [
+        {
+          "title": "With Turbolinks",
+          "source": "docs/turbolinks.md",
+          "url": "turbolinks.html",
+          "slug": "turbolinks"
+        },
+        {
+          "title": "With Rails",
+          "source": "docs/rails.md",
+          "url": "rails.html",
+          "slug": "rails"
+        }
+      ]
     }
   ]
 }
