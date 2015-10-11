@@ -1,0 +1,289 @@
+{
+  "toc": {
+    "sections": [
+      {
+        "title": "onmount",
+        "source": "README.md",
+        "url": "index.html",
+        "slug": "index",
+        "headings": [
+          {
+            "title": "Overview",
+            "depth": 2,
+            "id": "overview"
+          },
+          {
+            "title": "What for?",
+            "depth": 2,
+            "id": "what-for"
+          },
+          {
+            "title": "Usage",
+            "depth": 2,
+            "id": "usage"
+          },
+          {
+            "title": "API",
+            "depth": 2,
+            "id": "api"
+          },
+          {
+            "title": "Browser compatibility",
+            "depth": 2,
+            "id": "browser-compatibility"
+          },
+          {
+            "title": "Examples",
+            "depth": 2,
+            "id": "examples"
+          },
+          {
+            "title": "Thanks",
+            "depth": 2,
+            "id": "thanks"
+          }
+        ]
+      },
+      {
+        "title": "Premise",
+        "source": "docs/premise.md",
+        "url": "premise.html",
+        "slug": "premise",
+        "headings": [
+          {
+            "title": "Example",
+            "depth": 2,
+            "id": "example"
+          },
+          {
+            "title": "Problems",
+            "depth": 2,
+            "id": "problems"
+          },
+          {
+            "title": "Solution",
+            "depth": 2,
+            "id": "solution"
+          },
+          {
+            "title": "Benefits",
+            "depth": 2,
+            "id": "benefits"
+          }
+        ]
+      },
+      {
+        "title": "Features",
+        "sections": [
+          {
+            "title": "Role attributes",
+            "source": "docs/role.md",
+            "url": "role.html",
+            "slug": "role"
+          },
+          {
+            "title": "Cancelling",
+            "source": "docs/cancelling.md",
+            "url": "cancelling.html",
+            "slug": "cancelling"
+          },
+          {
+            "title": "Preforming cleanups",
+            "source": "docs/cleanup.md",
+            "url": "cleanup.html",
+            "slug": "cleanup"
+          },
+          {
+            "title": "Unique IDs",
+            "source": "docs/unique-ids.md",
+            "url": "unique-ids.html",
+            "slug": "unique-ids"
+          },
+          {
+            "title": "Idempotency",
+            "source": "docs/idempotency.md",
+            "url": "idempotency.html",
+            "slug": "idempotency"
+          },
+          {
+            "title": "Automatic observation",
+            "source": "docs/automatic-observation.md",
+            "url": "automatic-observation.html",
+            "slug": "automatic-observation"
+          }
+        ]
+      },
+      {
+        "title": "Testing",
+        "sections": [
+          {
+            "title": "Testing",
+            "source": "docs/testing.md",
+            "url": "testing.html",
+            "slug": "testing"
+          },
+          {
+            "title": "Debugging",
+            "source": "docs/debugging.md",
+            "url": "debugging.html",
+            "slug": "debugging"
+          }
+        ]
+      },
+      {
+        "title": "Integrations",
+        "sections": [
+          {
+            "title": "With Turbolinks",
+            "source": "docs/turbolinks.md",
+            "url": "turbolinks.html",
+            "slug": "turbolinks"
+          },
+          {
+            "title": "With Rails",
+            "source": "docs/rails.md",
+            "url": "rails.html",
+            "slug": "rails"
+          }
+        ]
+      }
+    ]
+  },
+  "index": {
+    "index.html": {
+      "source": "README.md",
+      "title": "onmount",
+      "slug": "index",
+      "headings": [
+        {
+          "title": "Overview",
+          "depth": 2,
+          "id": "overview"
+        },
+        {
+          "title": "What for?",
+          "depth": 2,
+          "id": "what-for"
+        },
+        {
+          "title": "Usage",
+          "depth": 2,
+          "id": "usage"
+        },
+        {
+          "title": "API",
+          "depth": 2,
+          "id": "api"
+        },
+        {
+          "title": "Browser compatibility",
+          "depth": 2,
+          "id": "browser-compatibility"
+        },
+        {
+          "title": "Examples",
+          "depth": 2,
+          "id": "examples"
+        },
+        {
+          "title": "Thanks",
+          "depth": 2,
+          "id": "thanks"
+        }
+      ]
+    },
+    "premise.html": {
+      "source": "docs/premise.md",
+      "title": "Premise",
+      "slug": "premise",
+      "headings": [
+        {
+          "title": "Example",
+          "depth": 2,
+          "id": "example"
+        },
+        {
+          "title": "Problems",
+          "depth": 2,
+          "id": "problems"
+        },
+        {
+          "title": "Solution",
+          "depth": 2,
+          "id": "solution"
+        },
+        {
+          "title": "Benefits",
+          "depth": 2,
+          "id": "benefits"
+        }
+      ]
+    },
+    "role.html": {
+      "source": "docs/role.md",
+      "title": "Role attributes",
+      "slug": "role"
+    },
+    "cancelling.html": {
+      "source": "docs/cancelling.md",
+      "title": "Cancelling",
+      "slug": "cancelling"
+    },
+    "cleanup.html": {
+      "source": "docs/cleanup.md",
+      "title": "Preforming cleanups",
+      "slug": "cleanup"
+    },
+    "unique-ids.html": {
+      "source": "docs/unique-ids.md",
+      "title": "Unique IDs",
+      "slug": "unique-ids"
+    },
+    "idempotency.html": {
+      "source": "docs/idempotency.md",
+      "title": "Idempotency",
+      "slug": "idempotency"
+    },
+    "automatic-observation.html": {
+      "source": "docs/automatic-observation.md",
+      "title": "Automatic observation",
+      "slug": "automatic-observation"
+    },
+    "testing.html": {
+      "source": "docs/testing.md",
+      "title": "Testing",
+      "slug": "testing"
+    },
+    "debugging.html": {
+      "source": "docs/debugging.md",
+      "title": "Debugging",
+      "slug": "debugging"
+    },
+    "turbolinks.html": {
+      "source": "docs/turbolinks.md",
+      "title": "With Turbolinks",
+      "slug": "turbolinks"
+    },
+    "rails.html": {
+      "source": "docs/rails.md",
+      "title": "With Rails",
+      "slug": "rails"
+    }
+  },
+  "sources": {
+    "README.md": "index.html",
+    "docs/premise.md": "premise.html",
+    "docs/role.md": "role.html",
+    "docs/cancelling.md": "cancelling.html",
+    "docs/cleanup.md": "cleanup.html",
+    "docs/unique-ids.md": "unique-ids.html",
+    "docs/idempotency.md": "idempotency.html",
+    "docs/automatic-observation.md": "automatic-observation.html",
+    "docs/testing.md": "testing.html",
+    "docs/debugging.md": "debugging.html",
+    "docs/turbolinks.md": "turbolinks.html",
+    "docs/rails.md": "rails.html",
+    "docs/docpress.json": "docpress.json",
+    "docs/assets/custom.scss": "assets/custom.scss"
+  }
+}
