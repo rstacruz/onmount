@@ -14,7 +14,7 @@
     "mocha-jsdom": "1.0.0",
     "mocha-standard": "1.0.0",
     "standard": "5.3.1",
-    "docpress": "git://github.com/docpress/docpress.git#master",
+    "docpress": "0.3.1",
     "git-update-ghpages": "1.1.1"
   },
   "directories": {
