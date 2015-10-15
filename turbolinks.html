@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/style.css?t=f78118d4">
-    <link rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css?t=a157e8bd">
+    <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
     <script src="assets/script.js?t=de0b4e6d"></script>
     <title>With Turbolinks</title>
   </head>
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="using-with-turbolinks">Using with Turbolinks</h1>
-<p>onmount is a perfect fit with projects that use Turbolinks. You&apos;ll notice that jQuery&apos;s <code>document</code> <code>ready</code> event is not friendly for Turbolinks applications. You should call <code>$.onmount()</code> when Turbolinks changes pages (<code>page:change</code> event).</p>
+<p>onmount is a perfect fit with projects that use Turbolinks. You&#x2019;ll notice that jQuery&#x2019;s <code>document</code> <code>ready</code> event is not friendly for Turbolinks applications. You should call <code>$.onmount()</code> when Turbolinks changes pages (<code>page:change</code> event).</p>
 <pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ $.onmount() })
 </code></pre>
 

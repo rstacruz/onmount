@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/style.css?t=f78118d4">
-    <link rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css?t=a157e8bd">
+    <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
     <script src="assets/script.js?t=de0b4e6d"></script>
     <title>Preforming cleanups</title>
   </head>
@@ -18,7 +18,7 @@
         </div>
         <div class="markdown-body"><h1 id="performing-cleanups">Performing cleanups</h1>
 <p>When your behavior modifies things outside itself (eg, binds events to the <code>document</code> element), you might want to clean up when the behavior is removed. Just pass a 2nd function to <code>onmount()</code>.</p>
-<p>In this example below, behaviors are checked once dialog boxes are opened and closed (<code>$.onmount()</code>). When it&apos;s called after closing, it will see that the old <code>.js-sticky</code> element is not part of the document anymore, and its exit callback will be called.</p>
+<p>In this example below, behaviors are checked once dialog boxes are opened and closed (<code>$.onmount()</code>). When it&#x2019;s called after closing, it will see that the old <code>.js-sticky</code> element is not part of the document anymore, and its exit callback will be called.</p>
 <pre><code class="lang-js">$.onmount(<span class="pl-s">&apos;.js-sticky&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   $(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;scroll.sticky&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
     <span class="pl-c">// do stuff</span>

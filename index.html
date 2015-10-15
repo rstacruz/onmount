@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/style.css?t=f78118d4">
-    <link rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css?t=a157e8bd">
+    <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
     <script src="assets/script.js?t=de0b4e6d"></script>
     <title>onmount</title>
   </head>
@@ -16,7 +16,7 @@
               <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
           </div>
         </div>
-        <div class="markdown-body"><h1 id="onmount">onmount</h1>
+        <div class="markdown-body"><h1 class="massive-header" id="onmount">onmount</h1>
 <p>Run something when a DOM element appears and when it exits.<br>
 No dependencies. Legacy IE compatible. 1kb .min.gz.</p>
 <p><a href="https://travis-ci.org/rstacruz/onmount" title="See test builds"><img src="https://travis-ci.org/rstacruz/onmount.svg?branch=master" alt="Status"></a></p>
@@ -62,14 +62,14 @@ $(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c
 $.onmount() <span class="pl-c">//=&gt; &apos;button was removed&apos;</span>
 </code></pre>
 <h2 id="what-for">What for?</h2>
-<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&apos;s great for common websites that are not Single-Page Apps. Read more on its <a href="premise.html">premise and motivation</a>.</p>
+<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&#x2019;s great for common websites that are not Single-Page Apps. Read more on its <a href="premise.html">premise and motivation</a>.</p>
 <p><a href="https://github.com/rstacruz/rsjs">rsjs</a> (Reasonable System for JavaScript Structure) is a great standard that onmount fits perfectly into.</p>
 <h2 id="usage">Usage</h2>
 <p>Onmount is available via <a href="https://www.npmjs.com/package/onmount">npm</a> and Bower.</p>
 <pre><code>npm install onmount
 bower install onmount
 </code></pre>
-<p>It can be used as a CommonJS module or on its own. It doesn&apos;t require jQuery, but if jQuery is found, it&apos;ll attach itself to it as <code>$.onmount</code>.</p>
+<p>It can be used as a CommonJS module or on its own. It doesn&#x2019;t require jQuery, but if jQuery is found, it&#x2019;ll attach itself to it as <code>$.onmount</code>.</p>
 <pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>)    <span class="pl-c">// With CommonJS (ie, Browserify)</span>
 <span class="pl-c1">window</span>.onmount                  <span class="pl-c">// with no module loaders:</span>
 $.onmount                       <span class="pl-c">// with jQuery</span>

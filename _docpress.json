@@ -283,7 +283,6 @@
     "docs/debugging.md": "debugging.html",
     "docs/turbolinks.md": "turbolinks.html",
     "docs/rails.md": "rails.html",
-    "docs/docpress.json": "docpress.json",
-    "docs/assets/custom.scss": "assets/custom.scss"
+    "docs/docpress.json": "docpress.json"
   }
 }

@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="assets/style.css?t=f78118d4">
-    <link rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css?t=a157e8bd">
+    <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
     <script src="assets/script.js?t=de0b4e6d"></script>
     <title>Premise</title>
   </head>
@@ -17,15 +17,15 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="premise">Premise</h1>
-<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&apos;s great for common websites that are not Single-Page Apps, and it goes hand-in-hand with Turbolinks.</p>
+<p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&#x2019;s great for common websites that are not Single-Page Apps, and it goes hand-in-hand with Turbolinks.</p>
 <h4 id="once-and-only-once">Once and only once</h4>
-<p>It solves many problems that crop up on sites where the DOM changes often, such as when using with Turbolinks or Pjax. Onmount assures you that each behavior is only applied <em>once</em> to an element and never again so you don&apos;t get duplicate event handlers and such. This is a concept called <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a>.</p>
+<p>It solves many problems that crop up on sites where the DOM changes often, such as when using with Turbolinks or Pjax. Onmount assures you that each behavior is only applied <em>once</em> to an element and never again so you don&#x2019;t get duplicate event handlers and such. This is a concept called <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a>.</p>
 <h4 id="testability">Testability</h4>
 <p>Onmount allows you to re-run certain behaviors. This is great for making isolated unit tests of your code.</p>
 <h4 id="reusable">Reusable</h4>
 <p>Code written in <code>onmount</code> blocks operate in the context of a single DOM element. It can be applied again other DOM elements later on and will be running in isolation from other instances.</p>
 <h2 id="example">Example</h2>
-<p>Let&apos;s build a navigation with some elements hidden under a <em>more...</em> button. Given this HTML snippet:</p>
+<p>Let&#x2019;s build a navigation with some elements hidden under a <em>more&#x2026;</em> button. Given this HTML snippet:</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s">&apos;js-expandable-nav&apos;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Inbox<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
@@ -39,7 +39,7 @@
   <span class="hljs-tag">&lt;<span class="pl-ent">button</span>&gt;</span>more...<span class="hljs-tag">&lt;/<span class="pl-ent">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="pl-ent">div</span>&gt;</span>
 </code></pre>
-<p>To make this work, you&apos;ll typically write JavaScript code like this:</p>
+<p>To make this work, you&#x2019;ll typically write JavaScript code like this:</p>
 <pre><code class="lang-js">$(<span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   $(<span class="pl-s">&apos;.js-expandable-nav button&apos;</span>).on(<span class="pl-s">&apos;click&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
     $(<span class="pl-s">&apos;.js-expandable-nav .more&apos;</span>).show()
@@ -50,13 +50,13 @@
 <h2 id="problems">Problems</h2>
 <p>However, you have a few problems with this approach.</p>
 <ul>
-<li><strong>Not testable</strong> &#x2014; You can&apos;t make unit tests from this code. To test this, you will need to load the entire page, simulate a click, and see if it worked. There&apos;s no easy way to test it in isolation.</li>
-<li><strong>Not reusable</strong> &#x2014; When there are 2 <code>.js-expandable-nav</code> elements in the page, this will break. This isn&apos;t a concern at first, but it certainly hampers code reusability.</li>
-<li><strong>Not for dialog boxes</strong> &#x2014; Since it triggers on a <code>document.ready</code> event, it doesn&apos;t work on elements loaded later. There&apos;s no easy way to retrigger this code, either, which you would want to do for when content is loaded remotely (like in a dialog box).</li>
+<li><strong>Not testable</strong> &#x2014; You can&#x2019;t make unit tests from this code. To test this, you will need to load the entire page, simulate a click, and see if it worked. There&#x2019;s no easy way to test it in isolation.</li>
+<li><strong>Not reusable</strong> &#x2014; When there are 2 <code>.js-expandable-nav</code> elements in the page, this will break. This isn&#x2019;t a concern at first, but it certainly hampers code reusability.</li>
+<li><strong>Not for dialog boxes</strong> &#x2014; Since it triggers on a <code>document.ready</code> event, it doesn&#x2019;t work on elements loaded later. There&#x2019;s no easy way to retrigger this code, either, which you would want to do for when content is loaded remotely (like in a dialog box).</li>
 <li><strong>No cleanups</strong> &#x2014; What happens when <code>.js-expandable-nav</code> exits the DOM (eg, the dialog box was closed)? In a more complex scenario, you will want to do cleanup such as unbinding event handlers.</li>
 </ul>
 <h2 id="solution">Solution</h2>
-<p>By writing your code in an <code>onmount</code> block, this will solve the issues above. You don&apos;t write your code any differently, but it will be accessible in a way that it&apos;s testable, isolated, and idempotent.</p>
+<p>By writing your code in an <code>onmount</code> block, this will solve the issues above. You don&#x2019;t write your code any differently, but it will be accessible in a way that it&#x2019;s testable, isolated, and idempotent.</p>
 <pre><code class="lang-js"><span class="pl-c">/*
  * attach a behavior to `.js-expandable-nav`
  */</span>
@@ -83,7 +83,7 @@ $(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready page:ch
 <h2 id="benefits">Benefits</h2>
 <p>By simply wrapping your code in <code>$.onmount(...)</code> instead of <code>$(function)</code> (aka <code>document.ready</code>), it gives you the power of a few features:</p>
 <ul>
-<li><strong>Idempotent</strong> &#x2014; You&apos;re assured that the block will only run once for every <code>.js-expandable-nav</code> element. If it has been applied before, it will not apply again.</li>
+<li><strong>Idempotent</strong> &#x2014; You&#x2019;re assured that the block will only run once for every <code>.js-expandable-nav</code> element. If it has been applied before, it will not apply again.</li>
 <li><strong>Reusable</strong> &#x2014; You can retrigger this behavior for tests. This allows you to create an isolated test for the behavior.</li>
 <li><strong>Reusable</strong> &#x2014; You can call behaviors again and again (<code>$.onmount()</code>) every time your DOM changes to make it work for any new elements. This is useful for in-page transitions with Turbolinks or Pjax, or for dynamically-loaded content such as modal boxes.</li>
 </ul>
