@@ -1,5 +1,7 @@
 # onmount
 
+<!-- {.massive-header} -->
+
 Run something when a DOM element appears and when it exits.<br>
 No dependencies. Legacy IE compatible. 1kb .min.gz.
 
