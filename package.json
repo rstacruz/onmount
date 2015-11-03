@@ -15,7 +15,7 @@
     "mocha-standard": "1.0.0",
     "standard": "5.3.1",
     "docpress": "0.6.1",
-    "git-update-ghpages": "1.2.0"
+    "git-update-ghpages": "1.3.0"
   },
   "directories": {
     "doc": "docs",
