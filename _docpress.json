@@ -76,16 +76,10 @@
         "title": "Features",
         "sections": [
           {
-            "title": "Role attributes",
-            "source": "docs/role.md",
-            "url": "role.html",
-            "slug": "role"
-          },
-          {
-            "title": "Cancelling",
-            "source": "docs/cancelling.md",
-            "url": "cancelling.html",
-            "slug": "cancelling"
+            "title": "Idempotency",
+            "source": "docs/idempotency.md",
+            "url": "idempotency.html",
+            "slug": "idempotency"
           },
           {
             "title": "Preforming cleanups",
@@ -100,16 +94,22 @@
             "slug": "unique-ids"
           },
           {
-            "title": "Idempotency",
-            "source": "docs/idempotency.md",
-            "url": "idempotency.html",
-            "slug": "idempotency"
+            "title": "Cancelling",
+            "source": "docs/cancelling.md",
+            "url": "cancelling.html",
+            "slug": "cancelling"
           },
           {
             "title": "Automatic observation",
             "source": "docs/automatic-observation.md",
             "url": "automatic-observation.html",
             "slug": "automatic-observation"
+          },
+          {
+            "title": "Role attributes",
+            "source": "docs/role.md",
+            "url": "role.html",
+            "slug": "role"
           }
         ]
       },
@@ -219,15 +219,10 @@
         }
       ]
     },
-    "role.html": {
-      "source": "docs/role.md",
-      "title": "Role attributes",
-      "slug": "role"
-    },
-    "cancelling.html": {
-      "source": "docs/cancelling.md",
-      "title": "Cancelling",
-      "slug": "cancelling"
+    "idempotency.html": {
+      "source": "docs/idempotency.md",
+      "title": "Idempotency",
+      "slug": "idempotency"
     },
     "cleanup.html": {
       "source": "docs/cleanup.md",
@@ -239,15 +234,20 @@
       "title": "Unique IDs",
       "slug": "unique-ids"
     },
-    "idempotency.html": {
-      "source": "docs/idempotency.md",
-      "title": "Idempotency",
-      "slug": "idempotency"
+    "cancelling.html": {
+      "source": "docs/cancelling.md",
+      "title": "Cancelling",
+      "slug": "cancelling"
     },
     "automatic-observation.html": {
       "source": "docs/automatic-observation.md",
       "title": "Automatic observation",
       "slug": "automatic-observation"
+    },
+    "role.html": {
+      "source": "docs/role.md",
+      "title": "Role attributes",
+      "slug": "role"
     },
     "testing.html": {
       "source": "docs/testing.md",
@@ -273,12 +273,12 @@
   "sources": {
     "README.md": "index.html",
     "docs/premise.md": "premise.html",
-    "docs/role.md": "role.html",
-    "docs/cancelling.md": "cancelling.html",
+    "docs/idempotency.md": "idempotency.html",
     "docs/cleanup.md": "cleanup.html",
     "docs/unique-ids.md": "unique-ids.html",
-    "docs/idempotency.md": "idempotency.html",
+    "docs/cancelling.md": "cancelling.html",
     "docs/automatic-observation.md": "automatic-observation.html",
+    "docs/role.md": "role.html",
     "docs/testing.md": "testing.html",
     "docs/debugging.md": "debugging.html",
     "docs/turbolinks.md": "turbolinks.html",
