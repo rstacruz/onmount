@@ -3,12 +3,12 @@
 * [onmount](/README.md)
 * [Premise](/docs/premise.md)
 * Features
-  * [Role attributes](/docs/role.md)
-  * [Cancelling](/docs/cancelling.md)
+  * [Idempotency](/docs/idempotency.md)
   * [Preforming cleanups](/docs/cleanup.md)
   * [Unique IDs](/docs/unique-ids.md)
-  * [Idempotency](/docs/idempotency.md)
+  * [Cancelling](/docs/cancelling.md)
   * [Automatic observation](/docs/automatic-observation.md)
+  * [Role attributes](/docs/role.md)
 * Testing
   * [Testing](/docs/testing.md)
   * [Debugging](/docs/debugging.md)
