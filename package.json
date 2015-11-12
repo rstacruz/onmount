@@ -7,7 +7,7 @@
     "url": "https://github.com/rstacruz/onmount/issues"
   },
   "devDependencies": {
-    "expect": "1.12.2",
+    "expect": "1.13.0",
     "jquery": "2.1.4",
     "jsdom": "7.0.2",
     "mocha": "2.3.3",
