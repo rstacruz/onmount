@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "expect": "1.13.3",
-    "jquery": "2.1.4",
+    "jquery": "2.2.0",
     "jsdom": "7.2.2",
     "mocha": "2.3.4",
     "mocha-jsdom": "1.0.0",
