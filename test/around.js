@@ -3,9 +3,10 @@ module.exports = function around (before, after) {
     var ctx
     try {
       ctx = before && before()
-      fn(ctx)
+      if (!Array.isArray(ctx)) ctx = [ ctx ]
+      fn.apply(this, ctx)
     } finally {
-      after && after(ctx)
+      after && after.apply(this, ctx)
     }
   }
 }
