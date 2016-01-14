@@ -129,7 +129,7 @@ Set this to `true` to see debug messages.
 
 ## Browser compatibility
 
-All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x. Try the [test suite](https://rawgit.com/rstacruz/onmount/master/test/index.html) in your browser. Try it [with jQuery 1.x](https://rawgit.com/rstacruz/onmount/master/test/jquery.html) for legacy browsers.
+All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x.
 
 ## Examples
 
