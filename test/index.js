@@ -12,6 +12,7 @@ require('./with_role_test')
 require('./state_test')
 require('./multiple_behaviors_test')
 require('./mutation_test')
+require('./jquery_test')
 
 // Smokestack
 require('tape').onFinish(function () { window.close() })
