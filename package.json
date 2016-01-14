@@ -16,7 +16,7 @@
     "jsdom": "7.2.2",
     "jsdom-global": "1.4.0",
     "tape": "4.4.0",
-    "tape-around": "2.1.0",
+    "tape-around": "2.2.0",
     "tape-eslint": "1.2.1"
   },
   "directories": {
