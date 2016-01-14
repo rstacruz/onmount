@@ -1,36 +1,36 @@
 var test = require('tape')
 var onmount = require('../index')
-var around = require('./around')
+var around = require('tape-around')
 var el = require('./helpers').el
 var remove = require('./helpers').remove
 
-test('with @role', function (t) {
-  var run = around(
-    function before () {
-      onmount('@his-behavior', function () {
-        this.innerHTML += '(on)'
-      })
-      return el('div', { role: 'his-behavior' })
-    },
-    function after (div) {
-      onmount.reset()
-      remove(div)
+var roleTest = around(test, 'with @role:')
+  .before(function (t) {
+    onmount('@his-behavior', function () {
+      this.innerHTML += '(on)'
     })
-
-  run(function (div) {
-    onmount()
-    t.equal(div.innerHTML, '(on)', 'works')
+    t.next(el('div', { role: 'his-behavior' }))
+  })
+  .after(function (t, div) {
+    onmount.reset()
+    remove(div)
+    t.end()
   })
 
-  run(function (div) {
-    onmount('@his-behavior')
-    t.equal(div.innerHTML, '(on)', 'can be called via @')
-  })
+roleTest('works', function (t, div) {
+  onmount()
+  t.equal(div.innerHTML, '(on)', 'ok')
+  t.end()
+})
 
-  run(function (div) {
-    onmount('[role~="his-behavior"]')
-    t.equal(div.innerHTML, '(on)', 'can be called via selector')
-  })
+roleTest('call via @', function (t, div) {
+  onmount('@his-behavior')
+  t.equal(div.innerHTML, '(on)', 'ok')
+  t.end()
+})
 
+roleTest('call via [role]', function (t, div) {
+  onmount('[role~="his-behavior"]')
+  t.equal(div.innerHTML, '(on)', 'ok')
   t.end()
 })

@@ -1,44 +1,45 @@
 var test = require('tape')
 var onmount = require('../index')
-var around = require('./around')
 var el = require('./helpers').el
 var remove = require('./helpers').remove
+var around = require('tape-around')
 
-test('mounting', function (t) {
-  var run = around(
-    function before () {
-      onmount('.my-behavior', function () { this.innerHTML += '(on)' })
-      var div = el('div', { 'class': 'my-behavior' })
-      return div
-    },
-    function after (div) {
-      remove(div)
-      onmount.reset()
-    })
-
-  run(function (div) {
-    onmount('.my-behavior')
-    t.equal(div.innerHTML, '(on)', 'onmount(selector) works')
+var mountingTest = around(test, 'mounting:')
+  .before(function (t) {
+    onmount('.my-behavior', function () { this.innerHTML += '(on)' })
+    var div = el('div', { 'class': 'my-behavior' })
+    t.next(div)
+  })
+  .after(function (t, div) {
+    remove(div)
+    onmount.reset()
+    t.end()
   })
 
-  run(function (div) {
-    onmount()
-    t.equal(div.innerHTML, '(on)', 'onmount() works')
-  })
+mountingTest('onmount(selector)', function (t, div) {
+  onmount('.my-behavior')
+  t.equal(div.innerHTML, '(on)', 'works')
+  t.end()
+})
 
-  run(function (div) {
-    onmount()
-    onmount()
-    onmount()
-    t.equal(div.innerHTML, '(on)', 'onmount() is idempotent')
-  })
+mountingTest('onmount()', function (t, div) {
+  onmount()
+  t.equal(div.innerHTML, '(on)', 'works')
+  t.end()
+})
 
-  run(function (div) {
-    onmount()
-    div.parentNode.removeChild(div)
-    onmount()
-    t.pass('works even without an exit handler')
-  })
+mountingTest('onmount() idempotency', function (t, div) {
+  onmount()
+  onmount()
+  onmount()
+  t.equal(div.innerHTML, '(on)', 'works')
+  t.end()
+})
 
+mountingTest('no exit handler', function (t, div) {
+  onmount()
+  div.parentNode.removeChild(div)
+  onmount()
+  t.pass('works even without an exit handler')
   t.end()
 })

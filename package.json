@@ -16,8 +16,10 @@
     "mocha": "2.3.4",
     "mocha-jsdom": "1.0.0",
     "mocha-standard": "1.0.0",
+    "redtape": "1.0.0",
     "standard": "5.4.1",
-    "tape": "4.4.0"
+    "tape": "4.4.0",
+    "tape-around": "2.1.0"
   },
   "directories": {
     "doc": "docs",

@@ -1,41 +1,41 @@
 var test = require('tape')
 var onmount = require('../index')
-var around = require('./around')
+var around = require('tape-around')
 var el = require('./helpers').el
 var remove = require('./helpers').remove
 
-test('exiting', function (t) {
-  var run = around(
-    function before () {
-      onmount('.their-behavior', function () {
-        this.innerHTML += '(on)'
-      }, function () {
-        this.innerHTML += '(off)'
-      })
-    },
-    function after () {
-      onmount.reset()
+var exitingTest = around(test, 'exiting:')
+  .before(function (t) {
+    onmount('.their-behavior', function () {
+      this.innerHTML += '(on)'
+    }, function () {
+      this.innerHTML += '(off)'
     })
-
-  run(function () {
-    var div = el('div', { 'class': 'their-behavior' })
-    onmount()
-    remove(div)
-    onmount()
-
-    t.equal(div.innerHTML, '(on)(off)', 'calls the unloader')
+    t.end()
+  })
+  .after(function (t) {
+    onmount.reset()
+    t.end()
   })
 
-  run(function () {
-    var div = el('div', { 'class': 'their-behavior' })
-    onmount()
-    remove(div)
-    onmount()
-    document.body.appendChild(div)
-    onmount()
+exitingTest('calls the unloader', function (t) {
+  var div = el('div', { 'class': 'their-behavior' })
+  onmount()
+  remove(div)
+  onmount()
 
-    t.equal(div.innerHTML, '(on)(off)(on)', 'gets double-applied intentionally')
-  })
+  t.equal(div.innerHTML, '(on)(off)', 'ok')
+  t.end()
+})
 
+exitingTest('gets double-applied intentionally', function (t) {
+  var div = el('div', { 'class': 'their-behavior' })
+  onmount()
+  remove(div)
+  onmount()
+  document.body.appendChild(div)
+  onmount()
+
+  t.equal(div.innerHTML, '(on)(off)(on)', 'ok')
   t.end()
 })
