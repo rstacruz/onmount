@@ -1,6 +1,5 @@
 var test = require('tape')
 var onmount = require('../index')
-var around = require('./around')
 var el = require('./helpers').el
 var remove = require('./helpers').remove
 

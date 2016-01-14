@@ -1,42 +1,42 @@
 var test = require('tape')
 var onmount = require('../index')
-var around = require('./around')
+var around = require('tape-around')
 var el = require('./helpers').el
 var remove = require('./helpers').remove
 
-test('state', function (t) {
-  var run = around(
-    function before () {
-      var state
-      onmount('.our-behavior', function (b) {
-        state = b
-        b.number = 10
-      }, function (b) {
-        b.number++
-      })
-
-      var div = el('div', { 'class': 'our-behavior' })
-      onmount()
-      remove(div)
-      onmount()
-      return [ div, state ]
-    },
-    function after (div, state) {
-      remove(div)
-      onmount.reset()
+var run = around(test, 'state')
+  .before(function (t) {
+    var state
+    onmount('.our-behavior', function (b) {
+      state = b
+      b.number = 10
+    }, function (b) {
+      b.number++
     })
 
-  run(function (div, state) {
-    t.ok(state['id'].match(/^c\d+$/), 'has an id')
+    var div = el('div', { 'class': 'our-behavior' })
+    onmount()
+    remove(div)
+    onmount()
+    t.next(div, state)
+  })
+  .after(function (t, div, state) {
+    remove(div)
+    onmount.reset()
+    t.end()
   })
 
-  run(function (div, state) {
-    t.equal(state.selector, '.our-behavior', 'passes the selector')
-  })
+run('has an id', function (t, div, state) {
+  t.ok(state['id'].match(/^c\d+$/))
+  t.end()
+})
 
-  run(function (div, state) {
-    t.equal(state.number, 11, 'works')
-  })
+run('passes the selector', function (t, div, state) {
+  t.equal(state.selector, '.our-behavior')
+  t.end()
+})
 
+run('works', function (t, div, state) {
+  t.equal(state.number, 11)
   t.end()
 })
