@@ -149,8 +149,8 @@ void (function (root, factory) {
 
   onmount.teardown = function teardown () {
     each(behaviors, function (be) {
-      each(be.loaded, function (el) {
-        be.doExit(el)
+      each(be.loaded, function (el, i) {
+        be.doExit(el, i)
       })
     })
   }
