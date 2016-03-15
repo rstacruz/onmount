@@ -206,11 +206,12 @@ void (function (root, factory) {
 
     register(selector, function () {
       // This is the function invoked on `onmount(selector)`.
-      // It cleans up old ones and initialize new ones.
+      // Clean up old ones (if they're not in the DOM anymore).
       each(loaded, function (element, i) {
         be.visitExit(element, i)
       })
 
+      // Clean up new ones (if they're not loaded yet).
       query(selector, function () {
         be.visitEnter(this)
       })
