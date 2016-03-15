@@ -219,7 +219,7 @@ void (function (root, factory) {
   }
 
   /**
-   * Internal: visits the element `el` and turns it on if applicable
+   * Internal: visits the element `el` and turns it on if applicable.
    */
 
   Behavior.prototype.visitEnter = function (el) {
@@ -235,12 +235,17 @@ void (function (root, factory) {
 
   /**
    * Internal: visits the element `el` and sees if it needs its exit handler
-   * called
+   * called.
    */
 
   Behavior.prototype.visitExit = function (el, i) {
     if (el && !isAttached(el)) return this.doExit(el, i)
   }
+
+  /**
+   * Internal: calls the exit handler for the behavior for element `el` (if
+   * available), and marks the behavior/element as uninitialized.
+   */
 
   Behavior.prototype.doExit = function (el, i) {
     if (typeof i === 'undefined') i = this.loaded.indexOf(el)
