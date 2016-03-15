@@ -144,7 +144,7 @@ void (function (root, factory) {
   }
 
   /**
-   * Cleanup
+   * Forces teardown of all behaviors currently applied.
    */
 
   onmount.teardown = function teardown () {

@@ -111,6 +111,9 @@ Registers a behavior for `selector` to run the callback `init()`. The `exit()` c
 
 > The callbacks are passed an object `b`, and  the same object is passed for both `init` and `exit`. This allows them to communicate and keep aware of state. A string ID is also provided, `b.id`, which is guaranteed unique for every behavior-element pair.
 
+#### onmount.teardown()
+Forces the teardown of all currently-applied behaviors. This triggers the exit handlers for all behaviors currently on the page.
+
 #### onmount.reset()
 
 Clears all defined behaviors. Useful for tests.
