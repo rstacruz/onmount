@@ -137,7 +137,19 @@
             "title": "With Turbolinks",
             "source": "docs/turbolinks.md",
             "url": "turbolinks.html",
-            "slug": "turbolinks"
+            "slug": "turbolinks",
+            "headings": [
+              {
+                "title": "Turbolinks v5",
+                "depth": 2,
+                "id": "turbolinks-v5"
+              },
+              {
+                "title": "Turbolinks v2",
+                "depth": 2,
+                "id": "turbolinks-v2"
+              }
+            ]
           },
           {
             "title": "With Rails",
@@ -262,7 +274,19 @@
     "turbolinks.html": {
       "source": "docs/turbolinks.md",
       "title": "With Turbolinks",
-      "slug": "turbolinks"
+      "slug": "turbolinks",
+      "headings": [
+        {
+          "title": "Turbolinks v5",
+          "depth": 2,
+          "id": "turbolinks-v5"
+        },
+        {
+          "title": "Turbolinks v2",
+          "depth": 2,
+          "id": "turbolinks-v2"
+        }
+      ]
     },
     "rails.html": {
       "source": "docs/rails.md",

@@ -96,6 +96,8 @@ $.onmount                       <span class="pl-c">// with jQuery</span>
 <blockquote>
 <p>The callbacks are passed an object <code>b</code>, and  the same object is passed for both <code>init</code> and <code>exit</code>. This allows them to communicate and keep aware of state. A string ID is also provided, <code>b.id</code>, which is guaranteed unique for every behavior-element pair.</p>
 </blockquote>
+<h4 id="onmount.teardown()">onmount.teardown()</h4>
+<p>Forces the teardown of all currently-applied behaviors. This triggers the exit handlers for all behaviors currently on the page.</p>
 <h4 id="onmount.reset()">onmount.reset()</h4>
 <p>Clears all defined behaviors. Useful for tests.</p>
 <h4 id="onmount.observe()">onmount.observe()</h4>

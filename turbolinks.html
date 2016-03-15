@@ -25,11 +25,15 @@
         </div>
         <div class="markdown-body"><h1 id="using-with-turbolinks">Using with Turbolinks</h1>
 <p>onmount is a perfect fit with projects that use Turbolinks. You&#x2019;ll notice that jQuery&#x2019;s <code>document</code> <code>ready</code> event is not friendly for Turbolinks applications. You should call <code>$.onmount()</code> when Turbolinks changes pages.</p>
-<p>For Turbolinks 2 and below, the event is <code>page:change</code>:</p>
-<pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ $.onmount() })
-</code></pre>
-<p>For Turbolinks 5, the event is <code>turbolinks:load</code>:</p>
+<h2 id="turbolinks-v5">Turbolinks v5</h2>
+<p>The event is <code>turbolinks:load</code> for Turbolinks 5. You will also need to teardown behaviors on <code>turbolinks:before-cache</code> (<a href="https://github.com/turbolinks/turbolinks/issues/30#issuecomment-195803051">info</a>).</p>
 <pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready turbolinks:load&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ $.onmount() })
+$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;turbolinks:before-cache&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ $.onmount.teardown() })
+</code></pre>
+<p>Discussion on this setup may be found <a href="https://github.com/rstacruz/onmount/issues/47#issuecomment-196751735">here</a>.</p>
+<h2 id="turbolinks-v2">Turbolinks v2</h2>
+<p>The event is <code>page:change</code> For Turbolinks 2 and below.</p>
+<pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ $.onmount() })
 </code></pre>
 
         </div>
@@ -72,6 +76,12 @@
             <li class="menu-item -level-1 -parent"><span class="title">Integrations</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a href="turbolinks.html" class="link title -active link-turbolinks">With Turbolinks</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a href="#turbolinks-v5" class="hlink link-turbolinks-v5">Turbolinks v5</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a href="#turbolinks-v2" class="hlink link-turbolinks-v2">Turbolinks v2</a>
+                    </li>
+                  </ul>
                 </li>
                 <li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a>
                 </li>
