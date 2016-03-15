@@ -22,6 +22,14 @@ mountingTest('onmount(selector)', function (t, div) {
   t.end()
 })
 
+mountingTest('onmount(selector) idempotency', function (t, div) {
+  onmount('.my-behavior')
+  onmount('.my-behavior')
+  onmount('.my-behavior')
+  t.equal(div.innerHTML, '(on)', "doesn't get called multiple times")
+  t.end()
+})
+
 mountingTest('onmount()', function (t, div) {
   onmount()
   t.equal(div.innerHTML, '(on)', 'works')
@@ -32,7 +40,7 @@ mountingTest('onmount() idempotency', function (t, div) {
   onmount()
   onmount()
   onmount()
-  t.equal(div.innerHTML, '(on)', 'works')
+  t.equal(div.innerHTML, '(on)', "doesn't get called multiple times")
   t.end()
 })
 

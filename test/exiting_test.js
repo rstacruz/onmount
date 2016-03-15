@@ -28,6 +28,15 @@ exitingTest('calls the unloader', function (t) {
   t.end()
 })
 
+exitingTest('using onmount.teardown()', function (t) {
+  var div = el('div', { 'class': 'their-behavior' })
+  onmount()
+  onmount.teardown()
+
+  t.equal(div.innerHTML, '(on)(off)', 'ok')
+  t.end()
+})
+
 exitingTest('gets double-applied intentionally', function (t) {
   var div = el('div', { 'class': 'their-behavior' })
   onmount()

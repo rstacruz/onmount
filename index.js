@@ -97,8 +97,8 @@ void (function (root, factory) {
 
   onmount.poll = function poll (selector) {
     if (selector) selector = onmount.selectify(selector)
-    var list = (selector ? selectors[selector] : handlers) || []
-    each(list, function (item) { item() })
+    var functions = (selector ? selectors[selector] : handlers) || []
+    each(functions, function (fn) { fn() })
   }
 
   /**
@@ -144,6 +144,18 @@ void (function (root, factory) {
   }
 
   /**
+   * Forces teardown of all behaviors currently applied.
+   */
+
+  onmount.teardown = function teardown () {
+    each(behaviors, function (be) {
+      each(be.loaded, function (el, i) {
+        be.doExit(el, i)
+      })
+    })
+  }
+
+  /**
    * Clears all behaviors. Useful for tests.
    * This will NOT call exit handlers.
    */
@@ -183,7 +195,8 @@ void (function (root, factory) {
   }
 
   /**
-   * Internal: Register this behavior
+   * Internal: initialize this behavior by registering itself to the internal
+   * `selectors` map. This allows you to call `onmount(selector)` later on.
    */
 
   Behavior.prototype.register = function () {
@@ -192,11 +205,13 @@ void (function (root, factory) {
     var selector = this.selector
 
     register(selector, function () {
-      // clean up old ones and initialize new ones
+      // This is the function invoked on `onmount(selector)`.
+      // Clean up old ones (if they're not in the DOM anymore).
       each(loaded, function (element, i) {
         be.visitExit(element, i)
       })
 
+      // Clean up new ones (if they're not loaded yet).
       query(selector, function () {
         be.visitEnter(this)
       })
@@ -204,7 +219,7 @@ void (function (root, factory) {
   }
 
   /**
-   * Internal: visits the element `el` and turns it on if applicable
+   * Internal: visits the element `el` and turns it on if applicable.
    */
 
   Behavior.prototype.visitEnter = function (el) {
@@ -220,17 +235,24 @@ void (function (root, factory) {
 
   /**
    * Internal: visits the element `el` and sees if it needs its exit handler
-   * called
+   * called.
    */
 
   Behavior.prototype.visitExit = function (el, i) {
-    if (el && !isAttached(el)) {
-      if (typeof i === 'undefined') i = this.loaded.indexOf(el)
-      this.loaded[i] = undefined
-      if (this.exit && this.exit.call(el, el[this.key]) !== false) {
-        if (onmount.debug) log('exit', this.selector, el)
-        delete el[this.key]
-      }
+    if (el && !isAttached(el)) return this.doExit(el, i)
+  }
+
+  /**
+   * Internal: calls the exit handler for the behavior for element `el` (if
+   * available), and marks the behavior/element as uninitialized.
+   */
+
+  Behavior.prototype.doExit = function (el, i) {
+    if (typeof i === 'undefined') i = this.loaded.indexOf(el)
+    this.loaded[i] = undefined
+    if (this.exit && this.exit.call(el, el[this.key]) !== false) {
+      if (onmount.debug) log('exit', this.selector, el)
+      delete el[this.key]
     }
   }
 
