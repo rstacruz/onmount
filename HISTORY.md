@@ -1,3 +1,13 @@
+## [v1.2.0]
+> Mar 15, 2016
+
+For Turbolinks 5 users, please see the updated [Using with Turbolinks](http://ricostacruz.com/onmount/turbolinks.html) documentation. You will need to use `onmount.teardown()`.
+
+* Add `onmount.teardown()`.
+* Improve compatibility with Turbolinks 5.
+
+[v1.2.0]: https://github.com/rstacruz/onmount/compare/v1.1.0...v1.2.0
+
 ## [v1.1.0]
 > Oct  1, 2015
 
