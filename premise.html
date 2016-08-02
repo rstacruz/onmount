@@ -33,18 +33,18 @@
 <p>Code written in <code>onmount</code> blocks operate in the context of a single DOM element. It can be applied again other DOM elements later on and will be running in isolation from other instances.</p>
 <h2 id="example">Example</h2>
 <p>Let&#x2019;s build a navigation with some elements hidden under a <em>more&#x2026;</em> button. Given this HTML snippet:</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s">&apos;js-expandable-nav&apos;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Inbox<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Messages<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="pl-s">&apos;js-expandable-nav&apos;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Inbox<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Messages<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
   
-  <span class="hljs-tag">&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s">&apos;more&apos;</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Help<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Support<span class="hljs-tag">&lt;/<span class="pl-ent">a</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="pl-ent">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="pl-s">&apos;more&apos;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Help<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="pl-s">&apos;&apos;</span>&gt;</span>Support<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   
-  <span class="hljs-tag">&lt;<span class="pl-ent">button</span>&gt;</span>more...<span class="hljs-tag">&lt;/<span class="pl-ent">button</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="pl-ent">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>more...<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
 <p>To make this work, you&#x2019;ll typically write JavaScript code like this:</p>
 <pre><code class="lang-js">$(<span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
