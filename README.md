@@ -106,10 +106,14 @@ Runs all behaviors registered for `selector`.
 #### onmount(`selector`, `init()`)
 Registers a behavior for `selector` to run the callback `init()`.
 
-#### onmount(`selector`, `init(b)`, `exit(b)`)
+#### onmount(`selector`, `init(b)`, `exit(b)`, `[options]`)
 Registers a behavior for `selector` to run the callback `init()`. The `exit()` callback will be called once the behavior is triggered again but the element is no longer attached to the DOM.
 
 > The callbacks are passed an object `b`, and  the same object is passed for both `init` and `exit`. This allows them to communicate and keep aware of state. A string ID is also provided, `b.id`, which is guaranteed unique for every behavior-element pair.
+>
+> Options is an optional object. It supports the following keys:
+>
+> - `detectMutate` - if *true*, the exit handler will be called if the element no longer matches the selector, even if it's still in the DOM. If *false*, the exit handler will only be called if the element is actually removed from the DOM tree. (default *false*)
 
 #### onmount.teardown()
 Forces the teardown of all currently-applied behaviors. This triggers the exit handlers for all behaviors currently on the page.
