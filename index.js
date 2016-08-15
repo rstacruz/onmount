@@ -211,15 +211,17 @@ void (function (root, factory) {
     var selector = this.selector
 
     register(selector, function () {
+      var list = query(selector)
+
       // This is the function invoked on `onmount(selector)`.
       // Clean up old ones (if they're not in the DOM anymore).
       each(loaded, function (element, i) {
-        be.visitExit(element, i)
+        be.visitExit(element, i, list)
       })
 
       // Clean up new ones (if they're not loaded yet).
-      query(selector, function () {
-        be.visitEnter(this)
+      eachOf(list, function (element) {
+        be.visitEnter(element)
       })
     })
   }
@@ -244,10 +246,12 @@ void (function (root, factory) {
    * called.
    */
 
-  Behavior.prototype.visitExit = function (el, i) {
+  Behavior.prototype.visitExit = function (el, i, list) {
     if (!el) return
-    if (!isAttached(el) || (this.detectMutate && !matches(el, this.selector))) {
-      return this.doExit(el, i)
+    if (this.detectMutate) {
+      if (!has(list, el)) return this.doExit(el, i)
+    } else {
+      if (!isAttached(el)) return this.doExit(el, i)
     }
   }
 
@@ -277,18 +281,32 @@ void (function (root, factory) {
   }
 
   /**
-   * Internal: reimplementation of `$('...').each()`. If jQuery is available,
+   * Internal: reimplementation of `$('...')`. If jQuery is available,
    * use it (I guess to preserve IE compatibility and to enable special jQuery
-   * attribute selectors).
+   * attribute selectors). Use with `eachOf()` or `has()`.
    */
 
   function query (selector, fn) {
-    if (onmount.$) return onmount.$(selector).each(fn)
+    if (onmount.$) return onmount.$(selector)
+    return document.querySelectorAll(selector)
+  }
 
-    var list = document.querySelectorAll(selector)
-    for (var i = 0, len = list.length; i < len; i++) {
-      fn.apply(list[i])
-    }
+  /**
+   * Internal: iterates through a `query()` result.
+   */
+
+  function eachOf (list, fn) {
+    if (onmount.$) return list.each(function (i) { fn(this, i) })
+    return each(list, fn)
+  }
+
+  /**
+   * Interanl: checks if given element `el` is in the query result `list`.
+   */
+
+  function has (list, el) {
+    if (onmount.$) return list.index(el) > -1
+    return list.indexOf(el) > -1
   }
 
   /**
