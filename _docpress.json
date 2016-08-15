@@ -73,6 +73,66 @@
         ]
       },
       {
+        "title": "API",
+        "source": "docs/api.md",
+        "url": "api.html",
+        "slug": "api",
+        "headings": [
+          {
+            "title": "onmount()",
+            "depth": 2,
+            "id": "onmount()"
+          },
+          {
+            "title": "onmount(selector)",
+            "depth": 2,
+            "id": "onmount(selector)"
+          },
+          {
+            "title": "onmount(selector, init())",
+            "depth": 2,
+            "id": "onmount(selector-init())"
+          },
+          {
+            "title": "onmount(selector, init(b), exit(b), [options])",
+            "depth": 2,
+            "id": "onmount(selector-init(b)-exit(b)-options)",
+            "headings": [
+              {
+                "title": "Options",
+                "depth": 3,
+                "id": "options"
+              }
+            ]
+          },
+          {
+            "title": "onmount.teardown()",
+            "depth": 2,
+            "id": "onmount.teardown()"
+          },
+          {
+            "title": "onmount.reset()",
+            "depth": 2,
+            "id": "onmount.reset()"
+          },
+          {
+            "title": "onmount.observe()",
+            "depth": 2,
+            "id": "onmount.observe()"
+          },
+          {
+            "title": "onmount.unobserve()",
+            "depth": 2,
+            "id": "onmount.unobserve()"
+          },
+          {
+            "title": "onmount.debug",
+            "depth": 2,
+            "id": "onmount.debug"
+          }
+        ]
+      },
+      {
         "title": "Features",
         "sections": [
           {
@@ -231,6 +291,65 @@
         }
       ]
     },
+    "api.html": {
+      "source": "docs/api.md",
+      "title": "API",
+      "slug": "api",
+      "headings": [
+        {
+          "title": "onmount()",
+          "depth": 2,
+          "id": "onmount()"
+        },
+        {
+          "title": "onmount(selector)",
+          "depth": 2,
+          "id": "onmount(selector)"
+        },
+        {
+          "title": "onmount(selector, init())",
+          "depth": 2,
+          "id": "onmount(selector-init())"
+        },
+        {
+          "title": "onmount(selector, init(b), exit(b), [options])",
+          "depth": 2,
+          "id": "onmount(selector-init(b)-exit(b)-options)",
+          "headings": [
+            {
+              "title": "Options",
+              "depth": 3,
+              "id": "options"
+            }
+          ]
+        },
+        {
+          "title": "onmount.teardown()",
+          "depth": 2,
+          "id": "onmount.teardown()"
+        },
+        {
+          "title": "onmount.reset()",
+          "depth": 2,
+          "id": "onmount.reset()"
+        },
+        {
+          "title": "onmount.observe()",
+          "depth": 2,
+          "id": "onmount.observe()"
+        },
+        {
+          "title": "onmount.unobserve()",
+          "depth": 2,
+          "id": "onmount.unobserve()"
+        },
+        {
+          "title": "onmount.debug",
+          "depth": 2,
+          "id": "onmount.debug"
+        }
+      ]
+    },
     "idempotency.html": {
       "source": "docs/idempotency.md",
       "title": "Idempotency",
@@ -297,6 +416,7 @@
   "sources": {
     "README.md": "index.html",
     "docs/premise.md": "premise.html",
+    "docs/api.md": "api.html",
     "docs/idempotency.md": "idempotency.html",
     "docs/cleanup.md": "cleanup.html",
     "docs/unique-ids.md": "unique-ids.html",

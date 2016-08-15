@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=a44c9e9d">
+    <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
+    <script src="assets/script.js?t=2bcc4b59"></script>
+    <title>API</title>
+    <meta name="viewport" content="width=device-width">
+    <script>
+      if (false || window.location.hostname.indexOf("ricostacruz.com") === window.location.hostname.length - 15) {
+        (function(d,o,c,p,r,e,s){d['GoogleAnalyticsObject']=r;d[r]=d[r]||function(){(d[r].q=d[r].q||[]).push(arguments)},d[r].l=1*new Date();e=o.createElement(c),s=o.getElementsByTagName(c)[0];e.async=1;e.src=p;s.parentNode.insertBefore(e,s)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create',"UA-20473929-1",'auto')
+      }
+    </script>
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="body page-api">
+        <div class="header-nav">
+          <div class="right"><a href="https://github.com/rstacruz/onmount" data-title="rstacruz/onmount" class="iconlink">
+              <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="api">API</h1>
+<h2 id="onmount()">onmount()</h2>
+<p>Runs all behaviors.</p>
+<p>When used with jQuery, this can be passed as an event handler, eg, <code>$(onmount)</code> or <code>$(document).on(&apos;load&apos;, onmount)</code>.</p>
+<pre><code class="lang-js">$(<span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+  onmount()
+})
+
+$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;page:change&apos;</span>, onmount)
+</code></pre>
+<h2 id="onmount(selector)">onmount(selector)</h2>
+<p>Runs all behaviors registered for <code>selector</code>.</p>
+<p>Useful for unit tests to run a single behavior.</p>
+<pre><code class="lang-js">onmount(<span class="pl-s">&apos;.js-popup&apos;</span>)
+</code></pre>
+<h2 id="onmount(selector-init())">onmount(selector, init())</h2>
+<p>Registers a behavior for <code>selector</code> to run the callback <code>init()</code>.</p>
+<pre><code class="lang-js">onmount(<span class="pl-s">&apos;.js-popup&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="pl-k">this</span>.addEventListener(<span class="pl-s">&apos;click&apos;</span>, <span class="pl-c">/*...*/</span>)
+})
+</code></pre>
+<h2 id="onmount(selector-init(b)-exit(b)-options)">onmount(selector, init(b), exit(b), [options])</h2>
+<p>Registers a behavior for <code>selector</code> to run the callback <code>init()</code>. The <code>exit()</code> callback will be called once the behavior is triggered again but the element is no longer attached to the DOM.</p>
+<p>The callbacks are passed an object <code>b</code>, and  the same object is passed for both <code>init</code> and <code>exit</code>. This allows them to communicate and keep aware of state. A string ID is also provided, <code>b.id</code>, which is guaranteed unique for every behavior-element pair.</p>
+<h3 id="options">Options</h3>
+<p><code>options</code> is an optional object. It supports the following keys:</p>
+<ul>
+<li><code>detectMutate</code> - if <em>true</em>, the exit handler will be called if the element no longer matches the selector, even if it&#x2019;s still in the DOM. If <em>false</em>, the exit handler will only be called if the element is actually removed from the DOM tree. (default <em>false</em>) (new in v1.3)</li>
+</ul>
+<pre><code class="lang-js">onmount(<span class="pl-s">&apos;.js-popup&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">b</span>) </span>{
+  b.handler = <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{ <span class="pl-c">/*...*/</span> }
+  <span class="pl-c1">window</span>.addEventListener(<span class="pl-s">&apos;resize&apos;</span>, handler)
+}, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params">b</span>) </span>{
+  <span class="pl-c1">window</span>.removeEventListener(<span class="pl-s">&apos;resize&apos;</span>, handler)
+})
+</code></pre>
+<h2 id="onmount.teardown()">onmount.teardown()</h2>
+<p>Forces the teardown of all currently-applied behaviors. This triggers the exit handlers for all behaviors currently on the page.</p>
+<h2 id="onmount.reset()">onmount.reset()</h2>
+<p>Clears all defined behaviors. Useful for tests.</p>
+<h2 id="onmount.observe()">onmount.observe()</h2>
+<p>Automatically invoke when new DOM elements appear using MutationObserver API. Returns <code>true</code> if it succeeds.</p>
+<h2 id="onmount.unobserve()">onmount.unobserve()</h2>
+<p>Turns off observation previously turned on via <code>onmount.observe()</code>.</p>
+<h2 id="onmount.debug">onmount.debug</h2>
+<p>Set this to <code>true</code> to see debug messages.</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="premise.html"><span class="title">Premise</span></a></div>
+          <div class="right"><a href="idempotency.html"><span class="label">Next: </span><span class="title">Idempotency</span></a></div>
+        </div>
+      </div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a href="index.html" class="link title  link-index">onmount</a>
+            </li>
+            <li class="menu-item -level-1"><a href="premise.html" class="link title  link-premise">Premise</a>
+            </li>
+            <li class="menu-item -level-1"><a href="api.html" class="link title -active link-api">API</a>
+              <ul class="headings heading-list">
+                <li class="heading-item -depth-2"><a href="#onmount()" class="hlink link-onmount()">onmount()</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount(selector)" class="hlink link-onmount(selector)">onmount(selector)</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount(selector-init())" class="hlink link-onmount(selector-init())">onmount(selector, init())</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount(selector-init(b)-exit(b)-options)" class="hlink link-onmount(selector-init(b)-exit(b)-options)">onmount(selector, init(b), exit(b), [options])</a>
+                  <ul class="heading-list -depth-2">
+                    <li class="heading-item -depth-3"><a href="#options" class="hlink link-options">Options</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount.teardown()" class="hlink link-onmount.teardown()">onmount.teardown()</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount.reset()" class="hlink link-onmount.reset()">onmount.reset()</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount.observe()" class="hlink link-onmount.observe()">onmount.observe()</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount.unobserve()" class="hlink link-onmount.unobserve()">onmount.unobserve()</a>
+                </li>
+                <li class="heading-item -depth-2"><a href="#onmount.debug" class="hlink link-onmount.debug">onmount.debug</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Features</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a href="idempotency.html" class="link title  link-idempotency">Idempotency</a>
+                </li>
+                <li class="menu-item -level-2"><a href="cleanup.html" class="link title  link-cleanup">Preforming cleanups</a>
+                </li>
+                <li class="menu-item -level-2"><a href="unique-ids.html" class="link title  link-unique-ids">Unique IDs</a>
+                </li>
+                <li class="menu-item -level-2"><a href="cancelling.html" class="link title  link-cancelling">Cancelling</a>
+                </li>
+                <li class="menu-item -level-2"><a href="automatic-observation.html" class="link title  link-automatic-observation">Automatic observation</a>
+                </li>
+                <li class="menu-item -level-2"><a href="role.html" class="link title  link-role">Role attributes</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Testing</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a href="testing.html" class="link title  link-testing">Testing</a>
+                </li>
+                <li class="menu-item -level-2"><a href="debugging.html" class="link title  link-debugging">Debugging</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Integrations</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a>
+                </li>
+                <li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+    </div>
+  </body>
+</html>
