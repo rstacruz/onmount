@@ -2,6 +2,7 @@
 
 * [onmount](/README.md)
 * [Premise](/docs/premise.md)
+* [API](/docs/api.md)
 * Features
   * [Idempotency](/docs/idempotency.md)
   * [Preforming cleanups](/docs/cleanup.md)
