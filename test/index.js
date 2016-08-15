@@ -13,5 +13,5 @@ require('./state_test')
 require('./multiple_behaviors_test')
 require('./mutation_test')
 require('./jquery_test')
+require('./detect_mutate_test')
 require('tape')('eslint', require('tape-eslint')())
-

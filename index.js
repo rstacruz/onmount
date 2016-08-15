@@ -46,7 +46,12 @@ void (function (root, factory) {
    *     $.onmount()
    */
 
-  function onmount (selector, init, exit) {
+  function onmount (selector, init, exit, options) {
+    if (typeof exit === 'object') {
+      options = exit
+      exit = undefined
+    }
+
     if (arguments.length === 0 || isjQuery(selector) || isEvent(selector)) {
       // onmount() - trigger all behaviors. Also account for cases such as
       // $($.onmount), where it's triggered with a jQuery event object.
@@ -56,7 +61,7 @@ void (function (root, factory) {
       onmount.poll(selector)
     } else {
       // onmount(sel, fn, [fn]) - register a new behavior.
-      var be = new Behavior(selector, init, exit)
+      var be = new Behavior(selector, init, exit, options)
       behaviors.push(be)
       be.register()
     }
@@ -119,7 +124,7 @@ void (function (root, factory) {
           })
 
           each(mutation.removedNodes, function (el) {
-            if (matches(el, be.selector)) be.visitExit(el)
+            if (matches(el, be.selector)) be.doExit(el)
           })
         })
       })
@@ -185,13 +190,14 @@ void (function (root, factory) {
    * Internal: behavior class
    */
 
-  function Behavior (selector, init, exit) {
+  function Behavior (selector, init, exit, options) {
     this.id = 'b' + bid++
     this.init = init
     this.exit = exit
     this.selector = onmount.selectify(selector)
     this.loaded = [] // keep track of dom elements loaded for this behavior
     this.key = '__onmount:' + bid // leave the state in el['__onmount:12']
+    this.detectMutate = options && options.detectMutate
   }
 
   /**
@@ -239,7 +245,10 @@ void (function (root, factory) {
    */
 
   Behavior.prototype.visitExit = function (el, i) {
-    if (el && !isAttached(el)) return this.doExit(el, i)
+    if (!el) return
+    if (!isAttached(el) || (this.detectMutate && !matches(el, this.selector))) {
+      return this.doExit(el, i)
+    }
   }
 
   /**
