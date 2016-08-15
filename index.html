@@ -38,9 +38,11 @@ onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-fu
   })
 })
 </code></pre>
+<blockquote>
+<p><em>See: <a href="premise.html">Premise</a></em></p>
+</blockquote>
 <h4 id="polling-for-changes">Polling for changes</h4>
-<p>Call <code>$.onmount()</code> everytime your code changes.
-<a href="idempotency.html">&#x2192;</a></p>
+<p>Call <code>$.onmount()</code> everytime your code changes.</p>
 <pre><code class="lang-js">$(<span class="pl-s">&apos;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&apos;</span>)
   .appendTo(<span class="pl-s">&apos;body&apos;</span>)
 
@@ -48,16 +50,20 @@ $.onmount()
 
 $(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c">//=&gt; &apos;working...&apos;</span>
 </code></pre>
+<blockquote>
+<p><em>See: <a href="idempotency.html">Idempotency</a></em></p>
+</blockquote>
 <h4 id="jquery-integration">jQuery integration</h4>
-<p>jQuery is optional; use it to poll on popular events.
-<a href="idempotency.html">&#x2192;</a></p>
+<p>jQuery is optional; use it to poll on popular events.</p>
 <pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready show.bs closed.bs load page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   $.onmount()
 })
 </code></pre>
+<blockquote>
+<p><em>See: <a href="api.html">API</a></em></p>
+</blockquote>
 <h4 id="cleanups">Cleanups</h4>
-<p>Supply a 2nd function to <em>onmount()</em> to execute something when the node is first detached.
-<a href="cleanup.html">&#x2192;</a></p>
+<p>Supply a 2nd function to <em>onmount()</em> to execute something when the node is first detached.</p>
 <pre><code class="lang-js">$.onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   <span class="pl-c">/*...*/</span>
 }, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
@@ -68,6 +74,9 @@ $(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c
 
 $.onmount() <span class="pl-c">//=&gt; &apos;button was removed&apos;</span>
 </code></pre>
+<blockquote>
+<p><em>See: <a href="cleanup.html">Cleanups</a></em></p>
+</blockquote>
 <h2 id="what-for">What for?</h2>
 <p>Onmount is a safe, reliable, idempotent, and testable way to attach JavaScript behaviors to DOM nodes. It&#x2019;s great for common websites that are not Single-Page Apps. Read more on its <a href="premise.html">premise and motivation</a>.</p>
 <p><a href="https://github.com/rstacruz/rsjs">rsjs</a> (Reasonable System for JavaScript Structure) is a great standard that onmount fits perfectly into.</p>
@@ -82,7 +91,9 @@ bower install onmount
 $.onmount                       <span class="pl-c">// with jQuery</span>
 </code></pre>
 <h2 id="api">API</h2>
-<p>See: <a href="api.html">API</a></p>
+<blockquote>
+<p><em>See: <a href="api.html">API</a></em></p>
+</blockquote>
 <h2 id="browser-compatibility">Browser compatibility</h2>
 <p>All modern browsers and IE8+. For legacy IE, use it with jQuery 1.x.</p>
 <h2 id="examples">Examples</h2>
