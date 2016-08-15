@@ -23,10 +23,11 @@ onmount('.push-button', function () {
 })
 ```
 
+> *See: [Premise](/docs/premise.md)*
+
 #### Polling for changes
 
 Call `$.onmount()` everytime your code changes.
-[→](/docs/idempotency.md)
 
 ```js
 $('<button class="push-button">Do something</button>')
@@ -37,10 +38,11 @@ $.onmount()
 $(".push-button").click()  //=> 'working...'
 ```
 
+> *See: [Idempotency](/docs/idempotency.md)*
+
 #### jQuery integration
 
 jQuery is optional; use it to poll on popular events.
-[→](/docs/idempotency.md)
 
 ```js
 $(document).on('ready show.bs closed.bs load page:change', function () {
@@ -48,10 +50,11 @@ $(document).on('ready show.bs closed.bs load page:change', function () {
 })
 ```
 
+> *See: [API](/docs/api.md)*
+
 #### Cleanups
 
 Supply a 2nd function to *onmount()* to execute something when the node is first detached.
-[→](/docs/cleanup.md)
 
 ```js
 $.onmount('.push-button', function () {
@@ -64,6 +67,8 @@ document.body.innerHTML = ''
 
 $.onmount() //=> 'button was removed'
 ```
+
+> *See: [Cleanups](/docs/cleanup.md)*
 
 ## What for?
 
@@ -95,7 +100,7 @@ $.onmount                       // with jQuery
 
 ## API
 
-See: [API](docs/api.md)
+> *See: [API](docs/api.md)*
 
 ## Browser compatibility
 

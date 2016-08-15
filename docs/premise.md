@@ -25,12 +25,12 @@ Let's build a navigation with some elements hidden under a *more...* button. Giv
   <a href=''>Home</a>
   <a href=''>Inbox</a>
   <a href=''>Messages</a>
-  
+
   <div class='more'>
     <a href=''>Help</a>
     <a href=''>Support</a>
   </div>
-  
+
   <button>more...</button>
 </div>
 ```

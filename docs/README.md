@@ -1,18 +1,18 @@
 # Table of contents
 
 * [onmount](/README.md)
-* [Premise](/docs/premise.md)
-* [API](/docs/api.md)
+* [Premise](premise.md)
+* [API](api.md)
 * Features
-  * [Idempotency](/docs/idempotency.md)
-  * [Preforming cleanups](/docs/cleanup.md)
-  * [Unique IDs](/docs/unique-ids.md)
-  * [Cancelling](/docs/cancelling.md)
-  * [Automatic observation](/docs/automatic-observation.md)
-  * [Role attributes](/docs/role.md)
+  * [Idempotency](idempotency.md)
+  * [Preforming cleanups](cleanup.md)
+  * [Unique IDs](unique-ids.md)
+  * [Cancelling](cancelling.md)
+  * [Automatic observation](automatic-observation.md)
+  * [Role attributes](role.md)
 * Testing
-  * [Testing](/docs/testing.md)
-  * [Debugging](/docs/debugging.md)
+  * [Testing](testing.md)
+  * [Debugging](debugging.md)
 * Integrations
-  * [With Turbolinks](/docs/turbolinks.md)
-  * [With Rails](/docs/rails.md)
+  * [With Turbolinks](turbolinks.md)
+  * [With Rails](rails.md)
