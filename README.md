@@ -9,7 +9,7 @@ No dependencies. Legacy IE compatible. 1kb .min.gz.
 
 ## Overview
 
-#### Detecting elements
+### Detecting elements
 
 Run something to initialize an element on its first appearance.
 
@@ -25,7 +25,7 @@ onmount('.push-button', function () {
 
 > *See: [Premise](/docs/premise.md)*
 
-#### Polling for changes
+### Polling for changes
 
 Call `$.onmount()` everytime your code changes.
 
@@ -40,7 +40,7 @@ $(".push-button").click()  //=> 'working...'
 
 > *See: [Idempotency](/docs/idempotency.md)*
 
-#### jQuery integration
+### jQuery integration
 
 jQuery is optional; use it to poll on popular events.
 
@@ -52,7 +52,7 @@ $(document).on('ready show.bs closed.bs load page:change', function () {
 
 > *See: [API](/docs/api.md)*
 
-#### Cleanups
+### Cleanups
 
 Supply a 2nd function to *onmount()* to execute something when the node is first detached.
 
