@@ -28,7 +28,7 @@
 No dependencies. Legacy IE compatible. 1kb .min.gz.</p>
 <p><a href="https://travis-ci.org/rstacruz/onmount" title="See test builds"><img src="https://travis-ci.org/rstacruz/onmount.svg?branch=master" alt="Status"></a></p>
 <h2 id="overview">Overview</h2>
-<h4 id="detecting-elements">Detecting elements</h4>
+<h3 id="detecting-elements">Detecting elements</h3>
 <p>Run something to initialize an element on its first appearance.</p>
 <pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>)
 
@@ -41,7 +41,7 @@ onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-fu
 <blockquote>
 <p><em>See: <a href="premise.html">Premise</a></em></p>
 </blockquote>
-<h4 id="polling-for-changes">Polling for changes</h4>
+<h3 id="polling-for-changes">Polling for changes</h3>
 <p>Call <code>$.onmount()</code> everytime your code changes.</p>
 <pre><code class="lang-js">$(<span class="pl-s">&apos;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&apos;</span>)
   .appendTo(<span class="pl-s">&apos;body&apos;</span>)
@@ -53,7 +53,7 @@ $(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c
 <blockquote>
 <p><em>See: <a href="idempotency.html">Idempotency</a></em></p>
 </blockquote>
-<h4 id="jquery-integration">jQuery integration</h4>
+<h3 id="jquery-integration">jQuery integration</h3>
 <p>jQuery is optional; use it to poll on popular events.</p>
 <pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready show.bs closed.bs load page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   $.onmount()
@@ -62,7 +62,7 @@ $(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c
 <blockquote>
 <p><em>See: <a href="api.html">API</a></em></p>
 </blockquote>
-<h4 id="cleanups">Cleanups</h4>
+<h3 id="cleanups">Cleanups</h3>
 <p>Supply a 2nd function to <em>onmount()</em> to execute something when the node is first detached.</p>
 <pre><code class="lang-js">$.onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
   <span class="pl-c">/*...*/</span>
@@ -119,6 +119,16 @@ Twitter <a href="https://twitter.com/rstacruz">@rstacruz</a></p>
             <li class="menu-item -level-1"><a href="index.html" class="link title -active link-index">onmount</a>
               <ul class="headings heading-list">
                 <li class="heading-item -depth-2"><a href="#overview" class="hlink link-overview">Overview</a>
+                  <ul class="heading-list -depth-2">
+                    <li class="heading-item -depth-3"><a href="#detecting-elements" class="hlink link-detecting-elements">Detecting elements</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a href="#polling-for-changes" class="hlink link-polling-for-changes">Polling for changes</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a href="#jquery-integration" class="hlink link-jquery-integration">jQuery integration</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a href="#cleanups" class="hlink link-cleanups">Cleanups</a>
+                    </li>
+                  </ul>
                 </li>
                 <li class="heading-item -depth-2"><a href="#what-for" class="hlink link-what-for">What for?</a>
                 </li>

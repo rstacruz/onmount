@@ -10,7 +10,29 @@
           {
             "title": "Overview",
             "depth": 2,
-            "id": "overview"
+            "id": "overview",
+            "headings": [
+              {
+                "title": "Detecting elements",
+                "depth": 3,
+                "id": "detecting-elements"
+              },
+              {
+                "title": "Polling for changes",
+                "depth": 3,
+                "id": "polling-for-changes"
+              },
+              {
+                "title": "jQuery integration",
+                "depth": 3,
+                "id": "jquery-integration"
+              },
+              {
+                "title": "Cleanups",
+                "depth": 3,
+                "id": "cleanups"
+              }
+            ]
           },
           {
             "title": "What for?",
@@ -230,7 +252,29 @@
         {
           "title": "Overview",
           "depth": 2,
-          "id": "overview"
+          "id": "overview",
+          "headings": [
+            {
+              "title": "Detecting elements",
+              "depth": 3,
+              "id": "detecting-elements"
+            },
+            {
+              "title": "Polling for changes",
+              "depth": 3,
+              "id": "polling-for-changes"
+            },
+            {
+              "title": "jQuery integration",
+              "depth": 3,
+              "id": "jquery-integration"
+            },
+            {
+              "title": "Cleanups",
+              "depth": 3,
+              "id": "cleanups"
+            }
+          ]
         },
         {
           "title": "What for?",
