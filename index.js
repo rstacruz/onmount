@@ -64,6 +64,7 @@ void (function (root, factory) {
       var be = new Behavior(selector, init, exit, options)
       behaviors.push(be)
       be.register()
+      onmount.poll(selector)
     }
 
     return this
