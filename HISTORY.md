@@ -1,3 +1,10 @@
+## [v2.0.0] - unreleased
+> Jan 23, 2018
+
+- Remove support for `onmount.debug`.
+
+[v2.0.0]: https://github.com/rstacruz/onmount/compare/v1.2.1...v2.0.0
+
 ## [v1.2.1]
 > Mar 28, 2016
 
