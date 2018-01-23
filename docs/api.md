@@ -70,7 +70,3 @@ Automatically invoke when new DOM elements appear using MutationObserver API. Re
 ## onmount.unobserve()
 
 Turns off observation previously turned on via `onmount.observe()`.
-
-## onmount.debug
-
-Set this to `true` to see debug messages.
