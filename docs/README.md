@@ -12,7 +12,6 @@
   * [Role attributes](role.md)
 * Testing
   * [Testing](testing.md)
-  * [Debugging](debugging.md)
 * Integrations
   * [With Turbolinks](turbolinks.md)
   * [With Rails](rails.md)
