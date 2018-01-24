@@ -146,11 +146,6 @@
             "title": "onmount.unobserve()",
             "depth": 2,
             "id": "onmount.unobserve()"
-          },
-          {
-            "title": "onmount.debug",
-            "depth": 2,
-            "id": "onmount.debug"
           }
         ]
       },
@@ -203,12 +198,6 @@
             "source": "docs/testing.md",
             "url": "testing.html",
             "slug": "testing"
-          },
-          {
-            "title": "Debugging",
-            "source": "docs/debugging.md",
-            "url": "debugging.html",
-            "slug": "debugging"
           }
         ]
       },
@@ -386,11 +375,6 @@
           "title": "onmount.unobserve()",
           "depth": 2,
           "id": "onmount.unobserve()"
-        },
-        {
-          "title": "onmount.debug",
-          "depth": 2,
-          "id": "onmount.debug"
         }
       ]
     },
@@ -429,11 +413,6 @@
       "title": "Testing",
       "slug": "testing"
     },
-    "debugging.html": {
-      "source": "docs/debugging.md",
-      "title": "Debugging",
-      "slug": "debugging"
-    },
     "turbolinks.html": {
       "source": "docs/turbolinks.md",
       "title": "With Turbolinks",
@@ -468,7 +447,6 @@
     "docs/automatic-observation.md": "automatic-observation.html",
     "docs/role.md": "role.html",
     "docs/testing.md": "testing.html",
-    "docs/debugging.md": "debugging.html",
     "docs/turbolinks.md": "turbolinks.html",
     "docs/rails.md": "rails.html",
     "docs/docpress.json": "docpress.json"
