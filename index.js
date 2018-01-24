@@ -11,7 +11,7 @@ void (function (root, factory) {
    * Internal: Registry.
    */
 
-  var handlers, behaviors, selectors, log
+  var handlers, behaviors, selectors
 
   /*
    * Internal: IDs for auto-incrementing.
@@ -86,12 +86,6 @@ void (function (root, factory) {
     window.MutationObserver ||
     window.WebKitMutationObserver ||
     window.MozMutationObserver
-
-  /**
-   * Set this to true if you want to see debug messages.
-   */
-
-  onmount.debug = false
 
   /**
    * Internal: triggers behaviors for a selector or for all.
@@ -234,7 +228,6 @@ void (function (root, factory) {
     if (el[this.key]) return
     var options = { id: 'c' + cid, selector: this.selector }
     if (this.init.call(el, options) !== false) {
-      if (onmount.debug) log('enter', this.selector, el)
       el[this.key] = options
       this.loaded.push(el)
       cid++
@@ -264,7 +257,6 @@ void (function (root, factory) {
     if (typeof i === 'undefined') i = this.loaded.indexOf(el)
     this.loaded[i] = undefined
     if (this.exit && this.exit.call(el, el[this.key]) !== false) {
-      if (onmount.debug) log('exit', this.selector, el)
       delete el[this.key]
     }
   }
@@ -387,25 +379,6 @@ void (function (root, factory) {
 
   function isEvent (e) {
     return typeof e === 'object' && e.target
-  }
-
-  /**
-   * Internal: logging
-   */
-
-  var styles = {
-    enter: 'background-color:#dfd;font-weight:bold;color:#141',
-    exit: 'background-color:#fdd;font-weight:bold;color:#411'
-  }
-
-  if (~navigator.userAgent.indexOf('Mozilla')) {
-    log = function (type, selector, el) {
-      console.log('%c %s ', styles[type], selector, el)
-    }
-  } else {
-    log = function (type, selector, el) {
-      console.log('(onmount)', type, selector)
-    }
   }
 
   /*
