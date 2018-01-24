@@ -159,7 +159,7 @@
             "slug": "idempotency"
           },
           {
-            "title": "Preforming cleanups",
+            "title": "Performing cleanups",
             "source": "docs/cleanup.md",
             "url": "cleanup.html",
             "slug": "cleanup"
@@ -385,7 +385,7 @@
     },
     "cleanup.html": {
       "source": "docs/cleanup.md",
-      "title": "Preforming cleanups",
+      "title": "Performing cleanups",
       "slug": "cleanup"
     },
     "unique-ids.html": {
