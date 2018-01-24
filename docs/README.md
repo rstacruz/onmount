@@ -5,7 +5,7 @@
 * [API](api.md)
 * Features
   * [Idempotency](idempotency.md)
-  * [Preforming cleanups](cleanup.md)
+  * [Performing cleanups](cleanup.md)
   * [Unique IDs](unique-ids.md)
   * [Cancelling](cancelling.md)
   * [Automatic observation](automatic-observation.md)
