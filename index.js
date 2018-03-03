@@ -70,13 +70,6 @@ void (function (root, factory) {
   }
 
   /*
-   * Use jQuery (or a jQuery-like) when available. This will allow
-   * the use of jQuery selectors.
-   */
-
-  onmount.$ = window.jQuery || window.Zepto || window.Ender
-
-  /*
    * Detect MutationObserver support for `onmount.observe()`.
    * You may even add a polyfill here via
    * `onmount.MutationObserver = require('mutation-observer')`.
@@ -166,21 +159,6 @@ void (function (root, factory) {
   }
 
   /**
-   * Internal: Converts `@role` to `[role~="role"]` if needed. You can override
-   * this by reimplementing `onmount.selectify`.
-   *
-   *     selectify('@hi')   //=> '[role="hi"]'
-   *     selectify('.btn')  //=> '.btn'
-   */
-
-  onmount.selectify = function selectify (selector) {
-    if (selector[0] === '@') {
-      return '[role~="' + selector.substr(1).replace(/"/g, '\\"') + '"]'
-    }
-    return selector
-  }
-
-  /**
    * Internal: behavior class
    */
 
@@ -188,7 +166,7 @@ void (function (root, factory) {
     this.id = 'b' + bid++
     this.init = init
     this.exit = exit
-    this.selector = onmount.selectify(selector)
+    this.selector = selector
     this.loaded = [] // keep track of dom elements loaded for this behavior
     this.key = '__onmount:' + bid // leave the state in el['__onmount:12']
     this.detectMutate = options && options.detectMutate
@@ -279,7 +257,6 @@ void (function (root, factory) {
    */
 
   function query (selector, fn) {
-    if (onmount.$) return onmount.$(selector)
     return document.querySelectorAll(selector)
   }
 
@@ -288,7 +265,6 @@ void (function (root, factory) {
    */
 
   function eachOf (list, fn) {
-    if (onmount.$) return list.each(function (i) { fn(this, i) })
     return each(list, fn)
   }
 
@@ -297,7 +273,7 @@ void (function (root, factory) {
    */
 
   function has (list, el) {
-    if (onmount.$) return list.index(el) > -1
+    // TODO use contains
     return list.indexOf(el) > -1
   }
 
@@ -321,16 +297,9 @@ void (function (root, factory) {
    */
 
   function matches (el, selector) {
-    var _matches = el.matches ||
-      el.matchesSelector ||
-      el.msMatchesSelector ||
-      el.mozMatchesSelector ||
-      el.webkitMatchesSelector ||
-      el.oMatchesSelector
+    var _matches = el.matches
 
-    if (onmount.$) {
-      return onmount.$(el).is(selector)
-    } else if (_matches) {
+    if (_matches) {
       return _matches.call(el, selector)
     } else if (el.parentNode) {
       // IE8 and below
@@ -357,6 +326,7 @@ void (function (root, factory) {
   function each (list, fn) {
     var i
     var len = list.length
+    // TODO array.from()
 
     if (len === +len) {
       for (i = 0; i < len; i++) { fn(list[i], i) }
@@ -369,11 +339,8 @@ void (function (root, factory) {
     return list
   }
 
-  /**
-   * Internal: Check if a given object is jQuery
-   */
-
   function isjQuery ($) {
+    // TODO deprecate isJquery
     return typeof $ === 'function' && $.fn && $.noConflict
   }
 
