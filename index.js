@@ -296,18 +296,7 @@ void (function (root, factory) {
    */
 
   function matches (el, selector) {
-    var _matches = el.matches
-
-    if (_matches) {
-      return _matches.call(el, selector)
-    } else if (el.parentNode) {
-      // IE8 and below
-      var nodes = el.parentNode.querySelectorAll(selector)
-      for (var i = nodes.length; i--; 0) {
-        if (nodes[i] === el) return true
-      }
-      return false
-    }
+    return el.matches(selector)
   }
 
   /**
