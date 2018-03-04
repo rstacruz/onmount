@@ -88,7 +88,6 @@ void (function (root, factory) {
    */
 
   onmount.poll = function poll (selector) {
-    if (selector) selector = onmount.selectify(selector)
     var functions = (selector ? selectors[selector] : handlers) || []
     each(functions, function (fn) { fn() })
   }
