@@ -273,7 +273,7 @@ void (function (root, factory) {
 
   function has (list, el) {
     // TODO use contains
-    return list.indexOf(el) > -1
+    return Array.from(list).indexOf(el) > -1
   }
 
   /**
