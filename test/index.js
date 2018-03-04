@@ -7,7 +7,6 @@ require('tape')('dom', function (t) {
 
 require('./mounting_test')
 require('./exiting_test')
-require('./with_at_role_test')
 require('./with_role_test')
 require('./state_test')
 require('./multiple_behaviors_test')
