@@ -182,7 +182,7 @@ Behavior.prototype.register = function () {
     })
 
     // Clean up new ones (if they're not loaded yet).
-    eachOf(list, function (element) {
+    each(list, function (element) {
       be.visitEnter(element)
     })
   })
@@ -243,28 +243,19 @@ function isAttached (el) {
 /**
  * Internal: reimplementation of `$('...')`. If jQuery is available,
  * use it (I guess to preserve IE compatibility and to enable special jQuery
- * attribute selectors). Use with `eachOf()` or `has()`.
+ * attribute selectors). Use with `each()` or `has()`.
  */
 
-function query (selector, fn) {
+function query (selector) {
   return document.querySelectorAll(selector)
 }
 
 /**
- * Internal: iterates through a `query()` result.
- */
-
-function eachOf (list, fn) {
-  return each(list, fn)
-}
-
-/**
- * Interanl: checks if given element `el` is in the query result `list`.
+ * Internal: checks if given element `el` is in the query result `list`.
  */
 
 function has (list, el) {
-  // TODO use contains
-  return Array.from(list).indexOf(el) > -1
+  return Array.from(list).includes(el)
 }
 
 /**
@@ -280,29 +271,10 @@ function register (selector, fn) {
 /**
  * Iterates through `list` (an array or an object). This is useful when dealing
  * with NodeLists like `document.querySelectorAll`.
- *
- *     var each = require('dom101/each');
- *     var qa = require('dom101/query-selector-all');
- *
- *     each(qa('.button'), function (el) {
- *       addClass('el', 'selected');
- *     });
  */
 
 function each (list, fn) {
-  var i
-  var len = list.length
-  // TODO array.from()
-
-  if (len === +len) {
-    for (i = 0; i < len; i++) { fn(list[i], i) }
-  } else {
-    for (i in list) {
-      if (list.hasOwnProperty(i)) fn(list[i], i)
-    }
-  }
-
-  return list
+  return Array.from(list).map(fn)
 }
 
 function isjQuery ($) {
