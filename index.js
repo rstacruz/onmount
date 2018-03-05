@@ -1,8 +1,4 @@
-/*
- * Internal: Registry.
- */
-
-let handlers, behaviors, selectors
+import { each, isjQuery, isEvent, has, query, isAttached } from './lib/helpers'
 
 /*
  * Internal: IDs for auto-incrementing.
@@ -53,7 +49,7 @@ function onmount (selector, init, exit, options) {
   } else {
     // onmount(sel, fn, [fn]) - register a new behavior.
     var be = new Behavior(selector, init, exit, options)
-    behaviors.push(be)
+    onmount.behaviors.push(be)
     be.register()
   }
 
@@ -79,8 +75,10 @@ onmount.MutationObserver =
  */
 
 onmount.poll = function poll (selector) {
-  var functions = (selector ? selectors[selector] : handlers) || []
-  each(functions, function (fn) { fn() })
+  const { selectors, handlers } = onmount
+
+  const functions = (selector ? selectors[selector] : handlers) || []
+  each(functions, (fn) => { fn() })
 }
 
 /**
@@ -90,7 +88,7 @@ onmount.poll = function poll (selector) {
  */
 
 onmount.observe = function observe () {
-  var MutationObserver = onmount.MutationObserver
+  const { behaviors, MutationObserver } = onmount
   if (typeof MutationObserver === 'undefined') return
 
   var obs = new MutationObserver(function (mutations) {
@@ -130,7 +128,7 @@ onmount.unobserve = function unobserve () {
  */
 
 onmount.teardown = function teardown () {
-  each(behaviors, function (be) {
+  each(onmount.behaviors, function (be) {
     each(be.loaded, function (el, i) {
       if (el) be.doExit(el, i)
     })
@@ -143,9 +141,9 @@ onmount.teardown = function teardown () {
  */
 
 onmount.reset = function reset () {
-  handlers = onmount.handlers = []
-  selectors = onmount.selectors = {}
-  behaviors = onmount.behaviors = []
+  onmount.handlers = []
+  onmount.selectors = {}
+  onmount.behaviors = []
 }
 
 /**
@@ -168,22 +166,20 @@ function Behavior (selector, init, exit, options) {
  */
 
 Behavior.prototype.register = function () {
-  var be = this
-  var loaded = this.loaded
-  var selector = this.selector
+  const { loaded, selector } = this
 
-  register(selector, function () {
-    var list = query(selector)
+  register(selector, () => {
+    const list = query(selector)
 
     // This is the function invoked on `onmount(selector)`.
     // Clean up old ones (if they're not in the DOM anymore).
-    each(loaded, function (element, i) {
-      be.visitExit(element, i, list)
+    each(loaded, (element, i) => {
+      this.visitExit(element, i, list)
     })
 
     // Clean up new ones (if they're not loaded yet).
-    each(list, function (element) {
-      be.visitEnter(element)
+    each(list, (element) => {
+      this.visitEnter(element)
     })
   })
 }
@@ -230,60 +226,15 @@ Behavior.prototype.doExit = function (el, i) {
 }
 
 /**
- * Internal: check if an element is still attached to its document.
- */
-
-function isAttached (el) {
-  while (el) {
-    if (el === document.documentElement) return true
-    el = el.parentElement
-  }
-}
-
-/**
- * Internal: reimplementation of `$('...')`. If jQuery is available,
- * use it (I guess to preserve IE compatibility and to enable special jQuery
- * attribute selectors). Use with `each()` or `has()`.
- */
-
-function query (selector) {
-  return document.querySelectorAll(selector)
-}
-
-/**
- * Internal: checks if given element `el` is in the query result `list`.
- */
-
-function has (list, el) {
-  return Array.from(list).includes(el)
-}
-
-/**
  * Internal: registers a behavior handler for a selector.
  */
 
 function register (selector, fn) {
+  const { selectors, handlers } = onmount
+
   if (!selectors[selector]) selectors[selector] = []
   selectors[selector].push(fn)
   handlers.push(fn)
-}
-
-/**
- * Iterates through `list` (an array or an object). This is useful when dealing
- * with NodeLists like `document.querySelectorAll`.
- */
-
-function each (list, fn) {
-  return Array.from(list).map(fn)
-}
-
-function isjQuery ($) {
-  // TODO deprecate isJquery
-  return typeof $ === 'function' && $.fn && $.noConflict
-}
-
-function isEvent (e) {
-  return typeof e === 'object' && e.target
 }
 
 /*
