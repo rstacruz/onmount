@@ -1,5 +1,7 @@
-var onmount = require('../index')
-var { el, remove } = require('../lib/test_helpers')
+/* eslint-env jest */
+
+const onmount = require('../index')
+const { el, remove } = require('../lib/test_helpers')
 
 describe('state', () => {
   let div, state
