@@ -46,7 +46,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint \"{.,lib,lib/*,tests}/*.js\"",
-    "build": "rollup index.js -f umd -o dist/onmount.js -n onmount",
+    "build": "rollup index.js -f umd -n onmount | buble > dist/onmount.js",
     "prepare": "npm run build"
   }
 }
