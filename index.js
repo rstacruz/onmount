@@ -1,41 +1,47 @@
 /*
-  * Internal: Registry.
-  */
+ * Cross-platform `global` access
+ */
+
+const global = (function () { return this }())
+
+/*
+ * Internal: Registry.
+ */
 
 let handlers, behaviors, selectors
 
 /*
-  * Internal: IDs for auto-incrementing.
-  */
+ * Internal: IDs for auto-incrementing.
+ */
 
 let bid = 0 /* behavior ID */
 let cid = 0 /* component ID */
 
 /**
-  * (Module) Adds a behavior, or triggers behaviors.
-  *
-  * When no parameters are passed, it triggers all behaviors. When one
-  * parameter is passed, it triggers the given behavior. Otherwise, it adds a
-  * behavior.
-  *
-  *     // define a behavior
-  *     $.onmount('.select-box', function () {
-  *       $(this).on('...')
-  *     })
-  *
-  *     // define a behavior with exit
-  *     $.onmount('.select-box', function () {
-  *       $(document).on('...')
-  *     }, function () {
-  *       $(document).off('...')
-  *     })
-  *
-  *     // retrigger a onmount
-  *     $.onmount('.select-box')
-  *
-  *     // retriggers all behaviors
-  *     $.onmount()
-  */
+ * (Module) Adds a behavior, or triggers behaviors.
+ *
+ * When no parameters are passed, it triggers all behaviors. When one
+ * parameter is passed, it triggers the given behavior. Otherwise, it adds a
+ * behavior.
+ *
+ *     // define a behavior
+ *     $.onmount('.select-box', function () {
+ *       $(this).on('...')
+ *     })
+ *
+ *     // define a behavior with exit
+ *     $.onmount('.select-box', function () {
+ *       $(document).on('...')
+ *     }, function () {
+ *       $(document).off('...')
+ *     })
+ *
+ *     // retrigger a onmount
+ *     $.onmount('.select-box')
+ *
+ *     // retriggers all behaviors
+ *     $.onmount()
+ */
 
 function onmount (selector, init, exit, options) {
   if (typeof exit === 'object') {
@@ -60,11 +66,11 @@ function onmount (selector, init, exit, options) {
   return this
 }
 
-/*
-  * Detect MutationObserver support for `onmount.observe()`.
-  * You may even add a polyfill here via
-  * `onmount.MutationObserver = require('mutation-observer')`.
-  */
+/**
+ * Detect MutationObserver support for `onmount.observe()`.
+ * You may even add a polyfill here via
+ * `onmount.MutationObserver = require('mutation-observer')`.
+ */
 
 onmount.MutationObserver =
   global.MutationObserver ||
@@ -72,11 +78,11 @@ onmount.MutationObserver =
   global.MozMutationObserver
 
 /**
-  * Internal: triggers behaviors for a selector or for all.
-  *
-  *     onmount.poll()
-  *     onmount.poll('.js-button')
-  */
+ * Internal: triggers behaviors for a selector or for all.
+ *
+ *     onmount.poll()
+ *     onmount.poll('.js-button')
+ */
 
 onmount.poll = function poll (selector) {
   var functions = (selector ? selectors[selector] : handlers) || []
@@ -84,10 +90,10 @@ onmount.poll = function poll (selector) {
 }
 
 /**
-  * Observes automatically using MutationObserver events.
-  *
-  *     onmount.observe()
-  */
+ * Observes automatically using MutationObserver events.
+ *
+ *     onmount.observe()
+ */
 
 onmount.observe = function observe () {
   var MutationObserver = onmount.MutationObserver
@@ -116,8 +122,8 @@ onmount.observe = function observe () {
 }
 
 /**
-  * Turns off observation first issued by `onmount.observe()`.
-  */
+ * Turns off observation first issued by `onmount.observe()`.
+ */
 
 onmount.unobserve = function unobserve () {
   if (!this.observer) return
@@ -126,8 +132,8 @@ onmount.unobserve = function unobserve () {
 }
 
 /**
-  * Forces teardown of all behaviors currently applied.
-  */
+ * Forces teardown of all behaviors currently applied.
+ */
 
 onmount.teardown = function teardown () {
   each(behaviors, function (be) {
@@ -138,9 +144,9 @@ onmount.teardown = function teardown () {
 }
 
 /**
-  * Clears all behaviors. Useful for tests.
-  * This will NOT call exit handlers.
-  */
+ * Clears all behaviors. Useful for tests.
+ * This will NOT call exit handlers.
+ */
 
 onmount.reset = function reset () {
   handlers = onmount.handlers = []
@@ -149,8 +155,8 @@ onmount.reset = function reset () {
 }
 
 /**
-  * Internal: behavior class
-  */
+ * Internal: behavior class
+ */
 
 function Behavior (selector, init, exit, options) {
   this.id = 'b' + bid++
@@ -163,9 +169,9 @@ function Behavior (selector, init, exit, options) {
 }
 
 /**
-  * Internal: initialize this behavior by registering itself to the internal
-  * `selectors` map. This allows you to call `onmount(selector)` later on.
-  */
+ * Internal: initialize this behavior by registering itself to the internal
+ * `selectors` map. This allows you to call `onmount(selector)` later on.
+ */
 
 Behavior.prototype.register = function () {
   var be = this
@@ -189,8 +195,8 @@ Behavior.prototype.register = function () {
 }
 
 /**
-  * Internal: visits the element `el` and turns it on if applicable.
-  */
+ * Internal: visits the element `el` and turns it on if applicable.
+ */
 
 Behavior.prototype.visitEnter = function (el) {
   if (el[this.key]) return
@@ -203,9 +209,9 @@ Behavior.prototype.visitEnter = function (el) {
 }
 
 /**
-  * Internal: visits the element `el` and sees if it needs its exit handler
-  * called.
-  */
+ * Internal: visits the element `el` and sees if it needs its exit handler
+ * called.
+ */
 
 Behavior.prototype.visitExit = function (el, i, list) {
   if (!el) return
@@ -217,9 +223,9 @@ Behavior.prototype.visitExit = function (el, i, list) {
 }
 
 /**
-  * Internal: calls the exit handler for the behavior for element `el` (if
-  * available), and marks the behavior/element as uninitialized.
-  */
+ * Internal: calls the exit handler for the behavior for element `el` (if
+ * available), and marks the behavior/element as uninitialized.
+ */
 
 Behavior.prototype.doExit = function (el, i) {
   if (typeof i === 'undefined') i = this.loaded.indexOf(el)
@@ -230,8 +236,8 @@ Behavior.prototype.doExit = function (el, i) {
 }
 
 /**
-  * Internal: check if an element is still attached to its document.
-  */
+ * Internal: check if an element is still attached to its document.
+ */
 
 function isAttached (el) {
   while (el) {
@@ -241,26 +247,26 @@ function isAttached (el) {
 }
 
 /**
-  * Internal: reimplementation of `$('...')`. If jQuery is available,
-  * use it (I guess to preserve IE compatibility and to enable special jQuery
-  * attribute selectors). Use with `eachOf()` or `has()`.
-  */
+ * Internal: reimplementation of `$('...')`. If jQuery is available,
+ * use it (I guess to preserve IE compatibility and to enable special jQuery
+ * attribute selectors). Use with `eachOf()` or `has()`.
+ */
 
 function query (selector, fn) {
   return document.querySelectorAll(selector)
 }
 
 /**
-  * Internal: iterates through a `query()` result.
-  */
+ * Internal: iterates through a `query()` result.
+ */
 
 function eachOf (list, fn) {
   return each(list, fn)
 }
 
 /**
-  * Interanl: checks if given element `el` is in the query result `list`.
-  */
+ * Interanl: checks if given element `el` is in the query result `list`.
+ */
 
 function has (list, el) {
   // TODO use contains
@@ -268,8 +274,8 @@ function has (list, el) {
 }
 
 /**
-  * Internal: registers a behavior handler for a selector.
-  */
+ * Internal: registers a behavior handler for a selector.
+ */
 
 function register (selector, fn) {
   if (!selectors[selector]) selectors[selector] = []
@@ -278,16 +284,16 @@ function register (selector, fn) {
 }
 
 /**
-  * Iterates through `list` (an array or an object). This is useful when dealing
-  * with NodeLists like `document.querySelectorAll`.
-  *
-  *     var each = require('dom101/each');
-  *     var qa = require('dom101/query-selector-all');
-  *
-  *     each(qa('.button'), function (el) {
-  *       addClass('el', 'selected');
-  *     });
-  */
+ * Iterates through `list` (an array or an object). This is useful when dealing
+ * with NodeLists like `document.querySelectorAll`.
+ *
+ *     var each = require('dom101/each');
+ *     var qa = require('dom101/query-selector-all');
+ *
+ *     each(qa('.button'), function (el) {
+ *       addClass('el', 'selected');
+ *     });
+ */
 
 function each (list, fn) {
   var i
@@ -315,8 +321,8 @@ function isEvent (e) {
 }
 
 /*
-  * Export
-  */
+ * Export
+ */
 
 onmount.reset()
 
