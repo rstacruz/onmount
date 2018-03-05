@@ -43,6 +43,7 @@
   },
   "scripts": {
     "test": "jest",
+    "lint": "eslint \"{.,lib,lib/*,tests}/*.js\"",
     "test-legacy": "node test"
   }
 }
