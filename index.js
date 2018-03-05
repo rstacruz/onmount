@@ -19,22 +19,22 @@ let cid = 0 /* component ID */
  * behavior.
  *
  *     // define a behavior
- *     $.onmount('.select-box', function () {
+ *     onmount('.select-box', function () {
  *       $(this).on('...')
  *     })
  *
  *     // define a behavior with exit
- *     $.onmount('.select-box', function () {
+ *     onmount('.select-box', function () {
  *       $(document).on('...')
  *     }, function () {
  *       $(document).off('...')
  *     })
  *
  *     // retrigger a onmount
- *     $.onmount('.select-box')
+ *     onmount('.select-box')
  *
  *     // retriggers all behaviors
- *     $.onmount()
+ *     onmount()
  */
 
 function onmount (selector, init, exit, options) {
@@ -45,7 +45,7 @@ function onmount (selector, init, exit, options) {
 
   if (arguments.length === 0 || isjQuery(selector) || isEvent(selector)) {
     // onmount() - trigger all behaviors. Also account for cases such as
-    // $($.onmount), where it's triggered with a jQuery event object.
+    // $(onmount), where it's triggered with a jQuery event object.
     onmount.poll()
   } else if (arguments.length === 1) {
     // onmount(selector) - trigger for a given selector.
