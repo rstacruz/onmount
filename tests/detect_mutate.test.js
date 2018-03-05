@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 var onmount = require('../index')
 var { el, remove } = require('../lib/test_helpers')
 

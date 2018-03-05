@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 const onmount = require('../index')
 const { el, remove } = require('../lib/test_helpers')
 
@@ -9,6 +11,8 @@ if (typeof MutationObserver === 'undefined') {
   })
 } else {
   describe('mutation observer', () => {
+    let div
+
     beforeEach(() => {
       onmount.observe()
     })
