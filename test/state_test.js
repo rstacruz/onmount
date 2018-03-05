@@ -1,8 +1,7 @@
 var test = require('tape')
 var onmount = require('../index')
 var around = require('tape-around')
-var el = require('./helpers').el
-var remove = require('./helpers').remove
+var { el, remove } = require('../lib/test_helpers')
 
 var run = around(test, 'state')
   .before(function (t) {
