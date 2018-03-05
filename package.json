@@ -42,6 +42,7 @@
     "url": "git+https://github.com/rstacruz/onmount.git"
   },
   "scripts": {
-    "test": "node test"
+    "test": "jest",
+    "test-legacy": "node test"
   }
 }
