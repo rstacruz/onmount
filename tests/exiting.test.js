@@ -1,43 +1,57 @@
 /* eslint-env jest */
 
 const onmount = require('../index')
-const { el } = require('../lib/test_helpers')
+const { el, remove } = require('../lib/test_helpers')
 
 describe('tests', () => {
+  let div
+
   beforeEach(() => {
     onmount('.their-behavior', function () {
+      // Triggered on load
       this.innerHTML += '(on)'
     }, function () {
+      // Triggered on unload
       this.innerHTML += '(off)'
     })
   })
 
   afterEach(() => {
+    remove(div)
     onmount.reset()
   })
 
   it('calls the unloader', () => {
-    const div = el('div', { 'class': 'their-behavior' })
+    div = el('div', { 'class': 'their-behavior' })
     onmount()
-    div.parentNode.removeChild(div)
+
+    // Unload it via polling onmount()
+    remove(div)
     onmount()
 
     expect(div.innerHTML).toEqual('(on)(off)')
   })
 
   it('using onmount.teardown()', () => {
-    const div = el('div', { 'class': 'their-behavior' })
+    div = el('div', { 'class': 'their-behavior' })
     onmount()
+
+    // Unload it via .teardown()
     onmount.teardown()
 
     expect(div.innerHTML).toEqual('(on)(off)')
   })
 
   it('gets double-applied intentionally', () => {
-    const div = el('div', { 'class': 'their-behavior' })
+    // Load it the first time
+    div = el('div', { 'class': 'their-behavior' })
     onmount()
-    div.parentNode.removeChild(div)
+
+    // Remove it (should trigger unload)
+    remove(div)
     onmount()
+
+    // Load it again (should trigger load again)
     document.body.appendChild(div)
     onmount()
 
