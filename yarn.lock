@@ -16,6 +16,10 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@std/esm@0.24.0":
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/@std/esm/-/esm-0.24.0.tgz#0e8ce9288ddcdec4e568feb4038416453c12ed34"
+
 JSONStream@^1.0.3:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.2.tgz#c102371b6ec3a7cf3b847ca00c20bb0fce4c6dea"
@@ -388,7 +392,7 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.0.0, babel-core@^6.26.0:
+babel-core@6.26.0, babel-core@^6.0.0, babel-core@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -432,7 +436,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@22.4.1, babel-jest@^22.4.1:
+babel-jest@^22.4.1:
   version "22.4.1"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-22.4.1.tgz#ff53ebca45957347f27ff4666a31499fbb4c4ddd"
   dependencies:

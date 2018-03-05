@@ -1,10 +1,4 @@
 /*
- * Cross-platform `global` access
- */
-
-const global = (function () { return this }())
-
-/*
  * Internal: Registry.
  */
 
@@ -73,9 +67,9 @@ function onmount (selector, init, exit, options) {
  */
 
 onmount.MutationObserver =
-  global.MutationObserver ||
-  global.WebKitMutationObserver ||
-  global.MozMutationObserver
+  (global || window).MutationObserver ||
+  (global || window).WebKitMutationObserver ||
+  (global || window).MozMutationObserver
 
 /**
  * Internal: triggers behaviors for a selector or for all.

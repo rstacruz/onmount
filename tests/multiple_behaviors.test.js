@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const onmount = require('../index')
+const onmount = require('../dist/onmount')
 const { el } = require('../lib/test_helpers')
 
 describe('multiple behaviors', () => {

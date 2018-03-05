@@ -13,7 +13,8 @@
     "index.js"
   ],
   "devDependencies": {
-    "babel-jest": "22.4.1",
+    "@std/esm": "0.24.0",
+    "babel-core": "6.26.0",
     "buble": "0.19.3",
     "docpress": "0.6.13",
     "eslint": "1.10.3",
@@ -48,5 +49,6 @@
     "lint": "eslint \"{.,lib,lib/*,tests}/*.js\"",
     "build": "mkdir -p dist; rollup index.js -f umd -n onmount | buble > dist/onmount.js",
     "prepare": "run-s build"
-  }
+  },
+  "@std/esm": "js"
 }

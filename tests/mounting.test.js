@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
+const onmount = require('../dist/onmount')
 const { el } = require('../lib/test_helpers')
-const onmount = require('../index')
 
 describe('mounting', () => {
   let div
