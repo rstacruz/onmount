@@ -2,14 +2,14 @@
   * Internal: Registry.
   */
 
-var handlers, behaviors, selectors
+let handlers, behaviors, selectors
 
 /*
   * Internal: IDs for auto-incrementing.
   */
 
-var bid = 0 /* behavior ID */
-var cid = 0 /* component ID */
+let bid = 0 /* behavior ID */
+let cid = 0 /* component ID */
 
 /**
   * (Module) Adds a behavior, or triggers behaviors.
@@ -97,11 +97,11 @@ onmount.observe = function observe () {
     each(behaviors, function (be) {
       each(mutations, function (mutation) {
         each(mutation.addedNodes, function (el) {
-          if (matches(el, be.selector)) be.visitEnter(el)
+          if (el.matches(be.selector)) be.visitEnter(el)
         })
 
         each(mutation.removedNodes, function (el) {
-          if (matches(el, be.selector)) be.doExit(el)
+          if (el.matches(be.selector)) be.doExit(el)
         })
       })
     })
@@ -275,19 +275,6 @@ function register (selector, fn) {
   if (!selectors[selector]) selectors[selector] = []
   selectors[selector].push(fn)
   handlers.push(fn)
-}
-
-/**
-  * Checks if a given element `el` matches `selector`.
-  * Compare with [$.fn.is](http://api.jquery.com/is/).
-  *
-  *     var matches = require('dom101/matches');
-  *
-  *     matches(button, ':focus');
-  */
-
-function matches (el, selector) {
-  return el.matches(selector)
 }
 
 /**
