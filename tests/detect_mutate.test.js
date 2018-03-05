@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-var onmount = require('../index')
+const onmount = require('../dist/onmount')
 var { el, remove } = require('../lib/test_helpers')
 
 describe('detectMutate', () => {

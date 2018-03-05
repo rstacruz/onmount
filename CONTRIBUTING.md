@@ -12,8 +12,8 @@ yarn
 yarn test
 ```
 
-Though I prefer this:
+Though I prefer to auto-run and auto-build:
 
 ``` bash
-yarn test --watch --notify --verbose
+yarn run watch
 ```
