@@ -86,13 +86,13 @@ onmount.observe = function observe () {
   if (typeof MutationObserver === 'undefined') return
 
   var obs = new MutationObserver(function (mutations) {
-    each(behaviors, function (be) {
-      each(mutations, function (mutation) {
-        each(mutation.addedNodes, function (el) {
+    each(behaviors, (be) => {
+      each(mutations, (mutation) => {
+        each(mutation.addedNodes, (el) => {
           if (el.matches(be.selector)) be.visitEnter(el)
         })
 
-        each(mutation.removedNodes, function (el) {
+        each(mutation.removedNodes, (el) => {
           if (el.matches(be.selector)) be.doExit(el)
         })
       })
