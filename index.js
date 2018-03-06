@@ -1,12 +1,5 @@
-import { each, isjQuery, isEvent, has, query, isAttached } from './lib/helpers'
+import { each, isjQuery, isEvent } from './lib/helpers'
 import Behavior from './lib/behavior'
-
-/*
- * Internal: IDs for auto-incrementing.
- */
-
-let bid = 0 /* behavior ID */
-let cid = 0 /* component ID */
 
 /**
  * (Module) Adds a behavior, or triggers behaviors.
