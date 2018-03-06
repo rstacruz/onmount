@@ -51,6 +51,5 @@
     "lint": "eslint \"{.,lib,lib/*,tests}/*.js\"",
     "build": "mkdir -p dist; rollup -c",
     "prepare": "run-s build"
-  },
-  "@std/esm": "js"
+  }
 }
