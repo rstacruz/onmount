@@ -5,7 +5,7 @@
 Run something when a DOM element appears and when it exits.<br>
 No dependencies. Legacy IE compatible. 1kb .min.gz.
 
-[![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount "See test builds")
+[![Status](https://travis-ci.org/rstacruz/onmount.svg?branch=master)](https://travis-ci.org/rstacruz/onmount 'See test builds')
 
 ## Overview
 
@@ -16,59 +16,66 @@ Run something to initialize an element on its first appearance.
 ```js
 onmount = require('onmount')
 
-onmount('.push-button', function () {
-  $(this).on('click', function () {
+onmount('.push-button', function() {
+  $(this).on('click', function() {
     alert('working...')
   })
 })
 ```
 
-> *See: [Premise](/docs/premise.md)*
+> _See: [Premise](/docs/premise.md)_
+
+### Using with React
+
+:tada: If you're looking to use Onmount to mount React components, check out [Remount] instead.
 
 ### Polling for changes
 
 Call `$.onmount()` everytime your code changes.
 
 ```js
-$('<button class="push-button">Do something</button>')
-  .appendTo('body')
+$('<button class="push-button">Do something</button>').appendTo('body')
 
 $.onmount()
 
-$(".push-button").click()  //=> 'working...'
+$('.push-button').click() //=> 'working...'
 ```
 
-> *See: [Idempotency](/docs/idempotency.md)*
+> _See: [Idempotency](/docs/idempotency.md)_
 
 ### jQuery integration
 
 jQuery is optional; use it to poll on popular events.
 
 ```js
-$(document).on('ready show.bs closed.bs load page:change', function () {
+$(document).on('ready show.bs closed.bs load page:change', function() {
   $.onmount()
 })
 ```
 
-> *See: [API](/docs/api.md)*
+> _See: [API](/docs/api.md)_
 
 ### Cleanups
 
-Supply a 2nd function to *onmount()* to execute something when the node is first detached.
+Supply a 2nd function to _onmount()_ to execute something when the node is first detached.
 
 ```js
-$.onmount('.push-button', function () {
-  /*...*/
-}, function () {
-  alert('button was removed')
-})
+$.onmount(
+  '.push-button',
+  function() {
+    /*...*/
+  },
+  function() {
+    alert('button was removed')
+  }
+)
 
 document.body.innerHTML = ''
 
 $.onmount() //=> 'button was removed'
 ```
 
-> *See: [Cleanups](/docs/cleanup.md)*
+> _See: [Cleanups](/docs/cleanup.md)_
 
 ## What for?
 
@@ -88,19 +95,19 @@ bower install onmount
 It can be used as a CommonJS module or on its own. It doesn't require jQuery, but if jQuery is found, it'll attach itself to it as `$.onmount`.
 
 ```js
-onmount = require('onmount')    // With CommonJS (ie, Browserify)
-window.onmount                  // with no module loaders:
-$.onmount                       // with jQuery
+onmount = require('onmount') // With CommonJS (ie, Browserify)
+window.onmount // with no module loaders:
+$.onmount // with jQuery
 ```
 
-[Bootstrap events]: http://getbootstrap.com/javascript/
-[Turbolinks load]: https://github.com/rails/turbolinks#events
+[bootstrap events]: http://getbootstrap.com/javascript/
+[turbolinks load]: https://github.com/rails/turbolinks#events
 [idempotent]: https://en.wiktionary.org/wiki/idempotent
-[Browserify]: http://browserify.org/
+[browserify]: http://browserify.org/
 
 ## API
 
-> *See: [API](docs/api.md)*
+> _See: [API](docs/api.md)_
 
 ## Browser compatibility
 
@@ -119,8 +126,10 @@ Authored and maintained by Rico Sta. Cruz with help from contributors ([list][co
 > GitHub [@rstacruz](https://github.com/rstacruz) &nbsp;&middot;&nbsp;
 > Twitter [@rstacruz](https://twitter.com/rstacruz)
 
-[MIT]: http://mit-license.org/
+[mit]: http://mit-license.org/
 [contributors]: http://github.com/rstacruz/onmount/contributors
 [rsjs]: https://github.com/rstacruz/rsjs
 
 [![](https://img.shields.io/badge/%E2%9C%93-collaborative_etiquette-brightgreen.svg)](http://git.io/col)
+
+[remount]: https://github.com/rstacruz/remount
