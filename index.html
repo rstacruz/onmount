@@ -32,8 +32,8 @@ No dependencies. Legacy IE compatible. 1kb .min.gz.</p>
 <p>Run something to initialize an element on its first appearance.</p>
 <pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>)
 
-onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
-  $(<span class="pl-k">this</span>).on(<span class="pl-s">&apos;click&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>) </span>{
+  $(<span class="pl-k">this</span>).on(<span class="pl-s">&apos;click&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>) </span>{
     alert(<span class="pl-s">&apos;working...&apos;</span>)
   })
 })
@@ -41,21 +41,22 @@ onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-fu
 <blockquote>
 <p><em>See: <a href="premise.html">Premise</a></em></p>
 </blockquote>
+<h3 id="using-with-react">Using with React</h3>
+<p>:tada: If you&#x2019;re looking to use Onmount to mount React components, check out <a href="https://github.com/rstacruz/remount">Remount</a> instead.</p>
 <h3 id="polling-for-changes">Polling for changes</h3>
 <p>Call <code>$.onmount()</code> everytime your code changes.</p>
-<pre><code class="lang-js">$(<span class="pl-s">&apos;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&apos;</span>)
-  .appendTo(<span class="pl-s">&apos;body&apos;</span>)
+<pre><code class="lang-js">$(<span class="pl-s">&apos;&lt;button class=&quot;push-button&quot;&gt;Do something&lt;/button&gt;&apos;</span>).appendTo(<span class="pl-s">&apos;body&apos;</span>)
 
 $.onmount()
 
-$(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c">//=&gt; &apos;working...&apos;</span>
+$(<span class="pl-s">&apos;.push-button&apos;</span>).click() <span class="pl-c">//=&gt; &apos;working...&apos;</span>
 </code></pre>
 <blockquote>
 <p><em>See: <a href="idempotency.html">Idempotency</a></em></p>
 </blockquote>
 <h3 id="jquery-integration">jQuery integration</h3>
 <p>jQuery is optional; use it to poll on popular events.</p>
-<pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready show.bs closed.bs load page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
+<pre><code class="lang-js">$(<span class="pl-c1">document</span>).on(<span class="pl-s">&apos;ready show.bs closed.bs load page:change&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>) </span>{
   $.onmount()
 })
 </code></pre>
@@ -64,11 +65,15 @@ $(<span class="pl-s">&quot;.push-button&quot;</span>).click()  <span class="pl-c
 </blockquote>
 <h3 id="cleanups">Cleanups</h3>
 <p>Supply a 2nd function to <em>onmount()</em> to execute something when the node is first detached.</p>
-<pre><code class="lang-js">$.onmount(<span class="pl-s">&apos;.push-button&apos;</span>, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
-  <span class="pl-c">/*...*/</span>
-}, <span class="hljs-function"><span class="pl-k">function</span> (<span class="hljs-params"></span>) </span>{
-  alert(<span class="pl-s">&apos;button was removed&apos;</span>)
-})
+<pre><code class="lang-js">$.onmount(
+  <span class="pl-s">&apos;.push-button&apos;</span>,
+  <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="pl-c">/*...*/</span>
+  },
+  <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>) </span>{
+    alert(<span class="pl-s">&apos;button was removed&apos;</span>)
+  }
+)
 
 <span class="pl-c1">document</span>.body.innerHTML = <span class="pl-s">&apos;&apos;</span>
 
@@ -86,9 +91,9 @@ $.onmount() <span class="pl-c">//=&gt; &apos;button was removed&apos;</span>
 bower install onmount
 </code></pre>
 <p>It can be used as a CommonJS module or on its own. It doesn&#x2019;t require jQuery, but if jQuery is found, it&#x2019;ll attach itself to it as <code>$.onmount</code>.</p>
-<pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>)    <span class="pl-c">// With CommonJS (ie, Browserify)</span>
-<span class="pl-c1">window</span>.onmount                  <span class="pl-c">// with no module loaders:</span>
-$.onmount                       <span class="pl-c">// with jQuery</span>
+<pre><code class="lang-js">onmount = <span class="pl-c1">require</span>(<span class="pl-s">&apos;onmount&apos;</span>) <span class="pl-c">// With CommonJS (ie, Browserify)</span>
+<span class="pl-c1">window</span>.onmount <span class="pl-c">// with no module loaders:</span>
+$.onmount <span class="pl-c">// with jQuery</span>
 </code></pre>
 <h2 id="api">API</h2>
 <blockquote>
@@ -121,6 +126,8 @@ Twitter <a href="https://twitter.com/rstacruz">@rstacruz</a></p>
                 <li class="heading-item -depth-2"><a href="#overview" class="hlink link-overview">Overview</a>
                   <ul class="heading-list -depth-2">
                     <li class="heading-item -depth-3"><a href="#detecting-elements" class="hlink link-detecting-elements">Detecting elements</a>
+                    </li>
+                    <li class="heading-item -depth-3"><a href="#using-with-react" class="hlink link-using-with-react">Using with React</a>
                     </li>
                     <li class="heading-item -depth-3"><a href="#polling-for-changes" class="hlink link-polling-for-changes">Polling for changes</a>
                     </li>
@@ -172,6 +179,8 @@ Twitter <a href="https://twitter.com/rstacruz">@rstacruz</a></p>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Integrations</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a href="react.html" class="link title  link-react">With React</a>
+                </li>
                 <li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a>
                 </li>
                 <li class="menu-item -level-2"><a href="rails.html" class="link title  link-rails">With Rails</a>

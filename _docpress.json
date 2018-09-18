@@ -18,6 +18,11 @@
                 "id": "detecting-elements"
               },
               {
+                "title": "Using with React",
+                "depth": 3,
+                "id": "using-with-react"
+              },
+              {
                 "title": "Polling for changes",
                 "depth": 3,
                 "id": "polling-for-changes"
@@ -205,6 +210,12 @@
         "title": "Integrations",
         "sections": [
           {
+            "title": "With React",
+            "source": "docs/react.md",
+            "url": "react.html",
+            "slug": "react"
+          },
+          {
             "title": "With Turbolinks",
             "source": "docs/turbolinks.md",
             "url": "turbolinks.html",
@@ -247,6 +258,11 @@
               "title": "Detecting elements",
               "depth": 3,
               "id": "detecting-elements"
+            },
+            {
+              "title": "Using with React",
+              "depth": 3,
+              "id": "using-with-react"
             },
             {
               "title": "Polling for changes",
@@ -413,6 +429,11 @@
       "title": "Testing",
       "slug": "testing"
     },
+    "react.html": {
+      "source": "docs/react.md",
+      "title": "With React",
+      "slug": "react"
+    },
     "turbolinks.html": {
       "source": "docs/turbolinks.md",
       "title": "With Turbolinks",
@@ -447,6 +468,7 @@
     "docs/automatic-observation.md": "automatic-observation.html",
     "docs/role.md": "role.html",
     "docs/testing.md": "testing.html",
+    "docs/react.md": "react.html",
     "docs/turbolinks.md": "turbolinks.html",
     "docs/rails.md": "rails.html",
     "docs/docpress.json": "docpress.json"

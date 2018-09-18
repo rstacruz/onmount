@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="assets/style.css?t=a44c9e9d">
     <link rel="stylesheet" href="http://ricostacruz.com/docpress-rsc/style.css">
     <script src="assets/script.js?t=820b7ffa"></script>
-    <title>Idempotency</title>
+    <title>With React</title>
     <meta name="viewport" content="width=device-width">
     <script>
       if (false || window.location.hostname.indexOf("ricostacruz.com") === window.location.hostname.length - 15) {
@@ -17,31 +17,19 @@
   <body class="-menu-visible">
     <div class="doc-layout">
       <div class="toggle menu-toggle js-menu-toggle"></div>
-      <div class="body page-idempotency">
+      <div class="body page-react">
         <div class="header-nav">
           <div class="right"><a href="https://github.com/rstacruz/onmount" data-title="rstacruz/onmount" class="iconlink">
               <!-- span.title Open in GitHub--><span class="icon -github"></span></a>
           </div>
         </div>
-        <div class="markdown-body"><h1 id="idempotency">Idempotency</h1>
-<p>You can call <code>$.onmount()</code> as much as you like. This will skip any behavior initialization for DOM nodes that have already been initialized. This is done to account for any new elements that may appear in your DOM.</p>
-<pre><code class="lang-js"><span class="pl-c">// add more content</span>
-$(<span class="pl-s">&apos;#content&apos;</span>).append(...)
-
-$.onmount()
-</code></pre>
-<p>This allows you to set up polling checkpoints to trigger new behaviors on certain events.
-Great for events such as <a href="http://getbootstrap.com/javascript/">Bootstrap events</a> or <a href="https://github.com/rails/turbolinks#events">Turbolinks load</a>.</p>
-<p>Also, when used with jQuery, <code>onmount</code> can be passed as an event handler, eg,
-<code>$(onmount)</code>.</p>
-<pre><code class="lang-js">$(<span class="pl-c1">document</span>)
-  .on(<span class="pl-s">&apos;ready show.bs closed.bs load page:change&apos;</span>, $.onmount)
-</code></pre>
+        <div class="markdown-body"><h1 id="using-with-react">Using with React</h1>
+<p>:tada: If you&#x2019;re looking to use Onmount to mount React components, check out <a href="https://github.com/rstacruz/remount">Remount</a> instead.</p>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="api.html"><span class="title">API</span></a></div>
-          <div class="right"><a href="cleanup.html"><span class="label">Next: </span><span class="title">Performing cleanups</span></a></div>
+          <div class="left"><a href="testing.html"><span class="title">Testing</span></a></div>
+          <div class="right"><a href="turbolinks.html"><span class="label">Next: </span><span class="title">With Turbolinks</span></a></div>
         </div>
       </div>
       <div class="menu toc-menu">
@@ -55,7 +43,7 @@ Great for events such as <a href="http://getbootstrap.com/javascript/">Bootstrap
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Features</span>
               <ul class="submenu">
-                <li class="menu-item -level-2"><a href="idempotency.html" class="link title -active link-idempotency">Idempotency</a>
+                <li class="menu-item -level-2"><a href="idempotency.html" class="link title  link-idempotency">Idempotency</a>
                 </li>
                 <li class="menu-item -level-2"><a href="cleanup.html" class="link title  link-cleanup">Performing cleanups</a>
                 </li>
@@ -77,7 +65,7 @@ Great for events such as <a href="http://getbootstrap.com/javascript/">Bootstrap
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Integrations</span>
               <ul class="submenu">
-                <li class="menu-item -level-2"><a href="react.html" class="link title  link-react">With React</a>
+                <li class="menu-item -level-2"><a href="react.html" class="link title -active link-react">With React</a>
                 </li>
                 <li class="menu-item -level-2"><a href="turbolinks.html" class="link title  link-turbolinks">With Turbolinks</a>
                 </li>
