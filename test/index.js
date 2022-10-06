@@ -1,4 +1,8 @@
-require('jsdom-global')()
+const JSDOM = require('jsdom').JSDOM
+const DOM = new JSDOM(`<!doctype html>`)
+global.window = DOM.window
+global.document = DOM.window.document
+global.navigator = DOM.window.navigator
 
 require('tape')('dom', function (t) {
   t.pass(navigator.userAgent)
