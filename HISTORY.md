@@ -1,6 +1,7 @@
-## [v2.0.0] - unreleased
-> Jan 23, 2018
+## [v2.0.0]
+> May 17, 2025
 
+- Security: Address incomplete string escaping in CSS selectors by escaping both backslashes and double quotes, as flagged by GitHub CodeQL. This prevents malformed selectors and potential injection issues.
 - [#210] - Remove support for `onmount.debug`.
 
 [v2.0.0]: https://github.com/rstacruz/onmount/compare/v1.2.1...v2.0.0
